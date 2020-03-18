@@ -54,18 +54,9 @@ fraction substr(fraction A, fraction B)
 
 fraction multipy(fraction A, fraction B)
 {
-	if (A.denominator != B.denominator) {
-		int tmp = A.denominator * B.denominator;
-		A.numerator *= (tmp / A.denominator);
-		A.denominator = tmp;
-		B.numerator *= (tmp / B.denominator);
-		B.denominator = tmp;
-	}
-	fraction res = { A.numerator * B.numerator, A.denominator };
+	fraction res = { A.numerator * B.numerator, A.denominator * B.denominator};
 	return res;
 }
-
-
 
 void printFraction(fraction A)
 {
@@ -134,57 +125,26 @@ void printFig(rectangle fig)
 
 void main() {
 	srand(time(NULL));
-	/*// Course: "Basics of programming in C++". Week 17. HomeWork 2.2
-		char*** arr;
-		int rows = 2, columns = 6, strLen = 16;
-		reserveArr(rows, columns, strLen, arr);
-		addContact(arr, 0, strLen, (char*)"Ivan Smirnov", (char*)"+79999999999");
-		addContact(arr, 1, strLen, (char*)"Petr Smirnov", (char*)"+71234567890");
-		addContact(arr, 2, strLen, (char*)"Oleg Efimov", (char*)"+71565151515");
-		addContact(arr, 3, strLen, (char*)"Petr Long", (char*)"+712345454545");
-		addContact(arr, 4, strLen, (char*)"Evgeny Petrov", (char*)"+79999889999");
-		addContact(arr, 5, strLen, (char*)"Petr Ivanov", (char*)"+71234566890");
-		printArr(arr, rows, columns, strLen, strLen);
-		findName(arr, columns, (char*)"Petr", strLen);
-		findPhone(arr, columns, (char*)"712345454545", strLen);
-	// There is something wrong with input. Every time i tried "cin" name to 3rd or larger column the program crashed.
-	// fail
-		//addContact(arr, 6, strLen);
-	// fail
-		while (true) {
-		cout << "Enter the name, please: --> ";
-		enterStr(arr, 0, 6, strLen);
-		}
-	// fail
-		for (int i = 0; i < columns; ++i) {
-		cout << "Enter the name, please: --> ";
-		cin.getline(arr[0][i], strLen);
-		}
-	// fail
-		for (int i = 0; i < columns; ++i) {
-		cout << "Enter the name, please: --> ";
-		cin >> arr[0][i];
-		}*/
 
-		// Course: "Basics of programming in C++". Week 18. ClassWork 2.1
-			/*rectangle fig1 = { 50, 50, 5, 5 };
-			printFig(fig1);
-			moveFig(fig1, 300, 700);
-			printFig(fig1);
-			drawFig(fig1);
-			scaleHeight(fig1, 1.5);
-			scaleLength(fig1, 0.5);
-			printFig(fig1);
-			drawFig(fig1);*/
+// Course: "Basics of programming in C++". Week 18. ClassWork 2.1
+	/*rectangle fig1 = { 50, 50, 5, 5 };
+	printFig(fig1);
+	moveFig(fig1, 300, 700);
+	printFig(fig1);
+	drawFig(fig1);
+	scaleHeight(fig1, 1.5);
+	scaleLength(fig1, 0.5);
+	printFig(fig1);
+	drawFig(fig1);*/
 
-			// Course: "Basics of programming in C++". Week 18. ClassWork 2.2
-				/*point a = { 0,0 };
-				point b = { 1,1 };
-				cout << distance(a, b);*/
+// Course: "Basics of programming in C++". Week 18. ClassWork 2.2
+	/*point a = { 0,0 };
+	point b = { 1,1 };
+	cout << distance(a, b);*/
 
-				// Course: "Basics of programming in C++". Week 18. ClassWork 2.3
-	fraction a = { 1, 2 };
-	fraction b = { 1, 3 };
+// Course: "Basics of programming in C++". Week 18. ClassWork 2.3
+	fraction a = { 1, 10 };
+	fraction b = { 1, 20 };
 	//fraction res1 = sum(a, b);
 	//printFraction(res1);
 	//fraction res2 = substr(a, b);
