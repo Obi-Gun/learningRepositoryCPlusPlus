@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{6D93B8B3-AAB1-4CEA-A28F-979070EF50CD}</ProjectGuid>
-    <RootNamespace>sakhatyrBasicsC</RootNamespace>
+    <ProjectGuid>{47B31C07-E867-452A-9075-2BC7BF67C79F}</ProjectGuid>
+    <RootNamespace>learningRepositoryCPlusPlus</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -123,11 +123,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\funcs.cpp" />
-    <ClCompile Include="..\..\..\tmpFile.cpp" />
+    <ClCompile Include="..\..\..\SakhatyrLearningC-\funcs.cpp" />
+    <ClCompile Include="..\..\..\SakhatyrLearningC-\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\funcs.h" />
+    <ClInclude Include="..\..\..\SakhatyrLearningC-\funcs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
