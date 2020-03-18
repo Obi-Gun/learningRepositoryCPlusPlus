@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\SakhatyrLearningC-\funcs.cpp">
+    <ClCompile Include="funcs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SakhatyrLearningC-\main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\SakhatyrLearningC-\funcs.h">
+    <ClInclude Include="funcs.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
