@@ -1,9 +1,4 @@
 #include "funcs.h"
-//#include <iostream>
-//#include <cmath>
-//#include <time.h>
-//#include <string.h>
-//using namespace std;
 
 //   ===================================================
 //   |            My own small library                 |
@@ -230,30 +225,16 @@ void reserveArr(int rows, int columns, int strLen, char***& arr)
 }
 
 
-/*void addElToArr(int*& arr, int& length, int newEl)
-{
-	int* newArr = reserveArr(++length);
-	copyArray(arr, length - 1, newArr);
-	*(newArr + length - 1) = newEl;
-	delete[] arr;
-	arr = newArr;
-}*/
-
 void addElToArr(int*& arr, int& length, int newEl, int indexNewEl)
 {
 	int* newArr = reserveArr(++length);
 	copyArray(arr, indexNewEl, newArr);
 	*(newArr + indexNewEl) = newEl;
 	copyArray(arr + indexNewEl, length - indexNewEl - 1, newArr + indexNewEl + 1);
-	deleteArr(arr);
+	removeArr(arr);
 	arr = newArr;
 }
 
-/*void addElToArrToSpecialPlace(int*& arr, int& length, int newEl, int indexNewEl)
-{
-	addElToArr(arr, length, newEl);
-	moveArrElRight(arr, indexNewEl, length - 1);
-}*/
 
 void addElToArrToSpecialPlace(char*& arr, int length, char newEl, int indexNewEl)
 {
@@ -262,7 +243,7 @@ void addElToArrToSpecialPlace(char*& arr, int length, char newEl, int indexNewEl
 	*(newArr + indexNewEl) = newEl;
 	copyArray(arr + indexNewEl, length - indexNewEl - 1, newArr + indexNewEl + 1);
 	*(newArr + length - 1) = '\0';
-	deleteArr(arr);
+	removeArr(arr);
 	arr = newArr;
 }
 
@@ -366,7 +347,7 @@ int* deletePrimeNumbers(int* arr, int length, int& lengthNewArr)
 	}
 	int* newArr = reserveArr(lengthNewArr);
 	copyArray(tmpArr, lengthNewArr, newArr);
-	deleteArr(tmpArr);
+	removeArr(tmpArr);
 	return newArr;
 }
 
@@ -776,4 +757,101 @@ void addContact(char*** arr, int column, int strLength, char* name, char* pNumbe
 	arr[rowName][column] = name;
 	arr[rowPNum][column] = pNumber;
 
+}
+
+fraction sum(fraction A, fraction B)
+{
+	if (A.denominator != B.denominator) {
+		int tmp = A.denominator * B.denominator;
+		A.numerator *= (tmp / A.denominator);
+		A.denominator = tmp;
+		B.numerator *= (tmp / B.denominator);
+		B.denominator = tmp;
+	}
+	fraction res = { A.numerator + B.numerator, A.denominator };
+	return res;
+}
+
+fraction substr(fraction A, fraction B)
+{
+	if (A.denominator != B.denominator) {
+		int tmp = A.denominator * B.denominator;
+		A.numerator *= (tmp / A.denominator);
+		A.denominator = tmp;
+		B.numerator *= (tmp / B.denominator);
+		B.denominator = tmp;
+	}
+	fraction res = { A.numerator - B.numerator, A.denominator };
+	return res;
+}
+
+fraction multipy(fraction A, fraction B)
+{
+	fraction res = { A.numerator * B.numerator, A.denominator * B.denominator };
+	return res;
+}
+
+void printFraction(fraction A)
+{
+	cout << A.numerator << endl;
+	cout << "---" << endl;
+	cout << A.denominator << endl;
+}
+
+double distance(point A, point B)
+{
+	return sqrt(pow(B.x - A.x, 2) + pow(B.y - A.y, 2));
+}
+
+void moveFig(rectangle& fig, int moveX, int moveY)
+{
+	fig.x += moveX;
+	fig.y += moveY;
+}
+
+void scaleHeight(rectangle& fig, double multiplier)
+{
+	fig.height *= multiplier;
+}
+
+void scaleLength(rectangle& fig, double multiplier)
+{
+	fig.length *= multiplier;
+}
+
+void drawFig(rectangle fig)
+{
+	char lu = 201, ld = 200;
+	char ru = 187, rd = 188;
+	char hor = 205;
+	char vert = 186;
+	fig.length *= 1.4; // it is for correct drawing in console
+	// TOP
+	cout << lu;
+	for (int j = 0; j < fig.length; ++j) {
+		cout << hor;
+	}
+	cout << ru << endl;
+	// MIDDLE
+	for (int i = 1; i < fig.height - 1; ++i) {
+		cout << vert;
+		for (int j = 0; j < fig.length; ++j) {
+			cout << ' ';
+		}
+		cout << vert << endl;
+	}
+	// BOTTOM
+	cout << ld;
+	for (int j = 0; j < fig.length; ++j) {
+		cout << hor;
+	}
+	cout << rd << endl;
+}
+
+void printFig(rectangle fig)
+{
+	cout << " coordinate x = " << fig.x << endl;
+	cout << " coordinate y = " << fig.y << endl;
+	cout << " height = " << fig.height << endl;
+	cout << " length = " << fig.length << endl;
 }

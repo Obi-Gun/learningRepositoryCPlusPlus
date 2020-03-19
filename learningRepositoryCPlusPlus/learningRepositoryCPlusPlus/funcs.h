@@ -46,8 +46,8 @@ template <typename T> void swap(T* pFirst, T* pSecond)
 void inserionSort(int arr[], int LEN);
 void bobbleSort(int arr[], int LEN);
 
-int* reserveArr(int length); // _old   (delete later)
-char* reserveArrChar(int length); // _old   (delete later)
+//int* reserveArr(int length); // _old   (delete later)
+//char* reserveArrChar(int length); // _old   (delete later)
 
 void reserveArr(int length, int*& arr);
 void reserveArr(int length, int**& arr);
@@ -58,19 +58,13 @@ void reserveArr(int length, char***& arr);
 void reserveArr(int rows, int columns, char**& arr);
 void reserveArr(int rows, int columns, int strLen, char***& arr);
 
-//void addElToArr(int*& arr, int& length, int newEl);
 void addElToArr(int*& arr, int& length, int newEl, int indexNewEl = 0);
-//void addElToArrToSpecialPlace(int*& arr, int& length, int newEl, int indexNewEl);
 void addElToArrToSpecialPlace(char*& arr, int length, char newEl, int indexNewEl);
 void addColumnToArr(int**& arr, int rows, int& columns, int* newColumn, int indexNewColumn = 0);
 
 void removeElFromArr(int*& arr, int& length, int indexRemEl = 0);
 void removeColumnFromArr(int**& arr, int rows, int& columns, int indexRemColumn = 0);
 void deleteLastElFromArr(int*& arr, int& length);
-template <typename T> void deleteArr(T* arr) //delete later
-{
-	delete[] arr;
-} //delete later
 void removeArr(int* arr);
 void removeArr(int** arr);
 void removeMatrix(int** arr, int lengthRows);
@@ -81,7 +75,7 @@ void removeArr(char* arr);
 //int** sumMatrix(int** arrA, int aRow, int aCol, int** arrB, int bRow, int bCol);
 void transposeMatrix(int**& arrSource, int& rows, int& columns);
 
-void shiftArrElRight_old(int* arr, int indexOfFirstElement, int indexOfSecondElement); // _old   (delete later)
+//void shiftArrElRight_old(int* arr, int indexOfFirstElement, int indexOfSecondElement); // _old   (delete later)
 void shiftArrElLeft_old(int* arr, int indexOfFirstElement, int indexOfSecondElement); // _old   (delete later)
 void shiftArrElLeft(int*& arr, int length, int times);
 void shiftArrElRight(int*& arr, int length, int times);
@@ -129,6 +123,40 @@ void findPhone(char*** arr, int columns, char* strPhoneNumber, int setMinimumWid
 void enterStr(char*** arr, int row, int column, int strLength);
 void addContact(char*** arr, int column, int strLength);
 void addContact(char*** arr, int column, int strLength, char* name, char* pNumber);
+
+struct rectangle
+{
+	int x;
+	int y;
+	int length;
+	int height;
+	/*void Print()
+	{
+		cout << x << " " << y << endl;
+	}*/
+};
+void moveFig(rectangle& fig, int moveX, int moveY);
+void scaleHeight(rectangle& fig, double multiplier);
+void scaleLength(rectangle& fig, double multiplier);
+void drawFig(rectangle fig);
+void printFig(rectangle fig);
+
+struct point
+{
+	double x;
+	double y;
+};
+double distance(point A, point B);
+
+struct fraction
+{
+	int numerator;
+	int denominator;
+};
+fraction sum(fraction A, fraction B);
+fraction substr(fraction A, fraction B);
+fraction multipy(fraction A, fraction B);
+void printFraction(fraction A);
 
 #define funcs
 #endif // !funcs
