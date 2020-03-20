@@ -158,6 +158,11 @@ int maxValue(int* pa, int* pd)
 	return *pa < *pd ? *pd : *pa;
 }
 
+int minValue(int* pa, int* pd)
+{
+	return *pa > *pd ? *pd : *pa;
+}
+
 void maxValArrInd(int* arr, int N, int& maxVal, int& indexMaxVal)
 {
 	maxVal = *arr;

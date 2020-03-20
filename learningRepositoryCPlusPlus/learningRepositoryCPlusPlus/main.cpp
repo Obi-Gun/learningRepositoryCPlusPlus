@@ -58,6 +58,23 @@ fraction multipy(fraction A, fraction B)
 	return res;
 }
 
+fraction divide(fraction A, fraction B)
+{
+	fraction res = { A.numerator * B.denominator, A.denominator * B.numerator };
+	return res;
+}
+
+void reduceFraction(fraction& A)
+{
+	for (int i = minValue(&A.numerator, &A.denominator); i > 0; --i) {
+		if (isDivisor(A.numerator, i) && isDivisor(A.denominator, i)) {
+			A.numerator /= i;
+			A.denominator /= i;
+			break;
+		}
+	}
+}
+
 void printFraction(fraction A)
 {
 	cout << A.numerator << endl;
@@ -143,11 +160,16 @@ void main() {
 	cout << distance(a, b);*/
 
 // Course: "Basics of programming in C++". Week 18. ClassWork 2.3
-	fraction a = { 1, 10 };
-	fraction b = { 1, 20 };
+	//fraction a = { 1, 10 };
+	//fraction b = { 1, 20 };
 	//fraction res1 = sum(a, b);
 	//printFraction(res1);
 	//fraction res2 = substr(a, b);
 	//printFraction(res2);
-	printFraction(multipy(a, b));
+	//printFraction(multipy(a, b));
+	//fraction res = divide(a, b);
+	fraction b = { 50, 700 };
+	printFraction(b);
+	reduceFraction(b);
+	printFraction(b);
 }

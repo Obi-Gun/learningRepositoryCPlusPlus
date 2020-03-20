@@ -98,6 +98,7 @@ void copyArray(char* arrSource, int length, char* arrDest);
 template <typename T> T sumArrValues(T arr[], int curPos, int LEN);
 template <typename T> T sumArrValues(T* curEl, T* endEl);
 int maxValue(int* pa, int* pd);
+int minValue(int* pa, int* pd);
 void maxValArrInd(int* arr, int N, int& maxVal, int& indexMaxVal);
 int* deletePrimeNumbers(int* arr, int length, int& lengthNewArr);
 void separateArrValues(int* arr, int length, int*& arrNeg, int& lenNeg, int*& arrZero, int& lenZero, int*& arrPos, int& lenPos);
