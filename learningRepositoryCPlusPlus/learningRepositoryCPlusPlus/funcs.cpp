@@ -297,6 +297,16 @@ char minValueDiagonal(char** squareMatrix, int length)
 	return tmp;
 }
 
+int maxCommonDivisor(int A, int B)
+{
+	for (int i = 2; i <= A && i <= B; ++i) {
+		if (isDivisor(A, i) && isDivisor(B, i)) {
+			return i * maxCommonDivisor(A / i, B / i);
+		}
+	}
+	return 1;
+}
+
 void maxValArrInd(int* arr, int N, int& maxVal, int& indexMaxVal)
 {
 	maxVal = *arr;

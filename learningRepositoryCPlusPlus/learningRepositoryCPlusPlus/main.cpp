@@ -23,7 +23,7 @@ void main() {
 	cout << "negative = " << negCounter << ", zeros = " << zerosCounter << ", positive = " << posCounter;*/
 
 // HomeWork 12.2.1. Course: "Basics of programming in C++".
-	int len = 5;
+	/*int len = 5;
 
 	char** arr1;
 	reserveArr(len, len, arr1);
@@ -51,10 +51,13 @@ void main() {
 	cout << "max value on diagonal = " << maxValueDiagonal(arr3, len) << endl;
 	cout << "min value on diagonal = " << minValueDiagonal(arr3, len) << endl;
 	insertionSort(arr3, len, len);
-	printArr(arr3, len, len);
-
-
+	printArr(arr3, len, len);*/
+	
 // HomeWork 12.2.2. Course: "Basics of programming in C++".
+	cout << maxCommonDivisor(159, 646) << endl;
+	cout << maxCommonDivisor(100, 1000) << endl;
+	cout << maxCommonDivisor(666, 777) << endl;
+
 // HomeWork 12.2.3. Course: "Basics of programming in C++".
 
 }

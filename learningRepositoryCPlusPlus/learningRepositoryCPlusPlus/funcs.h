@@ -124,6 +124,7 @@ char maxValueDiagonal(char** squareMatrix, int length);
 int minValueDiagonal(int** squareMatrix, int length);
 double minValueDiagonal(double** squareMatrix, int length);
 char minValueDiagonal(char** squareMatrix, int length);
+int maxCommonDivisor(int A, int B);
 void maxValArrInd(int* arr, int N, int& maxVal, int& indexMaxVal);
 int* deletePrimeNumbers(int* arr, int length, int& lengthNewArr);
 void separateArrValues(int* arr, int length, int*& arrNeg, int& lenNeg, int*& arrZero, int& lenZero, int*& arrPos, int& lenPos);
