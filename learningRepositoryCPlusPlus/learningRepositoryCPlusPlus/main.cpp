@@ -5,21 +5,16 @@ using namespace std;
 void main() {
 	srand(time(NULL));
 
-// Course: "Basics of programming in C++". Week 18. HomeWork 1.1 
+// HomeWork 12.1.1. Course: "Basics of programming in C++". 
+	cout << calcDays(1, 1, 2001, 02, 03, 2020) << endl;
+	cout << calcDays(1, 1, 2001, 01, 03, 2020) << endl;
+	cout << calcDays(1, 1, 2001, 29, 02, 2020) << endl;
+	cout << calcDays(1, 1, 2001, 28, 02, 2020) << endl;
 
-
-// Course: "Basics of programming in C++". Week 18. ClassWork 2.3
-	//fraction a = { 1, 10 };
-	//fraction b = { 1, 20 };
-	//fraction res1 = sum(a, b);
-	//printFraction(res1);
-	//fraction res2 = substr(a, b);
-	//printFraction(res2);
-	//printFraction(multipy(a, b));
-	//fraction res = divide(a, b);
-	fraction b = { 50, 700 };
-	printFraction(b);
-	reduceFraction(b);
-	printFraction(b);
+// HomeWork 12.1.2. Course: "Basics of programming in C++".  
+// HomeWork 12.1.3. Course: "Basics of programming in C++". 
+// HomeWork 12.2.1. Course: "Basics of programming in C++". 
+// HomeWork 12.2.2. Course: "Basics of programming in C++". 
+// HomeWork 12.2.3. Course: "Basics of programming in C++". 
 
 }

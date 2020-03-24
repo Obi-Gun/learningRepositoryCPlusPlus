@@ -105,22 +105,6 @@ void printArr(char*** arr, int rows, int columns, int strLength, int setMinimumW
 	cout << endl;
 }
 
-template <typename T> T sumArrValues(T arr[], int curPos, int LEN)
-{
-	if (curPos == LEN) {
-		return 0;
-	}
-	return arr[curPos] + sumArrValues(arr, (curPos + 1), LEN);
-}
-
-template <typename T> T sumArrValues(T* curEl, T* endEl)
-{
-	if (curEl == endEl) {
-		return *endEl;
-	}
-	return *curEl + sumArrValues((curEl + 1), endEl);
-}
-
 void inserionSort(int arr[], int LEN)
 {
 	for (int i = 0; i < (LEN - 1); ++i) {
@@ -492,6 +476,14 @@ void copyArray(char* arrSource, int length, char* arrDest)
 	for (int i = 0; i < length; ++i) {
 		*(arrDest + i) = *(arrSource + i);
 	}
+}
+
+int sumArrValues(int* curEl, int* endEl)
+{
+	if (curEl == endEl) {
+		return *endEl;
+	}
+	return *curEl + sumArrValues((curEl + 1), endEl);
 }
 
 void separateArrValues(int* arr, int length, int*& arrNeg, int& lenNeg, int*& arrZero, int& lenZero, int*& arrPos, int& lenPos)
@@ -876,4 +868,29 @@ void printFig(rectangle fig)
 	cout << " coordinate y = " << fig.y << endl;
 	cout << " height = " << fig.height << endl;
 	cout << " length = " << fig.length << endl;
+}
+
+bool isLeapYear(int year)
+{
+	if (year % 400 == 0) return true;
+	if (year % 100 == 0) return false;
+	if (year % 4 == 0)   return true;
+	return false;
+}
+
+int calcDays(int day1, int month1, int year1, int day2, int month2, int year2)
+{
+	if (year1 > year2) {
+		swap(day1, day2);
+		swap(month1, month2);
+		swap(year1, year2);
+	}
+	int daysInMonth[] = { 0, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
+	int daysCounter1 = day1 + daysInMonth[month1] + (month1 > 2 ? isLeapYear(year1) : 0);
+
+	int daysCounter2 = day2 + daysInMonth[month2] + (month2 > 2 ? isLeapYear(year2) : 0);
+	for (int i = year1; i < year2; ++i) {
+		daysCounter2 += 365 + isLeapYear(i);
+	}
+	return daysCounter2 - daysCounter1;
 }

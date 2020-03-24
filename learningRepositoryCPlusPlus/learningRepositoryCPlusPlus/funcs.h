@@ -3,8 +3,7 @@
 #include <time.h>
 #include <string.h>
 #include <iomanip>
-using namespace std;
-// headers
+using namespace std; //bad practice to use it out of funcs
 #ifndef funcs
 
 template <typename T> void fillRandomValuesToTheArray(T arr[], int LEN)
@@ -61,7 +60,7 @@ void reserveArr(int rows, int columns, int strLen, char***& arr);
 void addElToArr(int*& arr, int& length, int newEl, int indexNewEl = 0);
 void addElToArrToSpecialPlace(char*& arr, int length, char newEl, int indexNewEl);
 void addColumnToArr(int**& arr, int rows, int& columns, int* newColumn, int indexNewColumn = 0);
-
+	
 void removeElFromArr(int*& arr, int& length, int indexRemEl = 0);
 void removeColumnFromArr(int**& arr, int rows, int& columns, int indexRemColumn = 0);
 void deleteLastElFromArr(int*& arr, int& length);
@@ -89,8 +88,21 @@ void copyArray(int* arr, int lengthOfShortestArray, int* arrCopy);
 void copyArray(int** arr, int lengthOfShortestArray, int** arrCopy);
 void copyArray(char* arrSource, int length, char* arrDest);
 
-template <typename T> T sumArrValues(T arr[], int curPos, int LEN);
-template <typename T> T sumArrValues(T* curEl, T* endEl);
+/*template <typename T> T sumArrValues(T arr[], int curPos, int LEN)
+{
+	if (curPos == LEN) {
+		return 0;
+	}
+	return arr[curPos] + sumArrValues(arr, (curPos + 1), LEN);
+}*/
+int sumArrValues(int* curEl, int* endEl);
+/*template <typename T> T sumArrValues(T* curEl, T* endEl)
+{
+	if (curEl == endEl) {
+		return *endEl;
+	}
+	return *curEl + sumArrValues((curEl + 1), endEl);
+}*/
 int maxValue(int* pa, int* pd);
 int minValue(int* pa, int* pd);
 void maxValArrInd(int* arr, int N, int& maxVal, int& indexMaxVal);
@@ -160,6 +172,9 @@ fraction multipy(fraction A, fraction B);
 fraction divide(fraction A, fraction B);
 void reduceFraction(fraction& A);
 void printFraction(fraction A);
+
+bool isLeapYear(int year);
+int calcDays(int day1, int month1, int year1, int day2, int month2, int year2);
 
 #define funcs
 #endif // !funcs
