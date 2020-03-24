@@ -3,6 +3,7 @@
 #include <time.h>
 #include <string.h>
 #include <iomanip>
+
 using namespace std; //bad practice to use it out of funcs
 #ifndef funcs
 
@@ -23,6 +24,8 @@ template <typename T> void fillRandomValuesToTheArray(T arr[], int LEN, T minVal
 }
 void fillRandomValuesToTheArray(int** arr, int lenRow, int lenCol, int minValue, int maxValue);
 void fillRandomValuesToTheArray(int** arr, int lenRow, int lenCol);
+void fillRandomValuesToTheArray(double** arr, int lenRow, int lenCol);
+void fillRandomValuesToTheArray(char** arr, int lenRow, int lenCol, char minValue, char maxValue);
 
 template <typename T> void printArr(T arr[], int LEN)
 {
@@ -33,6 +36,8 @@ template <typename T> void printArr(T arr[], int LEN)
 	}
 }
 void printArr(int** arr, int rows, int columns, int setMinimumWidth = 0, bool showIndexes = false);
+void printArr(double** arr, int rows, int columns, int setMinimumWidth = 0, bool showIndexes = false);
+void printArr(char** arr, int rows, int columns, int setMinimumWidth = 0, bool showIndexes = false);
 void printArr(char*** arr, int rows, int columns, int strLength, int setMinimumWidth = 2, bool showIndexes = false);
 
 template <typename T> void swap(T* pFirst, T* pSecond)
@@ -42,7 +47,12 @@ template <typename T> void swap(T* pFirst, T* pSecond)
 	*pSecond = tmp;
 }
 
-void inserionSort(int arr[], int LEN);
+void insertionSort(int arr[], int LEN);
+void insertionSort(int** arr, int rows, int columns);
+void insertionSort(double arr[], int LEN);
+void insertionSort(double** arr, int rows, int columns);
+void insertionSort(char arr[], int LEN);
+void insertionSort(char** arr, int rows, int columns);
 void bobbleSort(int arr[], int LEN);
 
 //int* reserveArr(int length); // _old   (delete later)
@@ -50,6 +60,8 @@ void bobbleSort(int arr[], int LEN);
 void reserveArr(int length, int*& arr);
 void reserveArr(int length, int**& arr);
 void reserveArr(int rows, int columns, int**& arr);
+void reserveArr(int length, double*& arr);
+void reserveArr(int rows, int columns, double**& arr);
 void reserveArr(int length, char*& arr);
 void reserveArr(int length, char**& arr);
 void reserveArr(int length, char***& arr);
@@ -106,6 +118,12 @@ void calcNumbers(int* arr, int length, int& negCounter, int& zerosCounter, int& 
 }*/
 int maxValue(int* pa, int* pd);
 int minValue(int* pa, int* pd);
+int maxValueDiagonal(int** squareMatrix, int length);
+double maxValueDiagonal(double** squareMatrix, int length);
+char maxValueDiagonal(char** squareMatrix, int length);
+int minValueDiagonal(int** squareMatrix, int length);
+double minValueDiagonal(double** squareMatrix, int length);
+char minValueDiagonal(char** squareMatrix, int length);
 void maxValArrInd(int* arr, int N, int& maxVal, int& indexMaxVal);
 int* deletePrimeNumbers(int* arr, int length, int& lengthNewArr);
 void separateArrValues(int* arr, int length, int*& arrNeg, int& lenNeg, int*& arrZero, int& lenZero, int*& arrPos, int& lenPos);

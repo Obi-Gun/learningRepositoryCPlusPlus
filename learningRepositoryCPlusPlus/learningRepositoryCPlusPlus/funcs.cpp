@@ -68,7 +68,64 @@ void fillRandomValuesToTheArray(int** arr, int lenRow, int lenCol)
 	}
 }
 
+void fillRandomValuesToTheArray(double** arr, int lenRow, int lenCol)
+{
+	for (int i = 0; i < lenRow; ++i) {
+		for (int j = 0; j < lenCol; ++j) {
+			arr[i][j] = rand();
+		}
+	}
+}
+
+void fillRandomValuesToTheArray(char** arr, int lenRow, int lenCol, char minValue, char maxValue)
+{
+	if (maxValue < minValue) {
+		swap(maxValue, minValue);
+	}
+	for (int i = 0; i < lenRow; ++i) {
+		for (int j = 0; j < lenCol; ++j) {
+			arr[i][j] = minValue + rand() % (maxValue + 1 - minValue);
+		}
+	}
+}
+
 void printArr(int** arr, int rows, int columns, int setMinimumWidth, bool showIndexes)
+{
+	setMinimumWidth = setMinimumWidth < 0 ? 0 : setMinimumWidth;
+	cout << "\nArray values:" << endl;
+	for (int i = 0; i < rows; ++i) {
+		cout << " ";
+		for (int j = 0; j < columns; ++j) {
+			if (showIndexes) {
+				cout << "   arr[" << i << "][" << j << "]= " << setw(setMinimumWidth) << arr[i][j];
+			}
+			else {
+				cout << setw(setMinimumWidth) << arr[i][j] << "  ";
+			}
+		}
+		cout << endl << endl;
+	}
+}
+
+void printArr(double** arr, int rows, int columns, int setMinimumWidth, bool showIndexes)
+{
+	setMinimumWidth = setMinimumWidth < 0 ? 0 : setMinimumWidth;
+	cout << "\nArray values:" << endl;
+	for (int i = 0; i < rows; ++i) {
+		cout << " ";
+		for (int j = 0; j < columns; ++j) {
+			if (showIndexes) {
+				cout << "   arr[" << i << "][" << j << "]= " << setw(setMinimumWidth) << arr[i][j];
+			}
+			else {
+				cout << setw(setMinimumWidth) << arr[i][j] << "  ";
+			}
+		}
+		cout << endl << endl;
+	}
+}
+
+void printArr(char** arr, int rows, int columns, int setMinimumWidth, bool showIndexes)
 {
 	setMinimumWidth = setMinimumWidth < 0 ? 0 : setMinimumWidth;
 	cout << "\nArray values:" << endl;
@@ -105,19 +162,63 @@ void printArr(char*** arr, int rows, int columns, int strLength, int setMinimumW
 	cout << endl;
 }
 
-void inserionSort(int arr[], int LEN)
+void insertionSort(int arr[], int LEN)
 {
 	for (int i = 0; i < (LEN - 1); ++i) {
-		int x = arr[i + 1];
-		int j = i + 1;
-		while (arr[j] < arr[j - 1] && j > 0) {
-			//SWAP(arr, i, j);
-			int tmp = arr[j - 1];
-			arr[j - 1] = arr[j];
-			arr[j] = tmp;
-			j--;
+		int val = arr[i + 1];
+		int ind = i + 1;
+		while (ind > 0 && arr[ind] < arr[ind - 1]) {
+			swap(arr[ind - 1], arr[ind]);
+			ind--;
 		}
-		arr[j] = x;
+		arr[ind] = val;
+	}
+}
+
+void insertionSort(int** arr, int rows, int columns)
+{
+	for (int i = 0; i < rows; ++i) {
+		insertionSort(arr[i], columns);
+	}
+}
+
+void insertionSort(double arr[], int LEN)
+{
+	for (int i = 0; i < (LEN - 1); ++i) {
+		double val = arr[i + 1];
+		int ind = i + 1;
+		while (ind > 0 && arr[ind] < arr[ind - 1]) {
+			swap(arr[ind - 1], arr[ind]);
+			ind--;
+		}
+		arr[ind] = val;
+	}
+}
+
+void insertionSort(double** arr, int rows, int columns)
+{
+	for (int i = 0; i < rows; ++i) {
+		insertionSort(arr[i], columns);
+	}
+}
+
+void insertionSort(char arr[], int LEN)
+{
+	for (int i = 0; i < (LEN - 1); ++i) {
+		char val = arr[i + 1];
+		int ind = i + 1;
+		while (ind > 0 && arr[ind] < arr[ind - 1]) {
+			swap(arr[ind - 1], arr[ind]);
+			ind--;
+		}
+		arr[ind] = val;
+	}
+}
+
+void insertionSort(char** arr, int rows, int columns)
+{
+	for (int i = 0; i < rows; ++i) {
+		insertionSort(arr[i], columns);
 	}
 }
 
@@ -140,6 +241,60 @@ int maxValue(int* pa, int* pd)
 int minValue(int* pa, int* pd)
 {
 	return *pa > * pd ? *pd : *pa;
+}
+
+int maxValueDiagonal(int** squareMatrix, int length)
+{
+	int tmp = squareMatrix[0][0];
+	for (int i = 1; i < length; ++i) {
+		if (squareMatrix[i][i] > tmp) tmp = squareMatrix[i][i];
+	}
+	return tmp;
+}
+
+double maxValueDiagonal(double** squareMatrix, int length)
+{
+	double tmp = squareMatrix[0][0];
+	for (int i = 1; i < length; ++i) {
+		if (squareMatrix[i][i] > tmp) tmp = squareMatrix[i][i];
+	}
+	return tmp;
+}
+
+char maxValueDiagonal(char** squareMatrix, int length)
+{
+	char tmp = squareMatrix[0][0];
+	for (int i = 1; i < length; ++i) {
+		if (squareMatrix[i][i] > tmp) tmp = squareMatrix[i][i];
+	}
+	return tmp;
+}
+
+int minValueDiagonal(int** squareMatrix, int length)
+{
+	int tmp = squareMatrix[0][0];
+	for (int i = 1; i < length; ++i) {
+		if (squareMatrix[i][i] < tmp) tmp = squareMatrix[i][i];
+	}
+	return tmp;
+}
+
+double minValueDiagonal(double** squareMatrix, int length)
+{
+	double tmp = squareMatrix[0][0];
+	for (int i = 1; i < length; ++i) {
+		if (squareMatrix[i][i] < tmp) tmp = squareMatrix[i][i];
+	}
+	return tmp;
+}
+
+char minValueDiagonal(char** squareMatrix, int length)
+{
+	char tmp = squareMatrix[0][0];
+	for (int i = 1; i < length; ++i) {
+		if (squareMatrix[i][i] < tmp) tmp = squareMatrix[i][i];
+	}
+	return tmp;
 }
 
 void maxValArrInd(int* arr, int N, int& maxVal, int& indexMaxVal)
@@ -179,6 +334,19 @@ void reserveArr(int rows, int columns, int**& arr)
 	arr = new int* [rows];
 	for (int i = 0; i < rows; ++i) {
 		arr[i] = reserveArr(columns);
+	}
+}
+
+void reserveArr(int length, double*& arr) // _new
+{
+	arr = new double[length];
+}
+
+void reserveArr(int rows, int columns, double**& arr)
+{
+	arr = new double* [rows];
+	for (int i = 0; i < rows; ++i) {
+		reserveArr(columns, arr[i]);
 	}
 }
 
