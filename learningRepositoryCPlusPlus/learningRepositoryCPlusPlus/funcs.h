@@ -47,7 +47,6 @@ void bobbleSort(int arr[], int LEN);
 
 //int* reserveArr(int length); // _old   (delete later)
 //char* reserveArrChar(int length); // _old   (delete later)
-
 void reserveArr(int length, int*& arr);
 void reserveArr(int length, int**& arr);
 void reserveArr(int rows, int columns, int**& arr);
@@ -96,6 +95,8 @@ void copyArray(char* arrSource, int length, char* arrDest);
 	return arr[curPos] + sumArrValues(arr, (curPos + 1), LEN);
 }*/
 int sumArrValues(int* curEl, int* endEl);
+double calcAverage(int* arr, int length);
+void calcNumbers(int* arr, int length, int& negCounter, int& zerosCounter, int& posCounter);
 /*template <typename T> T sumArrValues(T* curEl, T* endEl)
 {
 	if (curEl == endEl) {

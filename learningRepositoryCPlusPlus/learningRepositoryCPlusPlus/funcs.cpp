@@ -486,6 +486,20 @@ int sumArrValues(int* curEl, int* endEl)
 	return *curEl + sumArrValues((curEl + 1), endEl);
 }
 
+double calcAverage(int* arr, int length)
+{
+	return (double)sumArrValues(arr, arr + length - 1) / length;
+}
+
+void calcNumbers(int* arr, int length, int& negCounter, int& zerosCounter, int& posCounter)
+{
+	for (int i = 0; i < length; ++i) {
+		if (arr[i] > 0) posCounter++;
+		else if (arr[i] == 0) zerosCounter++;
+		else                  negCounter++;
+	}
+}
+
 void separateArrValues(int* arr, int length, int*& arrNeg, int& lenNeg, int*& arrZero, int& lenZero, int*& arrPos, int& lenPos)
 {
 	for (int i = 0; i < length; ++i) {
