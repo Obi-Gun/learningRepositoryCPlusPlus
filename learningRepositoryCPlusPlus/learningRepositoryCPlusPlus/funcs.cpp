@@ -153,6 +153,11 @@ int maxValue(int* pa, int* pd)
 	return *pa < *pd ? *pd : *pa;
 }
 
+int minValue(int* pa, int* pd)
+{
+	return *pa > * pd ? *pd : *pa;
+}
+
 void maxValArrInd(int* arr, int N, int& maxVal, int& indexMaxVal)
 {
 	maxVal = *arr;
@@ -789,6 +794,23 @@ fraction multipy(fraction A, fraction B)
 {
 	fraction res = { A.numerator * B.numerator, A.denominator * B.denominator };
 	return res;
+}
+
+fraction divide(fraction A, fraction B)
+{
+	fraction res = { A.numerator * B.denominator, A.denominator * B.numerator };
+	return res;
+}
+
+void reduceFraction(fraction& A)
+{
+	for (int i = minValue(&A.numerator, &A.denominator); i > 0; --i) {
+		if (isDivisor(A.numerator, i) && isDivisor(A.denominator, i)) {
+			A.numerator /= i;
+			A.denominator /= i;
+			break;
+		}
+	}
 }
 
 void printFraction(fraction A)
