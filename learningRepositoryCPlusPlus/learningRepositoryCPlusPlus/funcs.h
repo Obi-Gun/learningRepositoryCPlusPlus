@@ -26,6 +26,7 @@ void fillRandomValuesToTheArray(int** arr, int lenRow, int lenCol, int minValue,
 void fillRandomValuesToTheArray(int** arr, int lenRow, int lenCol);
 void fillRandomValuesToTheArray(double** arr, int lenRow, int lenCol);
 void fillRandomValuesToTheArray(char** arr, int lenRow, int lenCol, char minValue, char maxValue);
+int fillRandomValue(int minValue, int maxValue);
 
 template <typename T> void printArr(T arr[], int LEN)
 {
@@ -55,8 +56,6 @@ void insertionSort(char arr[], int LEN);
 void insertionSort(char** arr, int rows, int columns);
 void bobbleSort(int arr[], int LEN);
 
-//int* reserveArr(int length); // _old   (delete later)
-//char* reserveArrChar(int length); // _old   (delete later)
 void reserveArr(int length, int*& arr);
 void reserveArr(int length, int**& arr);
 void reserveArr(int rows, int columns, int**& arr);
@@ -85,7 +84,6 @@ void removeArr(char* arr);
 //int** sumMatrix(int** arrA, int aRow, int aCol, int** arrB, int bRow, int bCol);
 void transposeMatrix(int**& arrSource, int& rows, int& columns);
 
-//void shiftArrElRight_old(int* arr, int indexOfFirstElement, int indexOfSecondElement); // _old   (delete later)
 void shiftArrElLeft_old(int* arr, int indexOfFirstElement, int indexOfSecondElement); // _old   (delete later)
 void shiftArrElLeft(int*& arr, int length, int times);
 void shiftArrElRight(int*& arr, int length, int times);
@@ -98,24 +96,8 @@ void shiftArrValues(int**& arr, int rows, int columns, bool shiftHigher, int ver
 void copyArray(int* arr, int lengthOfShortestArray, int* arrCopy);
 void copyArray(int** arr, int lengthOfShortestArray, int** arrCopy);
 void copyArray(char* arrSource, int length, char* arrDest);
+void copyArray(int* arrSource, int length, char* arrDest);
 
-/*template <typename T> T sumArrValues(T arr[], int curPos, int LEN)
-{
-	if (curPos == LEN) {
-		return 0;
-	}
-	return arr[curPos] + sumArrValues(arr, (curPos + 1), LEN);
-}*/
-int sumArrValues(int* curEl, int* endEl);
-double calcAverage(int* arr, int length);
-void calcNumbers(int* arr, int length, int& negCounter, int& zerosCounter, int& posCounter);
-/*template <typename T> T sumArrValues(T* curEl, T* endEl)
-{
-	if (curEl == endEl) {
-		return *endEl;
-	}
-	return *curEl + sumArrValues((curEl + 1), endEl);
-}*/
 int maxValue(int* pa, int* pd);
 int minValue(int* pa, int* pd);
 int maxValueDiagonal(int** squareMatrix, int length);
@@ -126,10 +108,28 @@ double minValueDiagonal(double** squareMatrix, int length);
 char minValueDiagonal(char** squareMatrix, int length);
 int maxCommonDivisor(int A, int B);
 void maxValArrInd(int* arr, int N, int& maxVal, int& indexMaxVal);
+
+int sumArrValues(int* curEl, int* endEl);
+double calcAverage(int* arr, int length);
 int* deletePrimeNumbers(int* arr, int length, int& lengthNewArr);
+void calcNumbers(int* arr, int length, int& negCounter, int& zerosCounter, int& posCounter);
 void separateArrValues(int* arr, int length, int*& arrNeg, int& lenNeg, int*& arrZero, int& lenZero, int*& arrPos, int& lenPos);
 void separateUniqElFromArr1ExceptArr2ElToNewArr(int* arr, int length, int* arr2, int length2, int*& arrNew, int& lengthNew);
-template <typename T> long long int mathPow(T a, T b);
+template <typename T> long long int mathPow(T a, T b)
+{
+	if (b < 0) {
+		return 1 / mathPow(a, -b);
+	}
+	else if (b == 0) {
+		return 1;
+	}
+	else if (b == 1) {
+		return a;
+	}
+	else {
+		return a * mathPow(a, b - 1);
+	}
+}
 int mathSumValFromRange(int a, int b);
 
 bool isUniqNumber(int number, int* arr, int length);
@@ -139,6 +139,8 @@ bool isNumberHappy(int number);
 bool isPrimeNumber(int number);
 bool isEqualsChar(char el, char el2);
 
+int countDigits(int inp);
+void separateDigits(int inp, int*& output, int& length);
 int countDigits(char* source);
 int countLetters(char* source);
 int countWords(char* sourceArr);
@@ -195,6 +197,12 @@ void printFraction(fraction A);
 
 bool isLeapYear(int year);
 int calcDays(int day1, int month1, int year1, int day2, int month2, int year2);
+
+int compareArr(int* arr1, int length, int* arr2);
+int compareArr(char* arr1, char* arr2);
+char* convertIntToCharArr(int number);
+void game_BullsAndCows();
+void game_BullsAndCows_old();
 
 #define funcs
 #endif // !funcs

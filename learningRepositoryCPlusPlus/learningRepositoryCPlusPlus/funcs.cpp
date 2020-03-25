@@ -89,6 +89,20 @@ void fillRandomValuesToTheArray(char** arr, int lenRow, int lenCol, char minValu
 	}
 }
 
+int fillRandomValue(int minValue, int maxValue)
+{
+	int arr;
+	if (maxValue < minValue) {
+		swap(maxValue, minValue);
+	}
+	//for (int i = 0; i < lenRow; ++i) {
+	//	for (int j = 0; j < lenCol; ++j) {
+	arr = minValue + rand() % (maxValue + 1 - minValue);
+	//	}
+	//}
+	return arr;
+}
+
 void printArr(int** arr, int rows, int columns, int setMinimumWidth, bool showIndexes)
 {
 	setMinimumWidth = setMinimumWidth < 0 ? 0 : setMinimumWidth;
@@ -480,12 +494,6 @@ void removeArr(char* arr)
 	delete[] arr;
 }
 
-/*void deleteSpecificElFromArr(int*& arr, int& length, int indexOfDelEl)
-{
-	moveArrElLeft(arr, indexOfDelEl, length - 1);
-	deleteLastElFromArr(arr, length);
-}*/
-
 int** multiplyMatrix(int** arrA, int** arrB, int aM, int K, int bN)
 {
 	//int** multiplyMatrix(int** arrA, int aRow, int aCol, int** arrb, int bRow, int bCol)
@@ -556,14 +564,7 @@ void shiftArrElRight_old(int* arr, int indexOfFirstElement, int indexOfSecondEle
 		swap((arr + i - 1), (arr + i));
 	}
 }
-/*
-void moveArrElRight (char* arr, int indexOfFirstElement, int indexOfSecondElement)
-{
-	for (int i = indexOfSecondElement; i != indexOfFirstElement; --i) {
-		swap((arr + i - 1), (arr + i));
-	}
-}
-*/
+
 void shiftArrElLeft_old(int* arr, int indexOfFirstElement, int indexOfSecondElement)
 {
 	for (int i = indexOfFirstElement; i != indexOfSecondElement; ++i) {
@@ -656,6 +657,13 @@ void copyArray(char* arrSource, int length, char* arrDest)
 	}
 }
 
+void copyArray(int* arrSource, int length, char* arrDest)
+{
+	for (int i = 0; i < length; ++i) {
+		*(arrDest + i) = *(arrSource + i) + 48;
+	}
+}
+
 int sumArrValues(int* curEl, int* endEl)
 {
 	if (curEl == endEl) {
@@ -699,22 +707,6 @@ void separateUniqElFromArr1ExceptArr2ElToNewArr(int* arr, int length, int* exclu
 		if (isUniqNumber(*(arr + i), excludeArr, lengthExclude) && isUniqNumber(*(arr + i), arrNew, lengthNew)) {
 			addElToArr(arrNew, lengthNew, *(arr + i));
 		}
-	}
-}
-
-template <typename T> long long int mathPow(T a, T b)
-{
-	if (b < 0) {
-		return 1 / mathPow(a, -b);
-	}
-	else if (b == 0) {
-		return 1;
-	}
-	else if (b == 1) {
-		return a;
-	}
-	else {
-		return a * mathPow(a, b - 1);
 	}
 }
 
@@ -768,6 +760,23 @@ bool isPerfectNumber(int a)
 bool isDivisor(int a, int divisor)
 {
 	return a % divisor == 0;
+}
+
+int countDigits(int inp)
+{
+	for (int i = 9; i >= 0; --i) {
+		if (inp / (int)pow(10, i) != 0) return i + 1;
+	}
+	return 0;
+}
+
+void separateDigits(int inp, int*& output, int& length)
+{
+	length = countDigits(inp);
+	reserveArr(length, output);
+	for (int i = length; i > 0; --i) {
+		output[length - i] = inp % (int)pow(10, i) / (int)pow(10, i - 1);
+	}
 }
 
 bool isNumberHappy(int number)
@@ -1085,4 +1094,81 @@ int calcDays(int day1, int month1, int year1, int day2, int month2, int year2)
 		daysCounter2 += 365 + isLeapYear(i);
 	}
 	return daysCounter2 - daysCounter1;
+}
+
+int compareArr(int* arr1, int length, int* arr2)
+{
+	int counter = 0;
+	for (int i = 0; i < length; ++i) {
+		if (arr1[i] == arr2[i]) ++counter;
+	}
+	return counter;
+}
+
+int compareArr(char* arr1, char* arr2)
+{
+	int counter = 0;
+	for (int i = 0; arr1[i] != '\0'; ++i) {
+		if (arr1[i] == arr2[i]) ++counter;
+	}
+	return counter;
+}
+
+char* convertIntToCharArr(int number)
+{
+	int* arr, length;
+	separateDigits(number, arr, length);
+	char* charArr;
+	reserveArr(length + 1, charArr);
+	charArr[length] = '\0';
+	copyArray(arr, length, charArr);
+	removeArr(arr);
+	return charArr;
+}
+
+void game_BullsAndCows()
+{
+	int progNumber = fillRandomValue(1000, 9999);
+	char* progCharArr = convertIntToCharArr(progNumber);
+	int userNumber, counterRightDigits, counterIterations = 0;
+	do {
+		cout << "\nEnter the number, please: ";
+		cin >> userNumber;
+		char* userCharArr = convertIntToCharArr(userNumber);
+		++counterIterations;
+		cout << "There are " << countSymbolsInArr1isFromArr2(progCharArr, userCharArr) << " bulls\n";
+		counterRightDigits = compareArr(progCharArr, userCharArr);
+		cout << "There are " << counterRightDigits << " cows.\n";
+	} while (counterRightDigits != 4);
+	cout << "\nIt takes " << counterIterations << " iterations to find the right number.\n";
+}
+
+void game_BullsAndCows_old()
+{
+	int progNumber = rand() % 10000, * progArrNum, progLen;
+	cout << progNumber << endl;
+	separateDigits(progNumber, progArrNum, progLen);
+	char* progCharArr;
+	reserveArr(progLen + 1, progCharArr);
+	progCharArr[progLen] = '\0';
+	copyArray(progArrNum, progLen, progCharArr);
+	int counter = 0;
+	int userNumber, * userArrNum, userLength;
+	int rightDigits;
+	do {
+		cout << "\nEnter the number, please: ";
+		cin >> userNumber;
+		separateDigits(userNumber, userArrNum, userLength);
+		char* userCharArr;
+		reserveArr(userLength + 1, userCharArr);
+		userCharArr[userLength] = '\0';
+		copyArray(userArrNum, userLength, userCharArr);
+
+		++counter;
+		cout << "There are " << countSymbolsInArr1isFromArr2(progCharArr, userCharArr) << " bulls\n";
+		rightDigits = compareArr(progArrNum, progLen, userArrNum);
+		cout << "There are " << rightDigits << " cows.\n";
+
+	} while (rightDigits != progLen);
+	cout << "\nIt takes " << counter << " iterations to find the right number.\n";
 }

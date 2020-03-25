@@ -54,10 +54,10 @@ void main() {
 	printArr(arr3, len, len);*/
 	
 // HomeWork 12.2.2. Course: "Basics of programming in C++".
-	cout << maxCommonDivisor(159, 646) << endl;
+	/*cout << maxCommonDivisor(159, 646) << endl;
 	cout << maxCommonDivisor(100, 1000) << endl;
-	cout << maxCommonDivisor(666, 777) << endl;
+	cout << maxCommonDivisor(666, 777) << endl;*/
 
 // HomeWork 12.2.3. Course: "Basics of programming in C++".
-
+	game_BullsAndCows();
 }
