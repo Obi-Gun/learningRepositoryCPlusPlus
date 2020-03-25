@@ -2,6 +2,29 @@
 #include "funcs.h"
 using namespace std;
 
+template <typename T> void quickSort(T* arr, int N) //N - index of last element
+{
+	int i = 0, j = N;
+	T p = arr[N / 2]; // опорный элемент
+	do {
+		while (arr[i] <= p) {
+			++i;
+		}
+		while (arr[j] >= p) {
+			--j;
+		}
+		if (i < j) {
+			swap(arr[i], arr[j]);
+		}
+	} while (i < j);
+	if (j > 0) {
+		quickSort(arr, j);
+	}
+	if (j < N) {
+		quickSort(arr + j, N - j);
+	}
+}
+
 void main() {
 	srand(time(NULL));
 
@@ -59,5 +82,14 @@ void main() {
 	cout << maxCommonDivisor(666, 777) << endl;*/
 
 // HomeWork 12.2.3. Course: "Basics of programming in C++".
-	game_BullsAndCows();
+	//game_BullsAndCows();
+
+// ClassWork QuickSort. Course: "Basics of programming in C++". 25.03.2020
+	int length = 10;
+	int* arr;
+	reserveArr(length, arr);
+	fillRandomValuesToTheArray(arr, length, 0, 10);
+	printArr(arr, length);
+	quickSort(arr, 9);
+	printArr(arr, length);
 }
