@@ -2,27 +2,35 @@
 #include "funcs.h"
 using namespace std;
 
-template <typename T> void quickSort(T* arr, int N) //N - index of last element
+template <typename T> void quickSort(T* arr, int lastElementIndex) //N - index of last element
 {
-	int i = 0, j = N;
-	T p = arr[N / 2]; // опорный элемент
+	int i = 0, j = lastElementIndex;
+	T p = arr[lastElementIndex / 2]; // опорный элемент
 	do {
-		while (arr[i] <= p) {
+		while (arr[i] < p) {
 			++i;
 		}
-		while (arr[j] >= p) {
+		while (arr[j] > p) {
 			--j;
 		}
-		if (i < j) {
+		if (i <= j) {
 			swap(arr[i], arr[j]);
+			i++;
+			j--;
 		}
-	} while (i < j);
+	} while (i <= j);
 	if (j > 0) {
 		quickSort(arr, j);
 	}
-	if (j < N) {
-		quickSort(arr + j, N - j);
+	if (i < lastElementIndex) {
+		quickSort(arr + i, lastElementIndex - i);
 	}
+}
+
+int aaa(char* arr1, char* arr2)
+{
+
+	return;
 }
 
 void main() {
@@ -85,11 +93,15 @@ void main() {
 	//game_BullsAndCows();
 
 // ClassWork QuickSort. Course: "Basics of programming in C++". 25.03.2020
-	int length = 10;
+	/*int length = 50;
 	int* arr;
 	reserveArr(length, arr);
-	fillRandomValuesToTheArray(arr, length, 0, 10);
+	fillRandomValuesToTheArray(arr, length, 0, 49);
 	printArr(arr, length);
-	quickSort(arr, 9);
-	printArr(arr, length);
+	quickSort(arr, length - 1);
+	printArr(arr, length);*/
+
+// ClassWork task. Course: "Basics of programming in C++". 25.03.2020
+
+
 }
