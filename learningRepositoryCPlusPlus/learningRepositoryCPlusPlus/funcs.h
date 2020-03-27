@@ -1,3 +1,6 @@
+#ifndef funcs //стражи включения 
+#define funcs
+
 #include <iostream>
 #include <cmath>
 #include <time.h>
@@ -5,7 +8,6 @@
 #include <iomanip>
 
 using namespace std; //bad practice to use it out of funcs
-#ifndef funcs
 
 template <typename T> void fillRandomValuesToTheArray(T arr[], int LEN)
 {
@@ -54,7 +56,33 @@ void insertionSort(double arr[], int LEN);
 void insertionSort(double** arr, int rows, int columns);
 void insertionSort(char arr[], int LEN);
 void insertionSort(char** arr, int rows, int columns);
+
 void bobbleSort(int arr[], int LEN);
+
+template <typename T> void quickSort(T* arr, int lastElementIndex) //N - index of last element
+{
+	int i = 0, j = lastElementIndex;
+	T p = arr[lastElementIndex / 2]; // опорный элемент
+	do {
+		while (arr[i] < p) {
+			++i;
+		}
+		while (arr[j] > p) {
+			--j;
+		}
+		if (i <= j) {
+			swap(arr[i], arr[j]);
+			i++;
+			j--;
+		}
+	} while (i <= j);
+	if (j > 0) {
+		quickSort(arr, j);
+	}
+	if (i < lastElementIndex) {
+		quickSort(arr + i, lastElementIndex - i);
+	}
+}
 
 void reserveArr(int length, int*& arr);
 void reserveArr(int length, int**& arr);
@@ -107,7 +135,13 @@ int minValueDiagonal(int** squareMatrix, int length);
 double minValueDiagonal(double** squareMatrix, int length);
 char minValueDiagonal(char** squareMatrix, int length);
 int maxCommonDivisor(int A, int B);
-void maxValArrInd(int* arr, int N, int& maxVal, int& indexMaxVal);
+
+void maxValArrInd(int* arr, int length, int& maxVal, int& indexMaxVal);
+void maxValArrInd(double* arr, int length, double& maxVal, int& indexMaxVal);
+void maxValArrInd(char* arr, int length, char& maxVal, int& indexMaxVal);
+void minValArrInd(int* arr, int length, int& minVal, int& indexMinVal);
+void minValArrInd(double* arr, int length, double& minVal, int& indexMinVal);
+void minValArrInd(char* arr, int length, char& minVal, int& indexMinVal);
 
 int sumArrValues(int* curEl, int* endEl);
 double calcAverage(int* arr, int length);
@@ -204,5 +238,4 @@ char* convertIntToCharArr(int number);
 void game_BullsAndCows();
 void game_BullsAndCows_old();
 
-#define funcs
-#endif // !funcs
+#endif funcs// !funcs

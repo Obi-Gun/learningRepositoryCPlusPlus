@@ -321,14 +321,74 @@ int maxCommonDivisor(int A, int B)
 	return 1;
 }
 
-void maxValArrInd(int* arr, int N, int& maxVal, int& indexMaxVal)
+void maxValArrInd(int* arr, int length, int& maxVal, int& indexMaxVal)
 {
 	maxVal = *arr;
 	indexMaxVal = 0;
-	for (int i = 1; i < N; ++i) {
+	for (int i = 1; i < length; ++i) {
 		if (maxVal < *(arr + i)) {
 			maxVal = *(arr + i);
 			indexMaxVal = i;
+		}
+	}
+}
+
+void maxValArrInd(double* arr, int length, double& maxVal, int& indexMaxVal)
+{
+	maxVal = *arr;
+	indexMaxVal = 0;
+	for (int i = 1; i < length; ++i) {
+		if (maxVal < *(arr + i)) {
+			maxVal = *(arr + i);
+			indexMaxVal = i;
+		}
+	}
+}
+
+void maxValArrInd(char* arr, int length, char& maxVal, int& indexMaxVal)
+{
+	maxVal = *arr;
+	indexMaxVal = 0;
+	for (int i = 1; i < length; ++i) {
+		if (maxVal < *(arr + i)) {
+			maxVal = *(arr + i);
+			indexMaxVal = i;
+		}
+	}
+}
+
+void minValArrInd(int* arr, int length, int& minVal, int& indexMinVal)
+{
+	minVal = *arr;
+	indexMinVal = 0;
+	for (int i = 1; i < length; ++i) {
+		if (minVal > *(arr + i)) {
+			minVal = *(arr + i);
+			indexMinVal = i;
+		}
+	}
+}
+
+void minValArrInd(double* arr, int length, double& minVal, int& indexMinVal)
+{
+	minVal = *arr;
+	indexMinVal = 0;
+	for (int i = 1; i < length; ++i) {
+		if (minVal > * (arr + i)) {
+			minVal = *(arr + i);
+			indexMinVal = i;
+		}
+	}
+}
+
+void minValArrInd(char* arr, int length, char& minVal, int& indexMinVal)
+{
+	minVal = *arr;
+	indexMinVal = 0;
+	for (int i = 1; i < length; ++i) {
+		if (minVal > * (arr + i)) {
+			minVal = *(arr + i);
+			indexMinVal = i;
 		}
 	}
 }
