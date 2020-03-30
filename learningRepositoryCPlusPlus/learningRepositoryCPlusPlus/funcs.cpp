@@ -1235,23 +1235,22 @@ void game_BullsAndCows_old()
 
 void process()
 {
-/*#define PROCESS
-#define INTEGER*/
+#define CHAR
 
-#ifdef PROCESS
+#if defined(INTEGER) || defined(DOUBLE) || defined(CHAR)
 	int length = 10;
-#if defined(INTEGER)
-	int* arr;
-	int minVal, minValInd, maxVal, maxValInd;
-#elif defined(DOUBLE)
-	double* arr;
-	double minVal, maxVal;
-	int maxValInd, minValInd;
-#elif defined(CHAR)
-	char* arr;
-	char minVal, maxVal;
-	int maxValInd, minValInd;
-#endif
+	#if defined(INTEGER)
+		int* arr;
+		int minVal, minValInd, maxVal, maxValInd;
+	#elif defined(DOUBLE)
+		double* arr;
+		double minVal, maxVal;
+		int maxValInd, minValInd;
+	#elif defined(CHAR)
+		char* arr;
+		char minVal, maxVal;
+		int maxValInd, minValInd;
+	#endif
 	reserveArr(length, arr);
 	fillRandomValuesToTheArray(arr, length);
 	printArr(arr, length);
@@ -1261,4 +1260,83 @@ void process()
 	printArr(arr, length);
 	cout << "minVal = " << minVal;
 #endif
+}
+
+void writeStringsToFile(const char* filepath, const char* strings[], int stringsSize)
+{
+	FILE* file;
+	if (fopen_s(&file, filepath, "w")) {
+		cout << "Unable to open file";
+		return;
+	}
+
+	for (int i = 0; i < stringsSize; ++i) {
+		fputs(strings[i], file);
+		fputs("\n", file);
+	}
+
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return;
+	}
+}
+
+void changeCharInFile(const char* sourcefilepath, const char* destfilepath, char sCh, char dCh)
+{
+	FILE* sourcefile;
+	if (fopen_s(&sourcefile, sourcefilepath, "r")) {
+		cout << "Unable to open sourcefile";
+		return;
+	}
+	FILE* destfile;
+	if (fopen_s(&destfile, destfilepath, "w")) {
+		cout << "Unable to open destfile";
+		return;
+	}
+
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+
+	while (fgets(str, maxStringSize, sourcefile)) {
+		while (char* p = strchr(str, sCh)) {
+			*p = dCh;
+		}
+		fputs(str, destfile);
+	}
+
+	if (fclose(sourcefile)) {
+		cout << "Unable to close file";
+		return;
+	}
+	if (fclose(destfile)) {
+		cout << "Unable to close file";
+		return;
+	}
+}
+
+int countWords(const char* filepath, char searchedChar)
+{
+	FILE* file;
+	if (fopen_s(&file, filepath, "r")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+	int counter = 0;
+	while (fgets(str, maxStringSize, file)) {
+		char* context;
+		char* word = strtok_s(str, " ", &context);
+		while (word) {
+			if (word[0] == searchedChar) {
+				++counter;
+			}
+			word = strtok_s(NULL, " ", &context);
+		}
+	}
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	return counter;
 }

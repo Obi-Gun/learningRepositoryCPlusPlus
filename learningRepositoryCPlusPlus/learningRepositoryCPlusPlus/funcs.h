@@ -1,4 +1,4 @@
-#ifndef funcs //стражи включения 
+#ifndef funcs
 #define funcs
 
 #include <iostream>
@@ -6,6 +6,8 @@
 #include <time.h>
 #include <string.h>
 #include <iomanip>
+#include <stdio.h>
+#include <io.h>
 
 using namespace std; //bad practice to use it out of funcs
 
@@ -15,7 +17,7 @@ template <typename T> void fillRandomValuesToTheArray(T arr[], int LEN)
 		arr[i] = rand();
 	}
 }
-template <typename T> void fillRandomValuesToTheArray(T arr[], int LEN, T minValue, T maxValue)
+template <typename T> void fillRandomValuesToTheArray(T arr[], int LEN, int minValue, int maxValue)
 {
 	if (maxValue < minValue) {
 		swap(maxValue, minValue);
@@ -240,4 +242,8 @@ void game_BullsAndCows();
 void game_BullsAndCows_old();
 void process();
 
-#endif funcs// !funcs
+void writeStringsToFile(const char* filepath, const char* strings[], int stringsSize);
+void changeCharInFile(const char* sourcefilepath, const char* destfilepath, char sCh, char dCh);
+int countWords(const char* filepath, char searchedChar);
+
+#endif //funcs// !funcs
