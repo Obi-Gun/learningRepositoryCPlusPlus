@@ -1232,3 +1232,33 @@ void game_BullsAndCows_old()
 	} while (rightDigits != progLen);
 	cout << "\nIt takes " << counter << " iterations to find the right number.\n";
 }
+
+void process()
+{
+/*#define PROCESS
+#define INTEGER*/
+
+#ifdef PROCESS
+	int length = 10;
+#if defined(INTEGER)
+	int* arr;
+	int minVal, minValInd, maxVal, maxValInd;
+#elif defined(DOUBLE)
+	double* arr;
+	double minVal, maxVal;
+	int maxValInd, minValInd;
+#elif defined(CHAR)
+	char* arr;
+	char minVal, maxVal;
+	int maxValInd, minValInd;
+#endif
+	reserveArr(length, arr);
+	fillRandomValuesToTheArray(arr, length);
+	printArr(arr, length);
+	quickSort(arr, length - 1);
+	minValArrInd(arr, length, minVal, minValInd);
+	maxValArrInd(arr, length, maxVal, maxValInd);
+	printArr(arr, length);
+	cout << "minVal = " << minVal;
+#endif
+}

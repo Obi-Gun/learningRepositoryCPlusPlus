@@ -235,7 +235,9 @@ int calcDays(int day1, int month1, int year1, int day2, int month2, int year2);
 int compareArr(int* arr1, int length, int* arr2);
 int compareArr(char* arr1, char* arr2);
 char* convertIntToCharArr(int number);
+
 void game_BullsAndCows();
 void game_BullsAndCows_old();
+void process();
 
 #endif funcs// !funcs
