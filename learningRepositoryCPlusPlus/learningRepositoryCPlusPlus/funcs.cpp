@@ -1262,6 +1262,44 @@ void process()
 #endif
 }
 
+int countStringsInFile(char* filepth) {
+	FILE* file;
+	if (fopen_s(&file, filepth, "r")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+	int strCounter = 0;
+	while (char* str2 = fgets(str, maxStringSize, file)) {
+		++strCounter;
+	}
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	return strCounter;
+}
+
+int countCharsInFile(char* filepth) {
+	FILE* file;
+	if (fopen_s(&file, filepth, "r")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+	int counter = 0;
+	while (char* str2 = fgets(str, maxStringSize, file)) {
+		counter += strlen(str2);
+	}
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	return counter;
+}
+
 void writeStringsToFile(const char* filepath, const char* strings[], int stringsSize)
 {
 	FILE* file;

@@ -242,6 +242,8 @@ void game_BullsAndCows();
 void game_BullsAndCows_old();
 void process();
 
+int countStringsInFile(char* filepth);
+int countCharsInFile(char* filepth);
 void writeStringsToFile(const char* filepath, const char* strings[], int stringsSize);
 void changeCharInFile(const char* sourcefilepath, const char* destfilepath, char sCh, char dCh);
 int countWords(const char* filepath, char searchedChar);
