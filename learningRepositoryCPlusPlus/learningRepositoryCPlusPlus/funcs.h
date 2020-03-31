@@ -31,6 +31,7 @@ void fillRandomValuesToTheArray(int** arr, int lenRow, int lenCol);
 void fillRandomValuesToTheArray(double** arr, int lenRow, int lenCol);
 void fillRandomValuesToTheArray(char** arr, int lenRow, int lenCol, char minValue, char maxValue);
 int fillRandomValue(int minValue, int maxValue);
+int fillRandom4DigitValue();
 
 template <typename T> void printArr(T arr[], int LEN)
 {
@@ -239,7 +240,6 @@ int compareArr(char* arr1, char* arr2);
 char* convertIntToCharArr(int number);
 
 void game_BullsAndCows();
-void game_BullsAndCows_old();
 void process();
 
 int countStringsInFile(char* filepth);

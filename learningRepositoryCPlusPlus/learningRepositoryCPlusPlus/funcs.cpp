@@ -91,6 +91,7 @@ void fillRandomValuesToTheArray(char** arr, int lenRow, int lenCol, char minValu
 
 int fillRandomValue(int minValue, int maxValue)
 {
+	srand(time(NULL));
 	int arr;
 	if (maxValue < minValue) {
 		swap(maxValue, minValue);
@@ -101,6 +102,15 @@ int fillRandomValue(int minValue, int maxValue)
 	//	}
 	//}
 	return arr;
+}
+
+int fillRandom4DigitValue()
+{
+	int num = rand() % 10;
+	num += rand() % 10 * 10;
+	num += rand() % 10 * 100;
+	num += 1000 + rand() % 9 * 1000;
+	return num;
 }
 
 void printArr(int** arr, int rows, int columns, int setMinimumWidth, bool showIndexes)
@@ -1188,49 +1198,23 @@ char* convertIntToCharArr(int number)
 
 void game_BullsAndCows()
 {
-	int progNumber = fillRandomValue(1000, 9999);
+	int progNumber = fillRandom4DigitValue();
 	char* progCharArr = convertIntToCharArr(progNumber);
-	int userNumber, counterRightDigits, counterIterations = 0;
+	int userNumber, cows, counterIterations = 0;
 	do {
 		cout << "\nEnter the number, please: ";
 		cin >> userNumber;
+		while (userNumber < 1000 || userNumber > 9999) {
+			cout << "\nYou`ve entered non-4 digit number, please try again: ";
+			cin >> userNumber;
+		}
 		char* userCharArr = convertIntToCharArr(userNumber);
 		++counterIterations;
 		cout << "There are " << countSymbolsInArr1isFromArr2(progCharArr, userCharArr) << " bulls\n";
-		counterRightDigits = compareArr(progCharArr, userCharArr);
-		cout << "There are " << counterRightDigits << " cows.\n";
-	} while (counterRightDigits != 4);
+		cows = compareArr(progCharArr, userCharArr);
+		cout << "There are " << cows << " cows.\n";
+	} while (cows != 4);
 	cout << "\nIt takes " << counterIterations << " iterations to find the right number.\n";
-}
-
-void game_BullsAndCows_old()
-{
-	int progNumber = rand() % 10000, * progArrNum, progLen;
-	cout << progNumber << endl;
-	separateDigits(progNumber, progArrNum, progLen);
-	char* progCharArr;
-	reserveArr(progLen + 1, progCharArr);
-	progCharArr[progLen] = '\0';
-	copyArray(progArrNum, progLen, progCharArr);
-	int counter = 0;
-	int userNumber, * userArrNum, userLength;
-	int rightDigits;
-	do {
-		cout << "\nEnter the number, please: ";
-		cin >> userNumber;
-		separateDigits(userNumber, userArrNum, userLength);
-		char* userCharArr;
-		reserveArr(userLength + 1, userCharArr);
-		userCharArr[userLength] = '\0';
-		copyArray(userArrNum, userLength, userCharArr);
-
-		++counter;
-		cout << "There are " << countSymbolsInArr1isFromArr2(progCharArr, userCharArr) << " bulls\n";
-		rightDigits = compareArr(progArrNum, progLen, userArrNum);
-		cout << "There are " << rightDigits << " cows.\n";
-
-	} while (rightDigits != progLen);
-	cout << "\nIt takes " << counter << " iterations to find the right number.\n";
 }
 
 void process()
