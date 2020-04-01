@@ -564,6 +564,19 @@ void removeArr(char* arr)
 	delete[] arr;
 }
 
+void removeArr(char** arr)
+{
+	delete[] arr;
+}
+
+void removeArr(char** arr, int lengthRows)
+{
+	for (int i = 0; i < lengthRows; ++i) {
+		removeArr(arr[i]);
+	}
+	removeArr(arr);
+}
+
 int** multiplyMatrix(int** arrA, int** arrB, int aM, int K, int bN)
 {
 	//int** multiplyMatrix(int** arrA, int aRow, int aCol, int** arrb, int bRow, int bCol)
@@ -1361,4 +1374,140 @@ int countWords(const char* filepath, char searchedChar)
 		return -2;
 	}
 	return counter;
+}
+
+void copyStingsFromFileToFile(const char* sourceFilepath, const char* destFilepath)
+{
+	FILE* sourceFile;
+	if (fopen_s(&sourceFile, sourceFilepath, "r")) {
+		cout << "Unable to open file";
+		return;
+	}
+	FILE* destFile;
+	if (fopen_s(&destFile, destFilepath, "w")) {
+		cout << "Unable to open file";
+		return;
+	}
+
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+	while (fgets(str, maxStringSize, sourceFile)) {
+		fputs(str, destFile);
+	}
+
+	if (fclose(sourceFile)) {
+		cout << "Unable to close file";
+		return;
+	}
+	if (fclose(destFile)) {
+		cout << "Unable to close file";
+		return;
+	}
+}
+
+void copyStingsFromFileToFileReverse(const char* sourceFilepath, const char* destFilepath)
+{
+	FILE* sourceFile;
+	if (fopen_s(&sourceFile, sourceFilepath, "r")) {
+		cout << "Unable to open file";
+		return;
+	}
+	FILE* destFile;
+	if (fopen_s(&destFile, destFilepath, "w")) {
+		cout << "Unable to open file";
+		return;
+	}
+	const int maxStringSize = 1024;
+	int strCounter = countStringsInFile((char*)sourceFilepath);
+	char** arr;
+	reserveArr(strCounter, maxStringSize, arr);
+	int i = 0;
+	while (fgets(arr[i++], maxStringSize, sourceFile));
+	for (int i = 0; i < strCounter; ++i) {
+		fputs(arr[strCounter - 1 - i], destFile);
+		if (!i) fputs("\n", destFile);
+	}
+	removeArr(arr);
+	if (fclose(sourceFile)) {
+		cout << "Unable to close file";
+		return;
+	}
+	if (fclose(destFile)) {
+		cout << "Unable to close file";
+		return;
+	}
+}
+
+int replaceWordsToFile(const char* filepath, const char* destFilepath, int wordLength)
+{
+	FILE* file;
+	if (fopen_s(&file, filepath, "r")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	FILE* destFile;
+	if (fopen_s(&destFile, destFilepath, "w")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+
+	while (fgets(str, maxStringSize, file)) {
+		char* context;
+		char* word = strtok_s(str, " ", &context);
+		while (word) {
+			if (strlen(word) > wordLength) {
+				fputs(word, destFile);
+				fputs(" ", destFile);
+			}
+			word = strtok_s(NULL, " ", &context);
+		}
+		fputs("\n", destFile);
+	}
+
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	return 0;
+}
+
+int insertStringToFile(const char* filepath)
+{
+	int strCounter = countStringsInFile((char*)filepath);
+	FILE* file;
+	if (fopen_s(&file, filepath, "r+")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	const int maxStringSize = 1024;
+	char** arr;
+	reserveArr(strCounter + 1, maxStringSize, arr);
+	int i = 0;
+	int strWithoutSpacesIndex;
+	while (fgets(arr[i], maxStringSize, file)) {
+		if (!strchr(arr[i], ' ')) {
+			strWithoutSpacesIndex = i;
+		}
+		++i;
+	}
+	arr[strCounter] = (char*)"------\n";
+	for (int i = strCounter; i > strWithoutSpacesIndex + 1; --i) {
+		swap(arr + i, arr + i - 1);
+	}
+
+	fseek(file, 0, 0);
+
+	for (int i = 0; i <= strCounter; ++i) {
+		fputs(arr[i], file);
+	}
+
+	printArr(arr, strCounter + 1);
+	removeArr(arr);
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	return 0;
 }

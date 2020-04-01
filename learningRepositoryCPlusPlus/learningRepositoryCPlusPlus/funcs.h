@@ -109,6 +109,8 @@ void removeArr(int* arr);
 void removeArr(int** arr);
 void removeMatrix(int** arr, int lengthRows);
 void removeArr(char* arr);
+void removeArr(char** arr);
+void removeArr(char** arr, int lengthRows);
 
 //void deleteSpecificElFromArr(int*& arr, int& length, int indexOfDelEl);
 //int** multiplyMatrix(int** arrA, int** arrB, int aM, int K, int bN);
@@ -247,5 +249,9 @@ int countCharsInFile(char* filepth);
 void writeStringsToFile(const char* filepath, const char* strings[], int stringsSize);
 void changeCharInFile(const char* sourcefilepath, const char* destfilepath, char sCh, char dCh);
 int countWords(const char* filepath, char searchedChar);
+void copyStingsFromFileToFile(const char* sourceFilepath, const char* destFilepath);
+void copyStingsFromFileToFileReverse(const char* sourceFilepath, const char* destFilepath);
+int replaceWordsToFile(const char* filepath, const char* destFilepath, int wordLength);
+int insertStringToFile(const char* filepath);
 
 #endif //funcs// !funcs
