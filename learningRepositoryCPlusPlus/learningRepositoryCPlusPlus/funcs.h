@@ -33,6 +33,8 @@ void fillRandomValuesToTheArray(char** arr, int lenRow, int lenCol, char minValu
 int fillRandomValue(int minValue, int maxValue);
 int fillRandom4DigitValue();
 
+void shakeValuesInArr(int* arr, int length);
+
 template <typename T> void printArr(T arr[], int LEN)
 {
 	cout << "\nArray values:" << endl;
@@ -62,10 +64,10 @@ void insertionSort(char** arr, int rows, int columns);
 
 void bobbleSort(int arr[], int LEN);
 
-template <typename T> void quickSort(T* arr, int lastElementIndex) //N - index of last element
+template <typename T> void quickSort(T* arr, int lastElementIndex)
 {
 	int i = 0, j = lastElementIndex;
-	T p = arr[lastElementIndex / 2]; // опорный элемент
+	T p = arr[lastElementIndex / 2];
 	do {
 		while (arr[i] < p) {
 			++i;
@@ -86,6 +88,24 @@ template <typename T> void quickSort(T* arr, int lastElementIndex) //N - index o
 		quickSort(arr + i, lastElementIndex - i);
 	}
 }
+template <typename T> void quickSortDescendingOrder(T* arr, int lastElementIndex)
+{
+	int i = 0, j = lastElementIndex;
+	T p = arr[lastElementIndex / 2];
+	do {
+		while (arr[i] > p) ++i;
+		while (arr[j] < p) --j;
+		if (i <= j) {
+			swap(arr[i], arr[j]);
+			i++;
+			j--;
+		}
+	} while (i <= j);
+	if (j > 0)				  quickSortDescendingOrder(arr, j);
+	if (i < lastElementIndex) quickSortDescendingOrder(arr + i, lastElementIndex - i);
+}
+
+void sortArr(int* arr, int length, bool isInAscendingOrder = 1);
 
 void reserveArr(int length, int*& arr);
 void reserveArr(int length, int**& arr);
@@ -107,7 +127,7 @@ void removeColumnFromArr(int**& arr, int rows, int& columns, int indexRemColumn 
 void deleteLastElFromArr(int*& arr, int& length);
 void removeArr(int* arr);
 void removeArr(int** arr);
-void removeMatrix(int** arr, int lengthRows);
+void removeArr(int** arr, int lengthRows);
 void removeArr(char* arr);
 void removeArr(char** arr);
 void removeArr(char** arr, int lengthRows);

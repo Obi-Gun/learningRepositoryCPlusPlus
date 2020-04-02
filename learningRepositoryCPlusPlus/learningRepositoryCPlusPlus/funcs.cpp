@@ -92,16 +92,10 @@ void fillRandomValuesToTheArray(char** arr, int lenRow, int lenCol, char minValu
 int fillRandomValue(int minValue, int maxValue)
 {
 	srand(time(NULL));
-	int arr;
 	if (maxValue < minValue) {
 		swap(maxValue, minValue);
 	}
-	//for (int i = 0; i < lenRow; ++i) {
-	//	for (int j = 0; j < lenCol; ++j) {
-	arr = minValue + rand() % (maxValue + 1 - minValue);
-	//	}
-	//}
-	return arr;
+	return minValue + rand() % (maxValue + 1 - minValue);
 }
 
 int fillRandom4DigitValue()
@@ -111,6 +105,17 @@ int fillRandom4DigitValue()
 	num += rand() % 10 * 100;
 	num += 1000 + rand() % 9 * 1000;
 	return num;
+}
+
+void shakeValuesInArr(int* arr, int length)
+{
+	int* arr2;
+	reserveArr(length, arr2);
+	fillRandomValuesToTheArray(arr2, length, 0, length - 1);
+	for (int i = 0; i < length; ++i) {
+		swap(arr + i, arr + arr2[i]);
+	}
+	removeArr(arr2);
 }
 
 void printArr(int** arr, int rows, int columns, int setMinimumWidth, bool showIndexes)
@@ -255,6 +260,12 @@ void bobbleSort(int arr[], int length)
 			}
 		}
 	}
+}
+
+void sortArr(int* arr, int length, bool isInAscendingOrder)
+{
+	if (isInAscendingOrder) quickSort(arr, length - 1);
+	else quickSortDescendingOrder(arr, length - 1);
 }
 
 int maxValue(int* pa, int* pd)
@@ -551,7 +562,7 @@ void removeArr(int** arr)
 	delete[] arr;
 }
 
-void removeMatrix(int** arr, int lengthRows)
+void removeArr(int** arr, int lengthRows)
 {
 	while (lengthRows > 0) {
 		removeArr(arr[--lengthRows]);

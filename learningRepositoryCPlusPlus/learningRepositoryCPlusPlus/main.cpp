@@ -3,38 +3,53 @@
 
 using namespace std;
 
-/*int aaa(char* filepath)
-{
-	FILE* file;
-	if (fopen_s(&file, filepath, "r")) {
-		cout << "Unable to open file";
-		return -1;
-	}
 
-	_access_s("", 00); // 00 02 04 06
-	fread_s();
-	fwrite();
-	_fileno();
-
-	if (fclose(file)) {
-		cout << "Unable to close file";
-		return -2;
-	}
-	return 0;
-}*/
 
 int main() {
-	//srand(time(NULL));
+	srand(time(NULL));
 
-// Classwork 21.1.2 Course: "Basics of programming in C++".
-	//copyStingsFromFileToFile("C:\\Users\\Alexandr\\Desktop\\Classwork21.1.2.txt", "C:\\Users\\Alexandr\\Desktop\\Classwork21.1.2-copy.txt");
+// Homework 13.1 Course: "Basics of programming in C++".
+	/*int length = 50;
+	int* arr;
+	reserveArr(length, arr);
+	fillRandomValuesToTheArray(arr, length, 0, 50);
+	printArr(arr, length);
+	sortArr(arr, length, 0);
+	printArr(arr, length);
+	removeArr(arr);*/
 
-// Classwork 21.1.3 Course: "Basics of programming in C++".
-	//copyStingsFromFileToFileReverse("C:\\Users\\Alexandr\\Desktop\\Classwork21.1.2.txt", "C:\\Users\\Alexandr\\Desktop\\Classwork21.1.2-copy.txt");
+// Homework 13.2 Course: "Basics of programming in C++".
+	/*int length = 20;
+	int* arr;
+	reserveArr(length, arr);
+	fillRandomValuesToTheArray(arr, length, -20, 20);
+	printArr(arr, length);
+	int left, right, l = 0, r = length - 1;
+	while (arr[l++] > 0);
+	while (arr[r--] > 0);
+	quickSort(arr + l, r - l);
+	printArr(arr, length);
+	removeArr(arr);*/
 
-// Classwork 21.1.1 Course: "Basics of programming in C++".
-	//replaceWordsToFile("C:\\Users\\Alexandr\\Desktop\\Classwork21.1.1.txt", "C:\\Users\\Alexandr\\Desktop\\Classwork21.1.1-copy.txt", 7);
-
-// Classwork 21.1.4 Course: "Basics of programming in C++".
-	//insertStringToFile("C:\\Users\\Alexandr\\Desktop\\Classwork21.1.4.txt");
+// Homework 13.3 Course: "Basics of programming in C++".
+	int length = 20;
+	int* arr;
+	reserveArr(length, arr);
+	for (int i = 0; i < length; ++i) {
+		arr[i] = i + 1;
+	}
+	printArr(arr, length);
+	// Homework 13.3.1
+	shakeValuesInArr(arr, length);
+	printArr(arr, length);
+	// Homework 13.3.2
+	int searchedNumber = fillRandomValue(1, 20);
+	cout << "searchedNumber = " << searchedNumber << endl;
+	int indexOfSN = searchIndexOfKeyEl(arr, length, searchedNumber);
+	cout << "index of searchedNumber = " << indexOfSN << endl;
+	// Homework 13.3.3
+	sortArr(arr, indexOfSN, false);
+	sortArr(arr + indexOfSN + 1, length - indexOfSN - 1);
+	printArr(arr, length);
+	removeArr(arr);
 }
