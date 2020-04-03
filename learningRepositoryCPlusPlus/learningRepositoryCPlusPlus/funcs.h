@@ -54,6 +54,7 @@ template <typename T> void swap(T* pFirst, T* pSecond)
 	*pFirst = *pSecond;
 	*pSecond = tmp;
 }
+void swapArr(char*& pFirst, char*& pSecond);
 
 void insertionSort(int arr[], int LEN);
 void insertionSort(int** arr, int rows, int columns);
@@ -106,6 +107,8 @@ template <typename T> void quickSortDescendingOrder(T* arr, int lastElementIndex
 }
 
 void sortArr(int* arr, int length, bool isInAscendingOrder = 1);
+void bobbleSortStr(char** arr, int rows, int iSL);
+void sortStr(char** arr, int rows, int iSL);
 
 void reserveArr(int length, int*& arr);
 void reserveArr(int length, int**& arr);
@@ -204,6 +207,7 @@ int countDigits(char* source);
 int countLetters(char* source);
 int countWords(char* sourceArr);
 int countSymbolsInArr1isFromArr2(char* source, const char* symbolsToFind);
+int strLength(char** arr, int rows);
 
 int searchIndexOfKeyEl(int* arr, int length, int searchedEl);
 int searchIndexOfKeyElBinar(int* arr, int length, int searchedEl);

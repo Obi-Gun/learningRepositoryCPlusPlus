@@ -47,6 +47,15 @@ int countSymbolsInArr1isFromArr2(char* source, const char* symbolsToFind)
 	return counter;
 }
 
+int strLength(char** arr, int rows)
+{
+	int minStrLen = strlen(arr[0]);
+	for (int i = 1; i < rows; ++i) {
+		if (minStrLen > strlen(arr[i])) minStrLen = strlen(arr[i]);
+	}
+	return minStrLen;
+}
+
 void fillRandomValuesToTheArray(int** arr, int lenRow, int lenCol, int minValue, int maxValue)
 {
 	if (maxValue < minValue) {
@@ -191,6 +200,13 @@ void printArr(char*** arr, int rows, int columns, int strLength, int setMinimumW
 	cout << endl;
 }
 
+void swapArr(char*& pFirst, char*& pSecond)
+{
+	char* tmp = pFirst;
+	pFirst = pSecond;
+	pSecond = tmp;
+}
+
 void insertionSort(int arr[], int LEN)
 {
 	for (int i = 0; i < (LEN - 1); ++i) {
@@ -266,6 +282,37 @@ void sortArr(int* arr, int length, bool isInAscendingOrder)
 {
 	if (isInAscendingOrder) quickSort(arr, length - 1);
 	else quickSortDescendingOrder(arr, length - 1);
+}
+
+void bobbleSortStr(char** arr, int rows, int iSL)
+{
+	for (int i = 0; i < rows; ++i) {
+		for (int j = (rows - 1); j > i; --j) {
+			if (arr[j][iSL] < arr[j - 1][iSL]) {
+				swapArr(arr[j], arr[j - 1]);
+			}
+		}
+	}
+}
+
+void sortStr(char** arr, int rows, int iSL)
+{ // iSL = index Of Sorted Letter
+	if (iSL >= strLength(arr, rows)) return;
+	bobbleSortStr(arr, rows, iSL);
+	int counter = 1, f;
+	for (f = 1; f < rows; ++f) {
+		if (arr[f][iSL] == arr[f - 1][iSL]) {
+			++counter;
+		}
+		else if (counter > 1) {
+			sortStr(arr + f - counter, counter, iSL + 1);
+			counter = 1;
+		}
+	}
+	if (counter > 1) {
+		sortStr(arr + f - counter, counter, iSL + 1);
+		counter = 1;
+	}
 }
 
 int maxValue(int* pa, int* pd)
