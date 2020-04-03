@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <stdio.h>
 #include <io.h>
+#include <direct.h>
 
 using namespace std; //bad practice to use it out of funcs
 
@@ -272,7 +273,8 @@ int countStringsInFile(char* filepth);
 int countCharsInFile(char* filepth);
 void writeStringsToFile(const char* filepath, const char* strings[], int stringsSize);
 void changeCharInFile(const char* sourcefilepath, const char* destfilepath, char sCh, char dCh);
-int countWords(const char* filepath, char searchedChar);
+int countWordsFile(const char* filepath, char searchedChar);
+int countWordsFile(const char* filepath);
 void copyStingsFromFileToFile(const char* sourceFilepath, const char* destFilepath);
 void copyStingsFromFileToFileReverse(const char* sourceFilepath, const char* destFilepath);
 int replaceWordsToFile(const char* filepath, const char* destFilepath, int wordLength);

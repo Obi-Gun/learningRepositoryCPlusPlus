@@ -1407,7 +1407,7 @@ void changeCharInFile(const char* sourcefilepath, const char* destfilepath, char
 	}
 }
 
-int countWords(const char* filepath, char searchedChar)
+int countWordsFile(const char* filepath, char searchedChar)
 {
 	FILE* file;
 	if (fopen_s(&file, filepath, "r")) {
@@ -1424,6 +1424,31 @@ int countWords(const char* filepath, char searchedChar)
 			if (word[0] == searchedChar) {
 				++counter;
 			}
+			word = strtok_s(NULL, " ", &context);
+		}
+	}
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	return counter;
+}
+
+int countWordsFile(const char* filepath)
+{
+	FILE* file;
+	if (fopen_s(&file, filepath, "r")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+	int counter = 0;
+	while (fgets(str, maxStringSize, file)) {
+		char* context;
+		char* word = strtok_s(str, " ", &context);
+		while (word) {
+			++counter;
 			word = strtok_s(NULL, " ", &context);
 		}
 	}
@@ -1525,6 +1550,10 @@ int replaceWordsToFile(const char* filepath, const char* destFilepath, int wordL
 	}
 
 	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	if (fclose(destFile)) {
 		cout << "Unable to close file";
 		return -2;
 	}

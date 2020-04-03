@@ -2,37 +2,112 @@
 #include "funcs.h"
 using namespace std;
 
+bool isWordInArr(char** arr, int rows, char* word)
+{
+	for (int i = 0; i < rows; ++i) {
+		if (!strcmp(word, arr[i])) {
+			return true;
+		}
+	}
+	return false;
+}
 
+void fillArr2(const char* specialWordsFilePath)
+{
+	int counterWords = countWordsFile(specialWordsFilePath);
+	FILE* sWFile;
+	if (fopen_s(&sWFile, specialWordsFilePath, "r")) {
+		cout << "Unable to open file";
+		return;
+	}
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+	char** arrBadWords;
+	reserveArr(counterWords, maxStringSize, arrBadWords);
+	int i = 0;
+	while (fgets(str, maxStringSize, sWFile)) {
+		char* context;
+		arrBadWords[i++] = strtok_s(str, " ", &context);
+		cout << arrBadWords[i - 1] << endl;
+		while (char* word = strtok_s(NULL, " ", &context)) {
+			strcpy_s(arrBadWords[i++], strlen(word) + 1, word);
+			//arrBadWords[i++] = word;
+			cout << word << endl;
+		}
+	}
+	printArr(arrBadWords, counterWords);
+	if (fclose(sWFile)) {
+		cout << "Unable to close file";
+		return;
+	}
+}
+
+int replaceTextToFileExceptSpecialWords(const char* filepath, const char* destFilepath, const char* specialWordsFilePath)
+{
+	int counterWords = countWordsFile(specialWordsFilePath);
+	FILE* file;
+	if (fopen_s(&file, filepath, "r")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	FILE* destFile;
+	if (fopen_s(&destFile, destFilepath, "w")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	FILE* sWFile;
+	if (fopen_s(&sWFile, specialWordsFilePath, "r")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+	char** arrBadWords;
+	reserveArr(counterWords, maxStringSize, arrBadWords);
+	int i = 0;
+	while (fgets(str, maxStringSize, sWFile)) {
+		char* context;
+		arrBadWords[i++] = strtok_s(str, " ", &context);
+		while (char* word = strtok_s(NULL, " ", &context)) {
+			arrBadWords[i++] = word;
+			cout << word << endl;
+		}
+	}
+	printArr(arrBadWords, counterWords);
+
+	while (fgets(str, maxStringSize, file)) {
+		char* context;
+		char* word = strtok_s(str, " ", &context);
+		while (word) {
+			
+			if (isWordInArr(arrBadWords, counterWords, word)) {
+				fputs(word, destFile);
+				fputs("\n", destFile);
+			}
+			word = strtok_s(NULL, " ", &context);
+		}
+	}
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	if (fclose(destFile)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	if (fclose(sWFile)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	return 0;
+}
 
 int main() {
 	srand(time(NULL));
 
-// Homework 18.1.1 Course: "Basics of programming in C++".
-	/*int length = 10;
-	int rows = 20;
-	char** arr;
-	reserveArr(rows, length, arr);
-	arr[0] = (char*)"33335";
-	arr[1] = (char*)"33325";
-	arr[2] = (char*)"33315";
-	arr[3] = (char*)"20";
-	arr[4] = (char*)"33235";
-	arr[5] = (char*)"330";
-	arr[6] = (char*)"23315";
-	arr[7] = (char*)"33015";
-	arr[8] = (char*)"33455";
-	arr[9] = (char*)"1008";
-	arr[10] = (char*)"Masha";
-	arr[11] = (char*)"Ivan";
-	arr[12] = (char*)"Misha";
-	arr[13] = (char*)"Alex";
-	arr[14] = (char*)"Mashunia";
-	arr[15] = (char*)"Alexa";
-	arr[16] = (char*)"Kolia";
-	arr[17] = (char*)"Maria";
-	arr[18] = (char*)"Mashia";
-	arr[19] = (char*)"Mashen`ka";
-	sortStr(arr, rows, 0);
-	printArr(arr, rows);*/
-
+// Classwork "Work with files3.". Course: "Basics of programming in C++".
+	// FILE* file;
+	// cout << countWordsFile("C:\\Users\\Alexandr\\Desktop\\ClassworkBadWords.txt");
+	fillArr2("C:\\Users\\Alexandr\\Desktop\\ClassworkBadWords.txt");
+	//replaceTextToFileExceptSpecialWords("C:\\Users\\Alexandr\\Desktop\\1.txt", "C:\\Users\\Alexandr\\Desktop\\2.txt", "C:\\Users\\Alexandr\\Desktop\\ClassworkBadWords.txt");
 }
