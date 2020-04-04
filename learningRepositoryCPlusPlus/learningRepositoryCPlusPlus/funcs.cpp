@@ -911,7 +911,7 @@ int countDigits(int inp)
 	return 0;
 }
 
-void separateDigits(int inp, int*& output, int& length)
+void separateDigitsFromNumberToArrValues(int inp, int*& output, int& length)
 {
 	length = countDigits(inp);
 	reserveArr(length, output);
@@ -1237,7 +1237,7 @@ int calcDays(int day1, int month1, int year1, int day2, int month2, int year2)
 	return daysCounter2 - daysCounter1;
 }
 
-int compareArr(int* arr1, int length, int* arr2)
+int compareValuesInArr(int* arr1, int length, int* arr2)
 {
 	int counter = 0;
 	for (int i = 0; i < length; ++i) {
@@ -1246,10 +1246,10 @@ int compareArr(int* arr1, int length, int* arr2)
 	return counter;
 }
 
-int compareArr(char* arr1, char* arr2)
+int compareValuesInArr(char* arr1, char* arr2)
 {
 	int counter = 0;
-	for (int i = 0; arr1[i] != '\0'; ++i) {
+	for (int i = 0; (arr1[i] != '\0') && (arr2[i] != '\0'); ++i) {
 		if (arr1[i] == arr2[i]) ++counter;
 	}
 	return counter;
@@ -1258,7 +1258,7 @@ int compareArr(char* arr1, char* arr2)
 char* convertIntToCharArr(int number)
 {
 	int* arr, length;
-	separateDigits(number, arr, length);
+	separateDigitsFromNumberToArrValues(number, arr, length);
 	char* charArr;
 	reserveArr(length + 1, charArr);
 	charArr[length] = '\0';
@@ -1282,13 +1282,13 @@ void game_BullsAndCows()
 		char* userCharArr = convertIntToCharArr(userNumber);
 		++counterIterations;
 		cout << "There are " << countSymbolsInArr1isFromArr2(progCharArr, userCharArr) << " bulls\n";
-		cows = compareArr(progCharArr, userCharArr);
+		cows = compareValuesInArr(progCharArr, userCharArr);
 		cout << "There are " << cows << " cows.\n";
 	} while (cows != 4);
 	cout << "\nIt takes " << counterIterations << " iterations to find the right number.\n";
 }
 
-void process()
+void processExamplePreprocessorsDefined()
 {
 #define CHAR
 
@@ -1374,7 +1374,7 @@ void writeStringsToFile(const char* filepath, const char* strings[], int strings
 	}
 }
 
-void changeCharInFile(const char* sourcefilepath, const char* destfilepath, char sCh, char dCh)
+void replaceCharInFile(const char* sourcefilepath, const char* destfilepath, char sCh, char dCh)
 {
 	FILE* sourcefile;
 	if (fopen_s(&sourcefile, sourcefilepath, "r")) {
@@ -1407,7 +1407,7 @@ void changeCharInFile(const char* sourcefilepath, const char* destfilepath, char
 	}
 }
 
-int countWordsFile(const char* filepath, char searchedChar)
+int countWordsInFile(const char* filepath, char searchedChar)
 {
 	FILE* file;
 	if (fopen_s(&file, filepath, "r")) {
@@ -1434,7 +1434,7 @@ int countWordsFile(const char* filepath, char searchedChar)
 	return counter;
 }
 
-int countWordsFile(const char* filepath)
+int countWordsInFile(const char* filepath)
 {
 	FILE* file;
 	if (fopen_s(&file, filepath, "r")) {
@@ -1459,7 +1459,7 @@ int countWordsFile(const char* filepath)
 	return counter;
 }
 
-void copyStingsFromFileToFile(const char* sourceFilepath, const char* destFilepath)
+void copyStringsFromFileToFile(const char* sourceFilepath, const char* destFilepath)
 {
 	FILE* sourceFile;
 	if (fopen_s(&sourceFile, sourceFilepath, "r")) {
@@ -1488,7 +1488,7 @@ void copyStingsFromFileToFile(const char* sourceFilepath, const char* destFilepa
 	}
 }
 
-void copyStingsFromFileToFileReverse(const char* sourceFilepath, const char* destFilepath)
+void copyStringsFromFileToFileReverse(const char* sourceFilepath, const char* destFilepath)
 {
 	FILE* sourceFile;
 	if (fopen_s(&sourceFile, sourceFilepath, "r")) {
@@ -1560,7 +1560,7 @@ int replaceWordsToFile(const char* filepath, const char* destFilepath, int wordL
 	return 0;
 }
 
-int insertStringToFile(const char* filepath)
+int addStringToFile(const char* filepath) // here is some bag here. Rewrite it later
 {
 	int strCounter = countStringsInFile((char*)filepath);
 	FILE* file;
@@ -1593,6 +1593,93 @@ int insertStringToFile(const char* filepath)
 	printArr(arr, strCounter + 1);
 	removeArr(arr);
 	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	return 0;
+}
+
+bool isWordInArr(char** arr, int rows, char* word)
+{
+	for (int i = 0; i < rows; ++i) {
+		if (!strcmp(word, arr[i])) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void fillArrFromFile(const char* specialWordsFilePath, char**& destArr, int& length)
+{
+	length = countWordsInFile(specialWordsFilePath);
+	FILE* sWFile;
+	if (fopen_s(&sWFile, specialWordsFilePath, "r")) {
+		cout << "Unable to open file";
+		return;
+	}
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+	reserveArr(length, maxStringSize, destArr);
+	int i = 0;
+	while (fgets(str, maxStringSize, sWFile)) {
+		char* context;
+		char* word = strtok_s(str, " ", &context);
+		strcpy_s(destArr[i++], strlen(word) + 1, word);
+		//strcpy_s(destArr +  i++, strlen(word) + 1, word);
+		while (word = strtok_s(NULL, " ", &context)) {
+			strcpy_s(destArr[i++], strlen(word) + 1, word);
+		}
+	}
+	if (fclose(sWFile)) {
+		cout << "Unable to close file";
+		return;
+	}
+}
+
+int replaceTextToFileExceptSpecialWords(const char* filepath, const char* destFilepath, const char* specialWordsFilePath)
+{
+	FILE* file;
+	if (fopen_s(&file, filepath, "r")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	FILE* destFile;
+	if (fopen_s(&destFile, destFilepath, "w")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	FILE* sWFile;
+	if (fopen_s(&sWFile, specialWordsFilePath, "r")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+	char** arrBadWords;
+	int length;
+	fillArrFromFile(specialWordsFilePath, arrBadWords, length);
+	while (fgets(str, maxStringSize, file)) {
+		char* context;
+		char* word = strtok_s(str, " ", &context);
+		while (word) {
+
+			if (!isWordInArr(arrBadWords, length, word)) {
+				fputs(" ", destFile);
+				fputs(word, destFile);
+			}
+			word = strtok_s(NULL, " ", &context);
+		}
+	}
+	removeArr(arrBadWords, length);
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	if (fclose(destFile)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	if (fclose(sWFile)) {
 		cout << "Unable to close file";
 		return -2;
 	}

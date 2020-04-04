@@ -10,8 +10,18 @@
 #include <io.h>
 #include <direct.h>
 
+//   |            My own small libraries               |
+//   |    I`ve tryed to follow this codeStyle          |
+//   |      https://habr.com/ru/post/172091/           |
 using namespace std; //bad practice to use it out of funcs
 
+
+
+
+
+//   ===================================================
+//   |            library "obi.arrays.h"               |
+//   ===================================================
 template <typename T> void fillRandomValuesToTheArray(T arr[], int LEN)
 {
 	for (int i = 0; i < LEN; ++i) {
@@ -49,14 +59,76 @@ void printArr(double** arr, int rows, int columns, int setMinimumWidth = 0, bool
 void printArr(char** arr, int rows, int columns, int setMinimumWidth = 0, bool showIndexes = false);
 void printArr(char*** arr, int rows, int columns, int strLength, int setMinimumWidth = 2, bool showIndexes = false);
 
-template <typename T> void swap(T* pFirst, T* pSecond)
-{
-	T tmp = *pFirst;
-	*pFirst = *pSecond;
-	*pSecond = tmp;
-}
-void swapArr(char*& pFirst, char*& pSecond);
+void reserveArr(int length, int*& arr);
+void reserveArr(int length, int**& arr);
+void reserveArr(int rows, int columns, int**& arr);
+void reserveArr(int length, double*& arr);
+void reserveArr(int rows, int columns, double**& arr);
+void reserveArr(int length, char*& arr);
+void reserveArr(int length, char**& arr);
+void reserveArr(int length, char***& arr);
+void reserveArr(int rows, int columns, char**& arr);
+void reserveArr(int rows, int columns, int strLen, char***& arr);
 
+void addElToArr(int*& arr, int& length, int newEl, int indexNewEl = 0);
+void addElToArrToSpecialPlace(char*& arr, int length, char newEl, int indexNewEl);
+void addColumnToArr(int**& arr, int rows, int& columns, int* newColumn, int indexNewColumn = 0);
+void removeElFromArr(int*& arr, int& length, int indexRemEl = 0);
+void removeColumnFromArr(int**& arr, int rows, int& columns, int indexRemColumn = 0);
+void deleteLastElFromArr(int*& arr, int& length);
+
+void removeArr(int* arr);
+void removeArr(int** arr);
+void removeArr(int** arr, int lengthRows);
+void removeArr(char* arr);
+void removeArr(char** arr);
+void removeArr(char** arr, int lengthRows);
+
+void shiftArrElLeft_old(int* arr, int indexOfFirstElement, int indexOfSecondElement); // _old   (delete later)
+void shiftArrElLeft(int*& arr, int length, int times);
+void shiftArrElRight(int*& arr, int length, int times);
+void shiftColumnsLeft(int** arr, int rows, int columns, int times = 1);
+void shiftColumnsRight(int** arr, int rows, int columns, int times = 1);
+void shiftArrRowsUp(int**& arr, int length, int times);
+void shiftArrRowsDown(int**& arr, int length, int times);
+void shiftArrValues(int**& arr, int rows, int columns, bool shiftHigher, int verticalSteps, bool shiftRight, int horizontalSteps);
+
+void copyArray(int* arr, int lengthOfShortestArray, int* arrCopy);
+void copyArray(int** arr, int lengthOfShortestArray, int** arrCopy);
+void copyArray(char* arrSource, int length, char* arrDest);
+void copyArray(int* arrSource, int length, char* arrDest);
+
+void maxValArrInd(int* arr, int length, int& maxVal, int& indexMaxVal);
+void maxValArrInd(double* arr, int length, double& maxVal, int& indexMaxVal);
+void maxValArrInd(char* arr, int length, char& maxVal, int& indexMaxVal);
+void minValArrInd(int* arr, int length, int& minVal, int& indexMinVal);
+void minValArrInd(double* arr, int length, double& minVal, int& indexMinVal);
+void minValArrInd(char* arr, int length, char& minVal, int& indexMinVal);
+
+//void deleteSpecificElFromArr(int*& arr, int& length, int indexOfDelEl);
+//int** multiplyMatrix(int** arrA, int** arrB, int aM, int K, int bN);
+//int** sumMatrix(int** arrA, int aRow, int aCol, int** arrB, int bRow, int bCol);
+void transposeMatrix(int**& arrSource, int& rows, int& columns);
+int maxValueDiagonal(int** squareMatrix, int length);
+double maxValueDiagonal(double** squareMatrix, int length);
+char maxValueDiagonal(char** squareMatrix, int length);
+int minValueDiagonal(int** squareMatrix, int length);
+double minValueDiagonal(double** squareMatrix, int length);
+char minValueDiagonal(char** squareMatrix, int length);
+
+int sumArrValues(int* curEl, int* endEl);
+double calcAverage(int* arr, int length);
+
+int compareValuesInArr(int* arr1, int length, int* arr2);
+int compareValuesInArr(char* arr1, char* arr2);
+
+
+
+
+
+//   ===================================================
+//   |            library "obi.sort.h"                 |
+//   ===================================================
 void insertionSort(int arr[], int LEN);
 void insertionSort(int** arr, int rows, int columns);
 void insertionSort(double arr[], int LEN);
@@ -111,73 +183,33 @@ void sortArr(int* arr, int length, bool isInAscendingOrder = 1);
 void bobbleSortStr(char** arr, int rows, int iSL);
 void sortStr(char** arr, int rows, int iSL);
 
-void reserveArr(int length, int*& arr);
-void reserveArr(int length, int**& arr);
-void reserveArr(int rows, int columns, int**& arr);
-void reserveArr(int length, double*& arr);
-void reserveArr(int rows, int columns, double**& arr);
-void reserveArr(int length, char*& arr);
-void reserveArr(int length, char**& arr);
-void reserveArr(int length, char***& arr);
-void reserveArr(int rows, int columns, char**& arr);
-void reserveArr(int rows, int columns, int strLen, char***& arr);
 
-void addElToArr(int*& arr, int& length, int newEl, int indexNewEl = 0);
-void addElToArrToSpecialPlace(char*& arr, int length, char newEl, int indexNewEl);
-void addColumnToArr(int**& arr, int rows, int& columns, int* newColumn, int indexNewColumn = 0);
-	
-void removeElFromArr(int*& arr, int& length, int indexRemEl = 0);
-void removeColumnFromArr(int**& arr, int rows, int& columns, int indexRemColumn = 0);
-void deleteLastElFromArr(int*& arr, int& length);
-void removeArr(int* arr);
-void removeArr(int** arr);
-void removeArr(int** arr, int lengthRows);
-void removeArr(char* arr);
-void removeArr(char** arr);
-void removeArr(char** arr, int lengthRows);
 
-//void deleteSpecificElFromArr(int*& arr, int& length, int indexOfDelEl);
-//int** multiplyMatrix(int** arrA, int** arrB, int aM, int K, int bN);
-//int** sumMatrix(int** arrA, int aRow, int aCol, int** arrB, int bRow, int bCol);
-void transposeMatrix(int**& arrSource, int& rows, int& columns);
 
-void shiftArrElLeft_old(int* arr, int indexOfFirstElement, int indexOfSecondElement); // _old   (delete later)
-void shiftArrElLeft(int*& arr, int length, int times);
-void shiftArrElRight(int*& arr, int length, int times);
-void shiftColumnsLeft(int** arr, int rows, int columns, int times = 1);
-void shiftColumnsRight(int** arr, int rows, int columns, int times = 1);
-void shiftArrRowsUp(int**& arr, int length, int times);
-void shiftArrRowsDown(int**& arr, int length, int times);
-void shiftArrValues(int**& arr, int rows, int columns, bool shiftHigher, int verticalSteps, bool shiftRight, int horizontalSteps);
 
-void copyArray(int* arr, int lengthOfShortestArray, int* arrCopy);
-void copyArray(int** arr, int lengthOfShortestArray, int** arrCopy);
-void copyArray(char* arrSource, int length, char* arrDest);
-void copyArray(int* arrSource, int length, char* arrDest);
-
+//   ===================================================
+//   |            library "obi.funcs.h"                |
+//   ===================================================
 int maxValue(int* pa, int* pd);
 int minValue(int* pa, int* pd);
-int maxValueDiagonal(int** squareMatrix, int length);
-double maxValueDiagonal(double** squareMatrix, int length);
-char maxValueDiagonal(char** squareMatrix, int length);
-int minValueDiagonal(int** squareMatrix, int length);
-double minValueDiagonal(double** squareMatrix, int length);
-char minValueDiagonal(char** squareMatrix, int length);
 int maxCommonDivisor(int A, int B);
-
-void maxValArrInd(int* arr, int length, int& maxVal, int& indexMaxVal);
-void maxValArrInd(double* arr, int length, double& maxVal, int& indexMaxVal);
-void maxValArrInd(char* arr, int length, char& maxVal, int& indexMaxVal);
-void minValArrInd(int* arr, int length, int& minVal, int& indexMinVal);
-void minValArrInd(double* arr, int length, double& minVal, int& indexMinVal);
-void minValArrInd(char* arr, int length, char& minVal, int& indexMinVal);
-
-int sumArrValues(int* curEl, int* endEl);
-double calcAverage(int* arr, int length);
+int mathSumValFromRange(int a, int b);
 int* deletePrimeNumbers(int* arr, int length, int& lengthNewArr);
+int countDigits(int inp);
+void separateDigitsFromNumberToArrValues(int inp, int*& output, int& length);
+
 void calcNumbers(int* arr, int length, int& negCounter, int& zerosCounter, int& posCounter);
 void separateArrValues(int* arr, int length, int*& arrNeg, int& lenNeg, int*& arrZero, int& lenZero, int*& arrPos, int& lenPos);
 void separateUniqElFromArr1ExceptArr2ElToNewArr(int* arr, int length, int* arr2, int length2, int*& arrNew, int& lengthNew);
+
+template <typename T> void swap(T* pFirst, T* pSecond)
+{
+	T tmp = *pFirst;
+	*pFirst = *pSecond;
+	*pSecond = tmp;
+}
+void swapArr(char*& pFirst, char*& pSecond);
+
 template <typename T> long long int mathPow(T a, T b)
 {
 	if (b < 0) {
@@ -193,7 +225,6 @@ template <typename T> long long int mathPow(T a, T b)
 		return a * mathPow(a, b - 1);
 	}
 }
-int mathSumValFromRange(int a, int b);
 
 bool isUniqNumber(int number, int* arr, int length);
 bool isPerfectNumber(int a);
@@ -202,14 +233,6 @@ bool isNumberHappy(int number);
 bool isPrimeNumber(int number);
 bool isEqualsChar(char el, char el2);
 
-int countDigits(int inp);
-void separateDigits(int inp, int*& output, int& length);
-int countDigits(char* source);
-int countLetters(char* source);
-int countWords(char* sourceArr);
-int countSymbolsInArr1isFromArr2(char* source, const char* symbolsToFind);
-int strLength(char** arr, int rows);
-
 int searchIndexOfKeyEl(int* arr, int length, int searchedEl);
 int searchIndexOfKeyElBinar(int* arr, int length, int searchedEl);
 int* findPerfectNumbersFromRange(int first, int last, int& length);
@@ -217,12 +240,40 @@ int* findPerfectNumbersFromRange(int first, int last, int& length);
 int convertBinarySystemNumberToDecimal(int input);
 int convertBinarySystemNumberToDecimal(long long int input);
 
+bool isLeapYear(int year);
+int calcDays(int day1, int month1, int year1, int day2, int month2, int year2);
+
+void game_BullsAndCows();
+void processExamplePreprocessorsDefined();
+
+
+
+
+
+//   ===================================================
+//   |            library "obi.strings.h"              |
+//   ===================================================
+int countDigits(char* source);
+int countLetters(char* source);
+int countWords(char* sourceArr);
+int countSymbolsInArr1isFromArr2(char* source, const char* symbolsToFind);
+int strLength(char** arr, int rows);
+
 void findName(char*** arr, int columns, char* strName, int setMinimumWidth = 16);
 void findPhone(char*** arr, int columns, char* strPhoneNumber, int setMinimumWidth = 16);
 void enterStr(char*** arr, int row, int column, int strLength);
 void addContact(char*** arr, int column, int strLength);
 void addContact(char*** arr, int column, int strLength, char* name, char* pNumber);
 
+char* convertIntToCharArr(int number);
+
+
+
+
+
+//   ===================================================
+//   |            library "obi.structures.h"           |
+//   ===================================================
 struct rectangle
 {
 	int x;
@@ -259,25 +310,30 @@ fraction divide(fraction A, fraction B);
 void reduceFraction(fraction& A);
 void printFraction(fraction A);
 
-bool isLeapYear(int year);
-int calcDays(int day1, int month1, int year1, int day2, int month2, int year2);
 
-int compareArr(int* arr1, int length, int* arr2);
-int compareArr(char* arr1, char* arr2);
-char* convertIntToCharArr(int number);
 
-void game_BullsAndCows();
-void process();
 
-int countStringsInFile(char* filepth);
+
+//   ===================================================
+//   |            library "obi.files.h"                |
+//   ===================================================
 int countCharsInFile(char* filepth);
+int countWordsInFile(const char* filepath, char searchedChar);
+int countWordsInFile(const char* filepath);
+int countStringsInFile(char* filepth);
+
+bool isWordInArr(char** arr, int rows, char* word);
+
+void fillArrFromFile(const char* specialWordsFilePath, char**& destArr, int& length);
+
+int addStringToFile(const char* filepath);
 void writeStringsToFile(const char* filepath, const char* strings[], int stringsSize);
-void changeCharInFile(const char* sourcefilepath, const char* destfilepath, char sCh, char dCh);
-int countWordsFile(const char* filepath, char searchedChar);
-int countWordsFile(const char* filepath);
-void copyStingsFromFileToFile(const char* sourceFilepath, const char* destFilepath);
-void copyStingsFromFileToFileReverse(const char* sourceFilepath, const char* destFilepath);
+
+void replaceCharInFile(const char* sourcefilepath, const char* destfilepath, char sCh, char dCh);
 int replaceWordsToFile(const char* filepath, const char* destFilepath, int wordLength);
-int insertStringToFile(const char* filepath);
+int replaceTextToFileExceptSpecialWords(const char* filepath, const char* destFilepath, const char* specialWordsFilePath); // here is some bag here. Rewrite it later
+
+void copyStringsFromFileToFile(const char* sourceFilepath, const char* destFilepath);
+void copyStringsFromFileToFileReverse(const char* sourceFilepath, const char* destFilepath);
 
 #endif //funcs// !funcs
