@@ -13,12 +13,17 @@
 //   |            My own small libraries               |
 //   |    I`ve tryed to follow this codeStyle          |
 //   |      https://habr.com/ru/post/172091/           |
+
 using namespace std; //bad practice to use it out of funcs
+enum carColor { red, blue };
+enum carTransmissionType { mechanic, automatic };
+enum carField { carLength = 1, clearance = 2, engineVolume = 3, enginePower = 4, wheelsDiameter = 5, color = 6, transmissionType = 7 };
 
-
-
-
-
+//
+//
+//
+//
+//
 //   ===================================================
 //   |            library "obi.arrays.h"               |
 //   ===================================================
@@ -109,23 +114,24 @@ void minValArrInd(char* arr, int length, char& minVal, int& indexMinVal);
 //int** multiplyMatrix(int** arrA, int** arrB, int aM, int K, int bN);
 //int** sumMatrix(int** arrA, int aRow, int aCol, int** arrB, int bRow, int bCol);
 void transposeMatrix(int**& arrSource, int& rows, int& columns);
+
 int maxValueDiagonal(int** squareMatrix, int length);
-double maxValueDiagonal(double** squareMatrix, int length);
 char maxValueDiagonal(char** squareMatrix, int length);
+double maxValueDiagonal(double** squareMatrix, int length);
 int minValueDiagonal(int** squareMatrix, int length);
-double minValueDiagonal(double** squareMatrix, int length);
 char minValueDiagonal(char** squareMatrix, int length);
+double minValueDiagonal(double** squareMatrix, int length);
 
 int sumArrValues(int* curEl, int* endEl);
 double calcAverage(int* arr, int length);
 
 int compareValuesInArr(int* arr1, int length, int* arr2);
 int compareValuesInArr(char* arr1, char* arr2);
-
-
-
-
-
+//
+//
+//
+//
+//
 //   ===================================================
 //   |            library "obi.sort.h"                 |
 //   ===================================================
@@ -182,11 +188,11 @@ template <typename T> void quickSortDescendingOrder(T* arr, int lastElementIndex
 void sortArr(int* arr, int length, bool isInAscendingOrder = 1);
 void bobbleSortStr(char** arr, int rows, int iSL);
 void sortStr(char** arr, int rows, int iSL);
-
-
-
-
-
+//
+//
+//
+//
+//
 //   ===================================================
 //   |            library "obi.funcs.h"                |
 //   ===================================================
@@ -201,6 +207,10 @@ void separateDigitsFromNumberToArrValues(int inp, int*& output, int& length);
 void calcNumbers(int* arr, int length, int& negCounter, int& zerosCounter, int& posCounter);
 void separateArrValues(int* arr, int length, int*& arrNeg, int& lenNeg, int*& arrZero, int& lenZero, int*& arrPos, int& lenPos);
 void separateUniqElFromArr1ExceptArr2ElToNewArr(int* arr, int length, int* arr2, int length2, int*& arrNew, int& lengthNew);
+void separateUniqElFromArr1ExceptArr2ElToNewArr(int** source, int sRows, int sColumns, int** excludeArr, int eRows, int eColumns, int*& arrNew, int& lengthNew);
+void separateUniqElFromArr1ExceptArr2ElToNewArr(int** source, int sRows, int sColumns, int* excludeArr, int elength, int*& arrNew, int& lengthNew);
+void separateCommonElFromArr1AndArr2ToNewArr(int* arr, int length, int* arr2, int length2, int*& arrNew, int& lengthNew);
+void separateCommonElFromArr1AndArr2ToNewArr(int** source, int sRows, int sColumns, int** arr2, int arr2Rows, int arr2Columns, int*& arrNew, int& lengthNew);
 
 template <typename T> void swap(T* pFirst, T* pSecond)
 {
@@ -227,6 +237,7 @@ template <typename T> long long int mathPow(T a, T b)
 }
 
 bool isUniqNumber(int number, int* arr, int length);
+bool isUniqNumber(int number, int** arr, int rows, int columns);
 bool isPerfectNumber(int a);
 bool isDivisor(int a, int divisor);
 bool isNumberHappy(int number);
@@ -245,11 +256,11 @@ int calcDays(int day1, int month1, int year1, int day2, int month2, int year2);
 
 void game_BullsAndCows();
 void processExamplePreprocessorsDefined();
-
-
-
-
-
+//
+//
+//
+//
+//
 //   ===================================================
 //   |            library "obi.strings.h"              |
 //   ===================================================
@@ -266,11 +277,11 @@ void addContact(char*** arr, int column, int strLength);
 void addContact(char*** arr, int column, int strLength, char* name, char* pNumber);
 
 char* convertIntToCharArr(int number);
-
-
-
-
-
+//
+//
+//
+//
+//
 //   ===================================================
 //   |            library "obi.structures.h"           |
 //   ===================================================
@@ -310,10 +321,60 @@ fraction divide(fraction A, fraction B);
 void reduceFraction(fraction& A);
 void printFraction(fraction A);
 
+struct complexNumber {
+	double a;
+	double b;
+	//char sigh = '+';
+	const char i = 'i';
+	void print()
+	{
+		cout << a << " + " << b << i << endl;
+	}
+};
+complexNumber addComplexNumber(complexNumber num1, complexNumber num2);
+complexNumber subComplexNumber(complexNumber num1, complexNumber num2);
+complexNumber multComplexNumber(complexNumber num1, complexNumber num2);
+complexNumber divComplexNumber(complexNumber num1, complexNumber num2);
 
-
-
-
+struct car {
+	char name[32];
+	double carLength;
+	double clearance;
+	double engineVolume;
+	double enginePower;
+	double wheelsDiameter;
+	carColor color;
+	carTransmissionType transmissionType;
+	void setLength(double inp)
+	{
+		if (inp > 0) {
+			carLength = inp;
+		}
+		else {
+			cout << "Please try again: =>";
+		}
+	}
+	void print()
+	{
+		cout << endl << endl;
+		cout << " name = " << name;
+		cout << " length = " << carLength;
+		cout << "\n clearance = " << clearance;
+		cout << "\n engineVolume = " << engineVolume;
+		cout << "\n enginePover = " << enginePower;
+		cout << "\n wheelsDiamter = " << wheelsDiameter;
+		cout << "\n color = " << color;
+		cout << "\n transmissionType = " << transmissionType;
+	}
+};
+bool trySearchIndexOfKeyEl(car* arr, int len, carField field, double searchedEl, car& resultCar, int& indexOfSearchedElement);
+bool trySearchIndexOfKeyEl(car* arr, int len, carColor searchedEl, car& resultCar, int& indexOfSearchedElement);
+bool trySearchIndexOfKeyEl(car* arr, int len, carTransmissionType searchedEl, car& resultCar, int& indexOfSearchedElement);
+//
+//
+//
+//
+//
 //   ===================================================
 //   |            library "obi.files.h"                |
 //   ===================================================

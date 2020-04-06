@@ -537,10 +537,19 @@ void reserveArr(int rows, int columns, int strLen, char***& arr)
 void addElToArr(int*& arr, int& length, int newEl, int indexNewEl)
 {
 	int* newArr = reserveArr(++length);
-	copyArray(arr, indexNewEl, newArr);
-	*(newArr + indexNewEl) = newEl;
-	copyArray(arr + indexNewEl, length - indexNewEl - 1, newArr + indexNewEl + 1);
-	removeArr(arr);
+	if (length > 1) {
+		copyArray(arr, indexNewEl, newArr);
+		*(newArr + indexNewEl) = newEl;
+		copyArray(arr + indexNewEl, length - indexNewEl - 1, newArr + indexNewEl + 1);
+		removeArr(arr);
+	}
+	else if (length == 1) {
+		newArr[0] = newEl;
+	}
+	else {
+		cout << "Exception. Error in function: void addElToArr(int*& arr, int& length, int newEl, int indexNewEl)\n";
+	}
+	
 	arr = newArr;
 }
 
@@ -851,6 +860,48 @@ void separateUniqElFromArr1ExceptArr2ElToNewArr(int* arr, int length, int* exclu
 	}
 }
 
+void separateCommonElFromArr1AndArr2ToNewArr(int* arr, int length, int* arr2, int length2, int*& arrNew, int& lengthNew)
+{
+	for (int i = 0; i < length; ++i) {
+		if (!isUniqNumber(*(arr + i), arr2, length2) && isUniqNumber(*(arr + i), arrNew, lengthNew)) {
+			addElToArr(arrNew, lengthNew, *(arr + i));
+		}
+	}
+}
+
+void separateUniqElFromArr1ExceptArr2ElToNewArr(int** source, int sRows, int sColumns, int** excludeArr, int eRows, int eColumns, int*& arrNew, int& lengthNew)
+{
+	for (int i = 0; i < sRows; ++i) {
+		for (int j = 0; j < sColumns; ++j) {
+			if (isUniqNumber(source[i][j], excludeArr, eRows, eColumns) && isUniqNumber(source[i][j], arrNew, lengthNew)) {
+				addElToArr(arrNew, lengthNew, source[i][j], lengthNew);
+			}
+		}
+	}
+}
+
+void separateUniqElFromArr1ExceptArr2ElToNewArr(int** source, int sRows, int sColumns, int* excludeArr, int elength, int*& arrNew, int& lengthNew)
+{
+	for (int i = 0; i < sRows; ++i) {
+		for (int j = 0; j < sColumns; ++j) {
+			if (isUniqNumber(source[i][j], excludeArr, elength) && isUniqNumber(source[i][j], arrNew, lengthNew)) {
+				addElToArr(arrNew, lengthNew, source[i][j], lengthNew);
+			}
+		}
+	}
+}
+
+void separateCommonElFromArr1AndArr2ToNewArr(int** source, int sRows, int sColumns, int** arr2, int arr2Rows, int arr2Columns, int*& arrNew, int& lengthNew)
+{
+	for (int i = 0; i < sRows; ++i) {
+		for (int j = 0; j < sColumns; ++j) {
+			if (!isUniqNumber(source[i][j], arr2, arr2Rows, arr2Columns) && isUniqNumber(source[i][j], arrNew, lengthNew)) {
+				addElToArr(arrNew, lengthNew, source[i][j], lengthNew);
+			}
+		}
+	}
+}
+
 int mathSumValFromRange(int a, int b)
 {
 	if (a > b) {
@@ -878,6 +929,16 @@ bool isUniqNumber(int number, int* arr, int length)
 {
 	for (int i = 0; i < length; ++i) {
 		if (number == *(arr + i)) {
+			return false;
+		}
+	}
+	return true;
+}
+
+bool isUniqNumber(int number, int** arr, int rows, int columns)
+{
+	for (int i = 0; i < rows; ++i) {
+		if (!isUniqNumber(number, arr[i], columns)) {
 			return false;
 		}
 	}
@@ -1211,6 +1272,109 @@ void printFig(rectangle fig)
 	cout << " height = " << fig.height << endl;
 	cout << " length = " << fig.length << endl;
 }
+
+complexNumber addComplexNumber(complexNumber num1, complexNumber num2)
+{
+	complexNumber num;
+	num.a = num1.a + num2.a;
+	num.b = num1.b + num2.b;
+	return num;
+}
+
+complexNumber subComplexNumber(complexNumber num1, complexNumber num2)
+{
+	complexNumber num;
+	num.a = num1.a - num2.a;
+	num.b = num1.b - num2.b;
+	return num;
+}
+
+complexNumber multComplexNumber(complexNumber num1, complexNumber num2)
+{
+	complexNumber num;
+	num.a = num1.a * num2.a - num1.b * num2.b;
+	num.b = num1.b * num2.a - num1.a * num2.b;
+	return num;
+}
+
+complexNumber divComplexNumber(complexNumber num1, complexNumber num2)
+{
+	complexNumber num;
+	num.a = (num1.a * num2.a + num1.b * num2.b) / (pow(num2.a, 2) + pow(num2.b, 2));
+	num.b = (num1.b * num2.a - num1.a * num2.b) / (pow(num2.a, 2) + pow(num2.b, 2));
+	return num;
+}
+
+bool trySearchIndexOfKeyEl(car* arr, int len, carField field, double searchedEl, car& resultCar, int& indexOfSearchedElement)
+{
+	for (int i = 0; i < len; ++i) {
+		switch (field) {
+		case carLength:
+			if (arr[i].carLength == searchedEl) {
+				indexOfSearchedElement = i;
+				resultCar = arr[i];
+				return true;
+			}
+			break;
+		case clearance:
+			if (arr[i].clearance == searchedEl) {
+				indexOfSearchedElement = i;
+				resultCar = arr[i];
+				return true;
+			}
+			break;
+		case engineVolume:
+			if (arr[i].engineVolume == searchedEl) {
+				indexOfSearchedElement = i;
+				resultCar = arr[i];
+				return true;
+			}
+			break;
+		case enginePower:
+			if (arr[i].enginePower == searchedEl) {
+				indexOfSearchedElement = i;
+				resultCar = arr[i];
+				return true;
+			}
+			break;
+		case wheelsDiameter:
+			if (arr[i].wheelsDiameter == searchedEl) {
+				indexOfSearchedElement = i;
+				resultCar = arr[i];
+				return true;
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	return false;
+}
+
+bool trySearchIndexOfKeyEl(car* arr, int len, carColor searchedEl, car& resultCar, int& indexOfSearchedElement)
+{
+	for (int i = 0; i < len; ++i) {
+		if (arr[i].color == searchedEl) {
+			indexOfSearchedElement = i;
+			resultCar = arr[i];
+			return true;
+		}
+	}
+	return false;
+}
+
+bool trySearchIndexOfKeyEl(car* arr, int len, carTransmissionType searchedEl, car& resultCar, int& indexOfSearchedElement)
+{
+	for (int i = 0; i < len; ++i) {
+		if (arr[i].transmissionType == searchedEl) {
+			indexOfSearchedElement = i;
+			resultCar = arr[i];
+			return true;
+		}
+	}
+	return false;
+}
+
 
 bool isLeapYear(int year)
 {
