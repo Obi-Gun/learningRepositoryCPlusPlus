@@ -851,6 +851,15 @@ void separateArrValues(int* arr, int length, int*& arrNeg, int& lenNeg, int*& ar
 	}
 }
 
+void separateArrValuesNegative(int* arr, int length, int*& arrNeg, int& lenNeg)
+{
+	for (int i = 0; i < length; ++i) {
+		if (*(arr + i) < 0) {
+			addElToArr(arrNeg, lenNeg, *(arr + i));
+		}
+	}
+}
+
 void separateUniqElFromArr1ExceptArr2ElToNewArr(int* arr, int length, int* excludeArr, int lengthExclude, int*& arrNew, int& lengthNew)
 {
 	for (int i = 0; i < length; ++i) {
@@ -1417,6 +1426,17 @@ int compareValuesInArr(char* arr1, char* arr2)
 		if (arr1[i] == arr2[i]) ++counter;
 	}
 	return counter;
+}
+
+void createArr(int**& arr, int& rows, int& columns, int minVal, int maxVal, const char* arrShowingName)
+{
+	cout << "Enter how many " << arrShowingName << " should have rows => ";
+	cin >> rows;
+	cout << "Enter how many " << arrShowingName << " should have columns => ";
+	cin >> columns;
+	reserveArr(rows, columns, arr);
+	fillRandomValuesToTheArray(arr, rows, columns, minVal, maxVal);
+	printArr(arr, rows, columns);
 }
 
 char* convertIntToCharArr(int number)

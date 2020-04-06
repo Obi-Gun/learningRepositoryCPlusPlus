@@ -127,6 +127,8 @@ double calcAverage(int* arr, int length);
 
 int compareValuesInArr(int* arr1, int length, int* arr2);
 int compareValuesInArr(char* arr1, char* arr2);
+
+void createArr(int**& arr, int& rows, int& columns, int minVal, int maxVal, const char* arrShowingName);
 //
 //
 //
@@ -206,6 +208,7 @@ void separateDigitsFromNumberToArrValues(int inp, int*& output, int& length);
 
 void calcNumbers(int* arr, int length, int& negCounter, int& zerosCounter, int& posCounter);
 void separateArrValues(int* arr, int length, int*& arrNeg, int& lenNeg, int*& arrZero, int& lenZero, int*& arrPos, int& lenPos);
+void separateArrValuesNegative(int* arr, int length, int*& arrNeg, int& lenNeg);
 void separateUniqElFromArr1ExceptArr2ElToNewArr(int* arr, int length, int* arr2, int length2, int*& arrNew, int& lengthNew);
 void separateUniqElFromArr1ExceptArr2ElToNewArr(int** source, int sRows, int sColumns, int** excludeArr, int eRows, int eColumns, int*& arrNew, int& lengthNew);
 void separateUniqElFromArr1ExceptArr2ElToNewArr(int** source, int sRows, int sColumns, int* excludeArr, int elength, int*& arrNew, int& lengthNew);

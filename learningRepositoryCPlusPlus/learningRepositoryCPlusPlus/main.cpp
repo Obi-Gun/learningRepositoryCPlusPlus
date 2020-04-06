@@ -2,16 +2,7 @@
 #include "funcs.h"
 using namespace std;
 
-void createArr(int**& arr, int& rows, int& columns, int minVal, int maxVal, const char* arrShowingName)
-{
-	/*cout << "Enter how many " << arrShowingName << " should have rows => ";
-	cin >> rows;
-	cout << "Enter how many " << arrShowingName << " should have columns => ";
-	cin >> columns;*/
-	reserveArr(rows, columns, arr);
-	fillRandomValuesToTheArray(arr, rows, columns, minVal, maxVal);
-	printArr(arr, rows, columns);
-}
+
 
 int main() {
 	srand(time(NULL));
@@ -45,10 +36,10 @@ int main() {
 	printArr(arr, rows);*/
 
 // Homework 18.1.2 Course: "Basics of programming in C++".
+	int minVal = -20, maxVal = 20;
 	int** A, aRows = 4, aColumns = 4;
 	int** B, bRows = 4, bColumns = 4;
 	int** C, cRows = 4, cColumns = 4;
-	int minVal = 0, maxVal = 20;
 	createArr(A, aRows, aColumns, minVal, maxVal, "arr A");
 	createArr(B, bRows, bColumns, minVal, maxVal, "arr B");
 	createArr(C, cRows, cColumns, minVal, maxVal, "arr C");
@@ -76,13 +67,21 @@ int main() {
 	printArr(uniqValABC, lenABCuniq);
 
 	// Task 4
-
-
+	int* negativeVal, lenNeg = 0;
+	separateArrValuesNegative(uniqValABC, lenABCuniq, negativeVal, lenNeg);
+	separateArrValuesNegative(commonValFromABC, lenABC, negativeVal, lenNeg);
+	cout << "\nThere are negative values from arrays A, B and C";
+	printArr(negativeVal, lenNeg);
 
 	removeArr(A, aRows);
 	removeArr(B, bRows);
 	removeArr(C, cRows);
-
+	removeArr(commonValFromAC);
+	removeArr(commonValFromAB);
+	removeArr(commonValFromABC);
+	removeArr(uniqValABC);
+	removeArr(negativeVal);
+	
 // Homework 18.2.1 Course: "Basics of programming in C++".
 	/*complexNumber A { 3, 3 };
 	complexNumber B { 4, 4 };
