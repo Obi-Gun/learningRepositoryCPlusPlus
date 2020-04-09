@@ -171,13 +171,18 @@ void printArr(char** arr, int rows, int columns, int setMinimumWidth, bool showI
 		cout << " ";
 		for (int j = 0; j < columns; ++j) {
 			if (showIndexes) {
-				cout << "   arr[" << i << "][" << j << "]= " << setw(setMinimumWidth) << arr[i][j];
+				cout << "   arr[" << i << "][" << j << "]= ";
 			}
-			else {
-				cout << setw(setMinimumWidth) << arr[i][j] << "  ";
-			}
+			cout << setw(setMinimumWidth) << arr[i][j] << "  ";
 		}
-		cout << endl << endl;
+		cout << endl;
+	}
+}
+
+void printArr(char** arr, int rows)
+{
+	for (int i = 0; i < rows; ++i) {
+		cout << arr[i];
 	}
 }
 
@@ -801,6 +806,13 @@ void copyArray(int** arr, int lengthOfShortestArray, int** arrCopy)
 }
 
 void copyArray(char* arrSource, int length, char* arrDest)
+{
+	for (int i = 0; i < length; ++i) {
+		*(arrDest + i) = *(arrSource + i);
+	}
+}
+
+void copyArray2(char* arrSource, int length, char*& arrDest)
 {
 	for (int i = 0; i < length; ++i) {
 		*(arrDest + i) = *(arrSource + i);
@@ -1510,7 +1522,7 @@ int countStringsInFile(char* filepth) {
 	const int maxStringSize = 1024;
 	char str[maxStringSize];
 	int strCounter = 0;
-	while (char* str2 = fgets(str, maxStringSize, file)) {
+	while (fgets(str, maxStringSize, file)) {
 		++strCounter;
 	}
 	if (fclose(file)) {
@@ -1705,6 +1717,54 @@ void copyStringsFromFileToFileReverse(const char* sourceFilepath, const char* de
 	}
 }
 
+void copyStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& rows)
+{
+	rows = countStringsInFile((char*)sourceFilepath);
+	FILE* sourceFile;
+	if (fopen_s(&sourceFile, sourceFilepath, "r")) {
+		cout << "Unable to open file";
+		return;
+	}
+	const int maxStringSize = 1024;
+	reserveArr(rows, maxStringSize, destArr);
+	int i = 0;
+	while (fgets(destArr[i++], maxStringSize, sourceFile)) {
+	}
+	if (fclose(sourceFile)) {
+		cout << "Unable to close file";
+		return;
+	}
+}
+
+void copyStringsFromFileToArr(const char* sourceFilepath, char*& destArr, int& length, bool copyWithLineBreakCharacters)
+{
+	length = countCharsInFile((char*)sourceFilepath) + 1;
+	reserveArr(length, destArr);
+	FILE* sourceFile;
+	if (fopen_s(&sourceFile, sourceFilepath, "r")) {
+		cout << "Unable to open file";
+		return;
+	}
+	char* str;
+	const int maxStringSize = 1024;
+	reserveArr(maxStringSize, str);
+	int counterDestArrCharacters = 0;
+	while (fgets(str, maxStringSize, sourceFile)) {
+		int len = strlen(str);
+		if (!copyWithLineBreakCharacters && str[len - 1] == '\n') {
+			--len;
+		}
+		copyArray(str, len, destArr + counterDestArrCharacters);
+		counterDestArrCharacters += len;
+	}
+	destArr[counterDestArrCharacters] = '\0';
+	removeArr(str);
+	if (fclose(sourceFile)) {
+		cout << "Unable to close file";
+		return;
+	}
+}
+
 int replaceWordsToFile(const char* filepath, const char* destFilepath, int wordLength)
 {
 	FILE* file;
@@ -1770,8 +1830,8 @@ int addStringToFile(const char* filepath) // here is some bag here. Rewrite it l
 
 	fseek(file, 0, 0);
 
-	for (int i = 0; i <= strCounter; ++i) {
-		fputs(arr[i], file);
+	for (int j = 0; j <= strCounter; ++j) {
+		fputs(arr[j], file);
 	}
 
 	printArr(arr, strCounter + 1);

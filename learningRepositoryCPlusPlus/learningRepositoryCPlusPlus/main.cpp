@@ -2,110 +2,87 @@
 #include "funcs.h"
 using namespace std;
 
+int removeLastStr(const char* filepath)
+{
+	int strCounter = countStringsInFile((char*)filepath);
+	FILE* file;
+	if (fopen_s(&file, filepath, "r+")) {
+		cout << "Unable to open file";
+		return -1;
+	}
+	const int maxStringSize = 1024;
+	char** arr;
+	reserveArr(strCounter, maxStringSize, arr);
+	int i = 0;
+	int strWithoutSpacesIndex;
+	while (fgets(arr[i], maxStringSize, file)) {
+		if (!strchr(arr[i], ' ')) {
+			strWithoutSpacesIndex = i;
+		}
+		++i;
+	}
 
+	//fseek(file, 0, 0);
+
+	for (int j = 0; j < (strCounter - 1); ++j) {
+		fputs(arr[j], file);
+	}
+
+	printArr(arr, strCounter);
+	removeArr(arr);
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	return 0;
+}
+
+void showMismatchedStrings(const char* filepath1, const char* filepath2) {
+	char** arr1, ** arr2;
+	int rows1, rows2;
+	copyStringsFromFileToArr(filepath1, arr1, rows1);
+	copyStringsFromFileToArr(filepath2, arr2, rows2);
+	cout << "________different lines:\n";
+	for (int i = 0; i < rows1 && rows2; ++i) {
+		if (strcmp(arr1[i], arr2[i])) {
+			cout << "____mismatched lines number " << i + 1 << ":" << endl << arr1[i] << arr2[i];
+		}
+	}
+	removeArr(arr1, rows1);
+	removeArr(arr2, rows2);
+}
 
 int main() {
 	srand(time(NULL));
 
-// Homework 18.1.1 Course: "Basics of programming in C++".
-	/*int length = 10;
-	int rows = 20;
-	char** arr;
-	reserveArr(rows, length, arr);
-	arr[0] = (char*)"33335";
-	arr[1] = (char*)"33325";
-	arr[2] = (char*)"33315";
-	arr[3] = (char*)"20";
-	arr[4] = (char*)"33235";
-	arr[5] = (char*)"330";
-	arr[6] = (char*)"23315";
-	arr[7] = (char*)"33015";
-	arr[8] = (char*)"33455";
-	arr[9] = (char*)"1008";
-	arr[10] = (char*)"Masha";
-	arr[11] = (char*)"Ivan";
-	arr[12] = (char*)"Misha";
-	arr[13] = (char*)"Alex";
-	arr[14] = (char*)"Mashunia";
-	arr[15] = (char*)"Alexa";
-	arr[16] = (char*)"Kolia";
-	arr[17] = (char*)"Maria";
-	arr[18] = (char*)"Mashia";
-	arr[19] = (char*)"Mashen`ka";
-	sortStr(arr, rows, 0);
-	printArr(arr, rows);*/
+// Homework 21.1.1 Course: "Basics of programming in C++".
+	showMismatchedStrings("C:\\Users\\Alexandr\\Desktop\\criptos_data.txt", "C:\\Users\\Alexandr\\Desktop\\criptos_data - Copy.txt");
 
-// Homework 18.1.2 Course: "Basics of programming in C++".
-	int minVal = -20, maxVal = 20;
-	int** A, aRows = 4, aColumns = 4;
-	int** B, bRows = 4, bColumns = 4;
-	int** C, cRows = 4, cColumns = 4;
-	createArr(A, aRows, aColumns, minVal, maxVal, "arr A");
-	createArr(B, bRows, bColumns, minVal, maxVal, "arr B");
-	createArr(C, cRows, cColumns, minVal, maxVal, "arr C");
+// Homework 21.1.2 Course: "Basics of programming in C++".
+// Homework 21.1.3 Course: "Basics of programming in C++".
+// Homework 21.2.1 Course: "Basics of programming in C++".
+	//cout << countStringsInFile((char*)"C:\\Users\\Alexandr\\Desktop\\Classwork21.1.2.txt");
+	//removeLastStr("C:\\Users\\Alexandr\\Desktop\\Classwork21.1.2.txt");
+	/*int arr2[10];
+	int arr3[15];
+	int* arr[2];
+	arr[0] = arr2;
+	arr[1] = arr3;*/
 
-	// Task 3
-	int* commonValFromAC, lenAC = 0;
-	separateCommonElFromArr1AndArr2ToNewArr(A, aRows, aColumns, C, cRows, cColumns, commonValFromAC, lenAC);
-	cout << "There are common values from arrays A and C";
-	printArr(commonValFromAC, lenAC);
+// Homework 21.2.2 Course: "Basics of programming in C++".
+// Homework 21.2.3 Course: "Basics of programming in C++".
+// Homework 21.2.4 Course: "Basics of programming in C++".
 
-	// Task 1
-	int* commonValFromAB, lenAB = 0;
-	separateCommonElFromArr1AndArr2ToNewArr(A, aRows, aColumns, B, bRows, bColumns, commonValFromAB, lenAB);
-	int* commonValFromABC, lenABC = 0;
-	separateCommonElFromArr1AndArr2ToNewArr(commonValFromAB, lenAB, commonValFromAC, lenAC, commonValFromABC, lenABC);
-	cout << "\nThere are common values from arrays A, B and C";
-	printArr(commonValFromABC, lenABC);
+// Kryptos task
+// Test copyStringsFromFileToArr
+	/*char** arr;
+	int len;
+	copyStringsFromFileToArr("C:\\Users\\Alexandr\\Desktop\\criptos_data.txt", arr, len);
+	printArr(arr, len, 5, 0, true);
+	char* destArr;
+	int length;
+	copyStringsFromFileToArr("C:\\Users\\Alexandr\\Desktop\\criptos_data.txt", destArr, length);
+	cout << endl << endl;
+	copyStringsFromFileToArr("C:\\Users\\Alexandr\\Desktop\\criptos_data.txt", destArr, length, false);*/
 
-	// Task 2
-	int* uniqValABC, lenABCuniq = 0;
-	separateUniqElFromArr1ExceptArr2ElToNewArr(A, aRows, aColumns, commonValFromABC, lenABC, uniqValABC, lenABCuniq);
-	separateUniqElFromArr1ExceptArr2ElToNewArr(B, bRows, bColumns, commonValFromABC, lenABC, uniqValABC, lenABCuniq);
-	separateUniqElFromArr1ExceptArr2ElToNewArr(C, cRows, cColumns, commonValFromABC, lenABC, uniqValABC, lenABCuniq);
-	cout << "\nThere are uniq values from arrays A, B and C";
-	printArr(uniqValABC, lenABCuniq);
-
-	// Task 4
-	int* negativeVal, lenNeg = 0;
-	separateArrValuesNegative(uniqValABC, lenABCuniq, negativeVal, lenNeg);
-	separateArrValuesNegative(commonValFromABC, lenABC, negativeVal, lenNeg);
-	cout << "\nThere are negative values from arrays A, B and C";
-	printArr(negativeVal, lenNeg);
-
-	removeArr(A, aRows);
-	removeArr(B, bRows);
-	removeArr(C, cRows);
-	removeArr(commonValFromAC);
-	removeArr(commonValFromAB);
-	removeArr(commonValFromABC);
-	removeArr(uniqValABC);
-	removeArr(negativeVal);
-	
-// Homework 18.2.1 Course: "Basics of programming in C++".
-	/*complexNumber A { 3, 3 };
-	complexNumber B { 4, 4 };
-	A.print();
-	addComplexNumber(A, B).print();
-	subComplexNumber(A, B).print();
-	multComplexNumber(A, B).print();
-	divComplexNumber(A, B).print();*/
-
-// Homework 18.2.2 Course: "Basics of programming in C++".
-	/*car A{ "Audi", 1, 2, 3, 4, 5, red, automatic };
-	car B{ "BMW", 2, 3, 4, 5, 6, blue, mechanic };
-	car arr[2];
-	arr[0] = A;
-	arr[1] = B;
-	car searchedCar;
-	int length = 2, indexOfSearchedElement;
-	if (trySearchIndexOfKeyEl(arr, length, carLength, 2, searchedCar, indexOfSearchedElement)) {
-		searchedCar.print();
-	}
-	if (trySearchIndexOfKeyEl(arr, length, red, searchedCar, indexOfSearchedElement)) {
-		searchedCar.print();
-	}
-	if (trySearchIndexOfKeyEl(arr, length, mechanic, searchedCar, indexOfSearchedElement)) {
-		searchedCar.print();
-	}*/
 }

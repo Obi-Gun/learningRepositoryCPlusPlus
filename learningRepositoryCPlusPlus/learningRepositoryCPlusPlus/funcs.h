@@ -62,6 +62,7 @@ template <typename T> void printArr(T arr[], int LEN)
 void printArr(int** arr, int rows, int columns, int setMinimumWidth = 0, bool showIndexes = false);
 void printArr(double** arr, int rows, int columns, int setMinimumWidth = 0, bool showIndexes = false);
 void printArr(char** arr, int rows, int columns, int setMinimumWidth = 0, bool showIndexes = false);
+void printArr(char** arr, int rows);
 void printArr(char*** arr, int rows, int columns, int strLength, int setMinimumWidth = 2, bool showIndexes = false);
 
 void reserveArr(int length, int*& arr);
@@ -101,6 +102,7 @@ void shiftArrValues(int**& arr, int rows, int columns, bool shiftHigher, int ver
 void copyArray(int* arr, int lengthOfShortestArray, int* arrCopy);
 void copyArray(int** arr, int lengthOfShortestArray, int** arrCopy);
 void copyArray(char* arrSource, int length, char* arrDest);
+void copyArray2(char* arrSource, int length, char*& arrDest); //
 void copyArray(int* arrSource, int length, char* arrDest);
 
 void maxValArrInd(int* arr, int length, int& maxVal, int& indexMaxVal);
@@ -399,5 +401,7 @@ int replaceTextToFileExceptSpecialWords(const char* filepath, const char* destFi
 
 void copyStringsFromFileToFile(const char* sourceFilepath, const char* destFilepath);
 void copyStringsFromFileToFileReverse(const char* sourceFilepath, const char* destFilepath);
+void copyStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& rows);
+void copyStringsFromFileToArr(const char* sourceFilepath, char*& destArr, int& length, bool copyWithLineBreakCharacters = true);
 
 #endif //funcs// !funcs
