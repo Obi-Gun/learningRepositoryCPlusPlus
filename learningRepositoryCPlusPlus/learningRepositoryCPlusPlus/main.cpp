@@ -2,7 +2,6 @@
 #include "funcs.h"
 using namespace std;
 
-/*
 int removeLastStr(const char* filepath)
 {
 	int strCounter = countStringsInFile((char*)filepath);
@@ -52,200 +51,81 @@ void showMismatchedStrings(const char* filepath1, const char* filepath2) {
 	removeArr(arr1, rows1);
 	removeArr(arr2, rows2);
 }
-*/
 
-bool isUniqStr(char** arr, int rows, char* searchedValue) { // FIXME
-	for (int i = 0; i < rows; ++i) {
-		if (searchedValue == arr[i]) { // FIXME
-			return false;
-		}
-	}
-	return true;
-}
-
-void addValue(char**& arr, int& rows, char* newStr) 
+int writeInfoAboutFileToNewFile(const char* sourcefilepath, const char* destfilepath)
 {
-	if (rows == 0) {
-		reserveArr(rows, arr);
+	int counterChars = 666; // FIXME
+	char* strCounterChars = convertIntToCharArr(counterChars);
+	int counterStr = countStringsInFile((char*)sourcefilepath);
+	int counterVowelChars = 666; // FIXME
+	int counterConsonantChars = 666; // FIXME
+	int counterDigitChars = 666; // FIXME
+	FILE* sourceFile;
+	if (fopen_s(&sourceFile, sourcefilepath, "r")) {
+		cout << "Unable to open file";
+		return -1;
 	}
-	char** arrNew;
-	reserveArr(rows + 1, arrNew);
-	copyArray(arr, rows, arrNew);
-	arrNew[rows] = newStr;
-	++rows;
-	removeArr(arr);
-	arr = arrNew;
-}
-
-void addValue(char**& arr, int& rows, const char* newStr)
-{
-	if (rows == 0) {
-		reserveArr(rows, arr);
+	FILE* destFile;
+	if (fopen_s(&destFile, destfilepath, "w+")) {
+		cout << "Error: int addStringToFile(const char* filepath, char* strNew)\n\tUnable to open file";
+		return -1;
 	}
-	char** arrNew;
-	reserveArr(rows + 1, arrNew);
-	copyArray(arr, rows, arrNew);
-	char* str;
-	int len = strlen(newStr) + 1;
-	reserveArr(len, str);
-	copyArray((char*)newStr, len, str);
-	arrNew[rows] = str;
-	++rows;
-	removeArr(arr);
-	arr = arrNew;
-}
+	fputs("Info about ", destFile);
+	fputs(sourcefilepath, destFile);
+	fputs(" file. \nCounterChars = ", destFile);
+	fputs(strCounterChars, destFile);
+	
+	//fputs("", destFile);
+	//fputs("", destFile);
 
-void copyUniqArrValues(char** arr, int rows, char**& destArr, int& rowsDestArr) // FIXME. Add isNullCheck
-{
-	if (rowsDestArr == 0) { // FIXME. Add isNullCheck
-		reserveArr(rowsDestArr, destArr);
+	removeArr(strCounterChars);
+	//addStringToFile(destfilepath, (char*)"lolo");
+	if (fclose(sourceFile)) {
+		cout << "Unable to close file";
+		return -2;
 	}
-	for (int i = 0; i < rows; ++i) {
-		if (isUniqStr(destArr, rowsDestArr, arr[i])) {
-			addValue(destArr, rowsDestArr, arr[i]);
-		}
+	if (fclose(destFile)) {
+		cout << "Error: int addStringToFile(const char* filepath, char* strNew)\n\tUnable to close file";
+		return -2;
 	}
-}
-
-void copyUniqArrValues(char** arr, int rows, char** arr2, int rows2, char**& destArr, int& rowsDestArr)
-{
-	copyUniqArrValues(arr, rows, destArr, rowsDestArr);
-	copyUniqArrValues(arr2, rows2, destArr, rowsDestArr);
-}
-
-void printString(char** arr, int row) // FIXME
-{
-	/*if (row < this.rows) { // FIXME
-		cout << arr[row];
-		return;
-	}*/
-	cout << "Error: row is out of arr length";
-}
-
-void printChar(char** arr, int row, int column)
-{
-	if (column < strlen(arr[row])) {
-		cout << arr[row][column];
-	}
-	else {
-		cout << "Column is out of string length";
-	}
-}
-
-void concatinateStr(char* source, char*& dest) // FIXME memory leak
-{
-	char* str;
-	int length = strlen(source) + strlen(dest);
-	reserveArr(length, str);
-	strcpy_s(str, length, dest);
-	strcpy_s(str + strlen(str), length, source);
-	// removeArr(dest);
-	dest = str;
-}
-
-void concatinateStrInArr(char** source, int rows, char**& destArr, int& rowsDestArr)
-{
-	if (rowsDestArr == 0) {
-		char** arrNew;
-		int rowsArrNew = 0;
-		reserveArr(rowsArrNew, arrNew);
-		for (int i = 0; i < rows; ++i) {
-			addValue(arrNew, rowsArrNew, " \0");
-		}
-		removeArr(destArr, rowsDestArr);
-		destArr = arrNew;
-		rowsDestArr = rowsArrNew;
-	}
-	for (int i = 0; i < rows && i < rowsDestArr; ++i) {
-		concatinateStr(source[i], destArr[i]);
-	}
-}
-
-void concatinateStrInArr(char** source, int rows, char** source2, int rows2, char**& destArr, int& rowsDestArr)
-{
-	concatinateStrInArr(source, rows, destArr, rowsDestArr);
-	concatinateStrInArr(source2, rows2, destArr, rowsDestArr);
+	return 0;
 }
 
 int main() {
 	//srand(time(NULL));
 	//setlocale(LC_ALL, "Russian");
 	
+// Homework 21.1.1 Course: "Basics of programming in C++".
+	//showMismatchedStrings("C:\\Users\\Alexandr\\Desktop\\criptos_data.txt", "C:\\Users\\Alexandr\\Desktop\\criptos_data - Copy.txt");
 
-// test void addValue(char**& arr, int& rows, char* newStr)
+// Homework 21.1.2 Course: "Basics of programming in C++".
+	writeInfoAboutFileToNewFile("C:\\Users\\Alexandr\\Desktop\\criptos_data.txt", "C:\\Users\\Alexandr\\Desktop\\criptos_data_info about file.txt");
+
+// Homework 21.1.3 Course: "Basics of programming in C++".
+// Homework 21.2.1 Course: "Basics of programming in C++".
+	//cout << countStringsInFile((char*)"C:\\Users\\Alexandr\\Desktop\\Classwork21.1.2.txt");
+	//removeLastStr("C:\\Users\\Alexandr\\Desktop\\Classwork21.1.2.txt");
+	/*int arr2[10];
+	int arr3[15];
+	int* arr[2];
+	arr[0] = arr2;
+	arr[1] = arr3;*/
+
+// Homework 21.2.2 Course: "Basics of programming in C++".
+// Homework 21.2.3 Course: "Basics of programming in C++".
+// Homework 21.2.4 Course: "Basics of programming in C++".
+
+// Kryptos task
+	// Test copyStringsFromFileToArr
 	/*char** arr;
-	int rows = 2;
-	int len = 20;
-	reserveArr(rows, len, arr);
-
-	arr[0] = (char*)"Lola";
-	arr[1] = (char*)"Ivan";
-	printArr(arr, 2);
-
-	char** arrNew;
-	int rows2 = 3;
-	int len2 = 0;
-	
-	reserveArr(rows2, arrNew);
-	arrNew[2] = (char*)"Kate";
-	addValue(arrNew, rows2, (char*)"Igor");
-	copyArray(arr, rows, arrNew);
-	printArr(arrNew, rows2);*/
-
-// test void copyUniqArrValues(char** arr, int rows, char** destArr, int& rowsDestArr)
-	char** nameList;
-	int rowsNameList = 3;
-	reserveArr(rowsNameList, nameList);
-	nameList[0] = (char*)"Lola";
-	nameList[1] = (char*)"Tolik";
-	nameList[2] = (char*)"Ebonit";
-	printArr(nameList, rowsNameList);
-	cout << endl;
-
-	char** nameList3;
-	int rowsNameList3 = 3;
-	reserveArr(rowsNameList3, nameList3);
-	nameList3[0] = (char*)"Igor";
-	nameList3[1] = (char*)"Tolik";
-	nameList3[2] = (char*)"Juju";
-	printArr(nameList3, rowsNameList3);
-	cout << endl;
-
-	char** nameList2;
-	int rowsNameList2 = 0;
-	copyUniqArrValues(nameList, rowsNameList, nameList3, rowsNameList3, nameList2, rowsNameList2);
-	printArr(nameList2, rowsNameList2);
-
-// test void concatinateStrInArr(char** source, int rows, char**& destArr, int& rowsDestArr)
-	/*char** nameList;
-	int rowsNameList = 0;
-	addValue(nameList, rowsNameList, "Lola");
-	addValue(nameList, rowsNameList, "Tolik");
-	addValue(nameList, rowsNameList, "Ebonit");
-	printArr(nameList, rowsNameList);
-	cout << endl;
-
-	char** nameList3;
-	int rowsNameList3 = 0;
-	addValue(nameList3, rowsNameList3, "Igorevsky");
-	addValue(nameList3, rowsNameList3, "Jujuvsky");
-	addValue(nameList3, rowsNameList3, "Tolikancky");
-	printArr(nameList3, rowsNameList3);
-	cout << endl;
-
-	char** nameListResult;
-	int rowsNameListResult = 0;
-	reserveArr(rowsNameListResult, nameListResult);
-	concatinateStrInArr(nameList, rowsNameList, nameList3, rowsNameList3, nameListResult, rowsNameListResult);
-	printArr(nameListResult, rowsNameListResult);*/
-
-// test void addValue(char**& arr, int& rows, const char* newStr)
-	/*char** arr;
-	int rows = 0;
-	reserveArr(rows, arr);
-	addValue(arr, rows, "Igor");
-	printArr(arr, rows);*/
-
+	int len;
+	copyStringsFromFileToArr("C:\\Users\\Alexandr\\Desktop\\criptos_data.txt", arr, len);
+	printArr(arr, len, 5, 0, true);
+	char* destArr;
+	int length;
+	copyStringsFromFileToArr("C:\\Users\\Alexandr\\Desktop\\criptos_data.txt", destArr, length);
+	cout << endl << endl;
+	copyStringsFromFileToArr("C:\\Users\\Alexandr\\Desktop\\criptos_data.txt", destArr, length, false);*/
 
 
 }

@@ -47,7 +47,7 @@ int countSymbolsInArr1isFromArr2(char* source, const char* symbolsToFind)
 	return counter;
 }
 
-int strLength(char** arr, int rows)
+int minStrLength(char** arr, int rows)
 {
 	int minStrLen = strlen(arr[0]);
 	for (int i = 1; i < rows; ++i) {
@@ -302,7 +302,7 @@ void bobbleSortStr(char** arr, int rows, int iSL)
 
 void sortStr(char** arr, int rows, int iSL)
 { // iSL = index Of Sorted Letter
-	if (iSL >= strLength(arr, rows)) return;
+	if (iSL >= minStrLength(arr, rows)) return;
 	bobbleSortStr(arr, rows, iSL);
 	int counter = 1, f;
 	for (f = 1; f < rows; ++f) {
@@ -1470,6 +1470,120 @@ char* convertIntToCharArr(int number)
 	return charArr;
 }
 
+bool isUniqStr(char** arr, int rows, char* searchedValue) { // FIXME
+	for (int i = 0; i < rows; ++i) {
+		if (searchedValue == arr[i]) { // FIXME
+			return false;
+		}
+	}
+	return true;
+}
+
+void addStrToArr(char**& arr, int& rows, char* newStr)
+{
+	if (rows == 0) {
+		reserveArr(rows, arr);
+	}
+	char** arrNew;
+	reserveArr(rows + 1, arrNew);
+	copyArray(arr, rows, arrNew);
+	arrNew[rows] = newStr;
+	++rows;
+	removeArr(arr);
+	arr = arrNew;
+}
+
+void addStrToArr(char**& arr, int& rows, const char* newStr)
+{
+	if (rows == 0) {
+		reserveArr(rows, arr);
+	}
+	char** arrNew;
+	reserveArr(rows + 1, arrNew);
+	copyArray(arr, rows, arrNew);
+	char* str;
+	int len = strlen(newStr) + 1;
+	reserveArr(len, str);
+	copyArray((char*)newStr, len, str);
+	arrNew[rows] = str;
+	++rows;
+	removeArr(arr);
+	arr = arrNew;
+}
+
+void copyUniqArrValues(char** arr, int rows, char**& destArr, int& rowsDestArr) // FIXME. Add isNullCheck
+{
+	if (rowsDestArr == 0) { // FIXME. Add isNullCheck
+		reserveArr(rowsDestArr, destArr);
+	}
+	for (int i = 0; i < rows; ++i) {
+		if (isUniqStr(destArr, rowsDestArr, arr[i])) {
+			addStrToArr(destArr, rowsDestArr, arr[i]);
+		}
+	}
+}
+
+void copyUniqArrValues(char** arr, int rows, char** arr2, int rows2, char**& destArr, int& rowsDestArr)
+{
+	copyUniqArrValues(arr, rows, destArr, rowsDestArr);
+	copyUniqArrValues(arr2, rows2, destArr, rowsDestArr);
+}
+
+void printString(char** arr, int row) // FIXME
+{
+	/*if (row < this.rows) { // FIXME
+		cout << arr[row];
+		return;
+	}*/
+	cout << "Error: row is out of arr length";
+}
+
+void printChar(char** arr, int row, int column)
+{
+	if (column < strlen(arr[row])) {
+		cout << arr[row][column];
+	}
+	else {
+		cout << "Column is out of string length";
+	}
+}
+
+void concatinateStr(char* source, char*& dest) // FIXME memory leak
+{
+	char* str;
+	int length = strlen(source) + strlen(dest);
+	reserveArr(length, str);
+	strcpy_s(str, length, dest);
+	strcpy_s(str + strlen(str), length, source);
+	// removeArr(dest);
+	dest = str;
+}
+
+void concatinateStrInArr(char** source, int rows, char**& destArr, int& rowsDestArr)
+{
+	if (rowsDestArr == 0) {
+		char** arrNew;
+		int rowsArrNew = 0;
+		reserveArr(rowsArrNew, arrNew);
+		for (int i = 0; i < rows; ++i) {
+			addStrToArr(arrNew, rowsArrNew, " \0");
+		}
+		removeArr(destArr, rowsDestArr);
+		destArr = arrNew;
+		rowsDestArr = rowsArrNew;
+	}
+	for (int i = 0; i < rows && i < rowsDestArr; ++i) {
+		concatinateStr(source[i], destArr[i]);
+	}
+}
+
+void concatinateStrInArr(char** source, int rows, char** source2, int rows2, char**& destArr, int& rowsDestArr)
+{
+	concatinateStrInArr(source, rows, destArr, rowsDestArr);
+	concatinateStrInArr(source2, rows2, destArr, rowsDestArr);
+}
+
+
 void game_BullsAndCows()
 {
 	int progNumber = fillRandom4DigitValue();
@@ -1558,7 +1672,7 @@ int countCharsInFile(char* filepth) {
 	return counter;
 }
 
-void writeStringsToFile(const char* filepath, const char* strings[], int stringsSize)
+void writeStringsToFile(const char* filepath, const char* strings[], int rows)
 {
 	FILE* file;
 	if (fopen_s(&file, filepath, "w")) {
@@ -1566,7 +1680,7 @@ void writeStringsToFile(const char* filepath, const char* strings[], int strings
 		return;
 	}
 
-	for (int i = 0; i < stringsSize; ++i) {
+	for (int i = 0; i < rows; ++i) {
 		fputs(strings[i], file);
 		fputs("\n", file);
 	}
@@ -1850,6 +1964,21 @@ int addStringToFile(const char* filepath) // here is some bag here. Rewrite it l
 	return 0;
 }
 
+int addStringToFile(const char* filepath, char* strNew)
+{
+	FILE* file;
+	if (fopen_s(&file, filepath, "w+")) {
+		cout << "Error: int addStringToFile(const char* filepath, char* strNew)\n\tUnable to open file";
+		return -1;
+	}
+	fputs(strNew, file);
+	if (fclose(file)) {
+		cout << "Error: int addStringToFile(const char* filepath, char* strNew)\n\tUnable to close file";
+		return -2;
+	}
+	return 0;
+}
+
 bool isWordInArr(char** arr, int rows, char* word)
 {
 	for (int i = 0; i < rows; ++i) {
@@ -1860,7 +1989,7 @@ bool isWordInArr(char** arr, int rows, char* word)
 	return false;
 }
 
-void fillArrFromFile(const char* specialWordsFilePath, char**& destArr, int& length)
+void copyWordsFromFileToArr(const char* specialWordsFilePath, char**& destArr, int& length)
 {
 	length = countWordsInFile(specialWordsFilePath);
 	FILE* sWFile;
@@ -1908,7 +2037,7 @@ int replaceTextToFileExceptSpecialWords(const char* filepath, const char* destFi
 	char str[maxStringSize];
 	char** arrBadWords;
 	int length;
-	fillArrFromFile(specialWordsFilePath, arrBadWords, length);
+	copyWordsFromFileToArr(specialWordsFilePath, arrBadWords, length);
 	while (fgets(str, maxStringSize, file)) {
 		char* context;
 		char* word = strtok_s(str, " ", &context);

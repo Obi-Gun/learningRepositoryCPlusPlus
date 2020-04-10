@@ -274,7 +274,7 @@ int countDigits(char* source);
 int countLetters(char* source);
 int countWords(char* sourceArr);
 int countSymbolsInArr1isFromArr2(char* source, const char* symbolsToFind);
-int strLength(char** arr, int rows);
+int minStrLength(char** arr, int rows);
 
 void findName(char*** arr, int columns, char* strName, int setMinimumWidth = 16);
 void findPhone(char*** arr, int columns, char* strPhoneNumber, int setMinimumWidth = 16);
@@ -283,6 +283,18 @@ void addContact(char*** arr, int column, int strLength);
 void addContact(char*** arr, int column, int strLength, char* name, char* pNumber);
 
 char* convertIntToCharArr(int number);
+
+// funcs for list class in future
+bool isUniqStr(char** arr, int rows, char* searchedValue);// FIXME
+void addStrToArr(char**& arr, int& rows, char* newStr);
+void addStrToArr(char**& arr, int& rows, const char* newStr);
+void copyUniqArrValues(char** arr, int rows, char**& destArr, int& rowsDestArr); // FIXME. Add isNullCheck
+void copyUniqArrValues(char** arr, int rows, char** arr2, int rows2, char**& destArr, int& rowsDestArr);
+void printString(char** arr, int row); // FIXME
+void printChar(char** arr, int row, int column);
+void concatinateStr(char* source, char*& dest); // FIXME memory leak
+void concatinateStrInArr(char** source, int rows, char**& destArr, int& rowsDestArr);
+void concatinateStrInArr(char** source, int rows, char** source2, int rows2, char**& destArr, int& rowsDestArr);
 //
 //
 //
@@ -391,15 +403,15 @@ int countStringsInFile(char* filepth);
 
 bool isWordInArr(char** arr, int rows, char* word);
 
-void fillArrFromFile(const char* specialWordsFilePath, char**& destArr, int& length);
-
 int addStringToFile(const char* filepath);
+int addStringToFile(const char* filepath, char* strNew);
 void writeStringsToFile(const char* filepath, const char* strings[], int stringsSize);
 
 void replaceCharInFile(const char* sourcefilepath, const char* destfilepath, char sCh, char dCh);
 int replaceWordsToFile(const char* filepath, const char* destFilepath, int wordLength);
 int replaceTextToFileExceptSpecialWords(const char* filepath, const char* destFilepath, const char* specialWordsFilePath); // here is some bag here. Rewrite it later
 
+void copyWordsFromFileToArr(const char* specialWordsFilePath, char**& destArr, int& length);
 void copyStringsFromFileToFile(const char* sourceFilepath, const char* destFilepath);
 void copyStringsFromFileToFileReverse(const char* sourceFilepath, const char* destFilepath);
 void copyStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& rows);
