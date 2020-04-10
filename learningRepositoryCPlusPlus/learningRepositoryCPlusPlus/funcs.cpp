@@ -182,7 +182,7 @@ void printArr(char** arr, int rows, int columns, int setMinimumWidth, bool showI
 void printArr(char** arr, int rows)
 {
 	for (int i = 0; i < rows; ++i) {
-		cout << arr[i];
+		cout << arr[i] << endl;
 	}
 }
 
@@ -517,17 +517,17 @@ void reserveArr(int length, char**& arr)
 	arr = new char* [length];
 }
 
-void reserveArr(int length, char***& arr)
-{
-	arr = new char** [length];
-}
-
 void reserveArr(int rows, int columns, char**& arr)
 {
 	reserveArr(rows, arr);
 	for (int i = 0; i < rows; ++i) {
 		reserveArr(columns, arr[i]);
 	}
+}
+
+void reserveArr(int length, char***& arr)
+{
+	arr = new char** [length];
 }
 
 void reserveArr(int rows, int columns, int strLen, char***& arr)
@@ -816,6 +816,13 @@ void copyArray2(char* arrSource, int length, char*& arrDest)
 {
 	for (int i = 0; i < length; ++i) {
 		*(arrDest + i) = *(arrSource + i);
+	}
+}
+
+void copyArray(char** arrSource, int rows, char** arrDest)
+{
+	for (int i = 0; i < rows; ++i) {
+		arrDest[i] = arrSource[i];
 	}
 }
 

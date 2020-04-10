@@ -103,6 +103,7 @@ void copyArray(int* arr, int lengthOfShortestArray, int* arrCopy);
 void copyArray(int** arr, int lengthOfShortestArray, int** arrCopy);
 void copyArray(char* arrSource, int length, char* arrDest);
 void copyArray2(char* arrSource, int length, char*& arrDest); //
+void copyArray(char** arrSource, int rows, char** arrDest);
 void copyArray(int* arrSource, int length, char* arrDest);
 
 void maxValArrInd(int* arr, int length, int& maxVal, int& indexMaxVal);
