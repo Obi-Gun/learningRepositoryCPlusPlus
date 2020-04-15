@@ -37,59 +37,6 @@ int removeLastStr(const char* filepath)
 	return 0;
 }
 
-void showMismatchedStrings(const char* filepath1, const char* filepath2) {
-	char** arr1, ** arr2;
-	int rows1, rows2;
-	copyStringsFromFileToArr(filepath1, arr1, rows1);
-	copyStringsFromFileToArr(filepath2, arr2, rows2);
-	cout << "________different lines:\n";
-	for (int i = 0; i < rows1 && rows2; ++i) {
-		if (strcmp(arr1[i], arr2[i])) {
-			cout << "____mismatched lines number " << i + 1 << ":" << endl << arr1[i] << arr2[i];
-		}
-	}
-	removeArr(arr1, rows1);
-	removeArr(arr2, rows2);
-}
-
-int writeInfoAboutFileToNewFile(const char* sourcefilepath, const char* destfilepath)
-{
-	int counterChars = 666; // FIXME
-	char* strCounterChars = convertIntToCharArr(counterChars);
-	int counterStr = countStringsInFile((char*)sourcefilepath);
-	int counterVowelChars = 666; // FIXME
-	int counterConsonantChars = 666; // FIXME
-	int counterDigitChars = 666; // FIXME
-	FILE* sourceFile;
-	if (fopen_s(&sourceFile, sourcefilepath, "r")) {
-		cout << "Unable to open file";
-		return -1;
-	}
-	FILE* destFile;
-	if (fopen_s(&destFile, destfilepath, "w+")) {
-		cout << "Error: int addStringToFile(const char* filepath, char* strNew)\n\tUnable to open file";
-		return -1;
-	}
-	fputs("Info about ", destFile);
-	fputs(sourcefilepath, destFile);
-	fputs(" file. \nCounterChars = ", destFile);
-	fputs(strCounterChars, destFile);
-	
-	//fputs("", destFile);
-	//fputs("", destFile);
-
-	removeArr(strCounterChars);
-	//addStringToFile(destfilepath, (char*)"lolo");
-	if (fclose(sourceFile)) {
-		cout << "Unable to close file";
-		return -2;
-	}
-	if (fclose(destFile)) {
-		cout << "Error: int addStringToFile(const char* filepath, char* strNew)\n\tUnable to close file";
-		return -2;
-	}
-	return 0;
-}
 
 int main() {
 	//srand(time(NULL));
@@ -99,9 +46,11 @@ int main() {
 	//showMismatchedStrings("C:\\Users\\Alexandr\\Desktop\\criptos_data.txt", "C:\\Users\\Alexandr\\Desktop\\criptos_data - Copy.txt");
 
 // Homework 21.1.2 Course: "Basics of programming in C++".
-	writeInfoAboutFileToNewFile("C:\\Users\\Alexandr\\Desktop\\criptos_data.txt", "C:\\Users\\Alexandr\\Desktop\\criptos_data_info about file.txt");
+	writeInfoAboutFileToNewFile("C:\\Users\\Alexandr\\Desktop\\2.txt", "C:\\Users\\Alexandr\\Desktop\\3.txt");
 
 // Homework 21.1.3 Course: "Basics of programming in C++".
+
+
 // Homework 21.2.1 Course: "Basics of programming in C++".
 	//cout << countStringsInFile((char*)"C:\\Users\\Alexandr\\Desktop\\Classwork21.1.2.txt");
 	//removeLastStr("C:\\Users\\Alexandr\\Desktop\\Classwork21.1.2.txt");
@@ -126,6 +75,8 @@ int main() {
 	copyStringsFromFileToArr("C:\\Users\\Alexandr\\Desktop\\criptos_data.txt", destArr, length);
 	cout << endl << endl;
 	copyStringsFromFileToArr("C:\\Users\\Alexandr\\Desktop\\criptos_data.txt", destArr, length, false);*/
+
+
 
 
 }

@@ -36,6 +36,34 @@ int countWords(char* sourceArr)
 	return counter;
 }
 
+int countVowelLettersInStr(char* str)
+{
+	int counter = 0;
+	const char key[] = "AaEeIiOoUu";
+	char* p = strpbrk(str, key);
+	while (p != NULL)
+	{
+		++counter;
+		p = strpbrk(p + 1, key);
+	}
+	return counter;
+}
+
+
+
+int countConsonantLettersInStr(char* str)
+{
+	int counter = 0;
+	const char key[] = "BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvXxZzWwYy";
+	char* p = strpbrk(str, key);
+	while (p != NULL)
+	{
+		++counter;
+		p = strpbrk(p + 1, key);
+	}
+	return counter;
+}
+
 int countSymbolsInArr1isFromArr2(char* source, const char* symbolsToFind)
 {
 	char* currentPointer = source;
@@ -1429,7 +1457,7 @@ int calcDays(int day1, int month1, int year1, int day2, int month2, int year2)
 	return daysCounter2 - daysCounter1;
 }
 
-int compareValuesInArr(int* arr1, int length, int* arr2)
+int countPairsWithEqualValuesInArr(int* arr1, int length, int* arr2)
 {
 	int counter = 0;
 	for (int i = 0; i < length; ++i) {
@@ -1438,7 +1466,7 @@ int compareValuesInArr(int* arr1, int length, int* arr2)
 	return counter;
 }
 
-int compareValuesInArr(char* arr1, char* arr2)
+int countPairsWithEqualValuesInArr(char* arr1, char* arr2)
 {
 	int counter = 0;
 	for (int i = 0; (arr1[i] != '\0') && (arr2[i] != '\0'); ++i) {
@@ -1599,7 +1627,7 @@ void game_BullsAndCows()
 		char* userCharArr = convertIntToCharArr(userNumber);
 		++counterIterations;
 		cout << "There are " << countSymbolsInArr1isFromArr2(progCharArr, userCharArr) << " bulls\n";
-		cows = compareValuesInArr(progCharArr, userCharArr);
+		cows = countPairsWithEqualValuesInArr(progCharArr, userCharArr);
 		cout << "There are " << cows << " cows.\n";
 	} while (cows != 4);
 	cout << "\nIt takes " << counterIterations << " iterations to find the right number.\n";
@@ -1653,10 +1681,70 @@ int countStringsInFile(char* filepth) {
 	return strCounter;
 }
 
+int countVowelLettersInFile(const char* filepth)
+{
+	FILE* file;
+	if (fopen_s(&file, filepth, "r")) {
+		cout << "Error:\nUnable to open destFile file\nint countVowelLettersInFile(const char* filepth)";
+		return -1;
+	}
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+	int counter = 0;
+	while (fgets(str, maxStringSize, file)) {
+		counter += countVowelLettersInStr(str);
+	}
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	return counter;
+}
+
+int countConsonantLettersInFile(const char* filepth)
+{
+	FILE* file;
+	if (fopen_s(&file, filepth, "r")) {
+		cout << "Error:\nUnable to open destFile file\nint countConsonantLettersInFile(const char* filepth)";
+		return -1;
+	}
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+	int counter = 0;
+	while (fgets(str, maxStringSize, file)) {
+		counter += countConsonantLettersInStr(str);
+	}
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	return counter;
+}
+
+int countDigitsInFile(const char* filepth)
+{
+	FILE* file;
+	if (fopen_s(&file, filepth, "r")) {
+		cout << "Error:\nUnable to open destFile file\nint countDigitsInFile(const char* filepth)";
+		return -1;
+	}
+	const int maxStringSize = 1024;
+	char str[maxStringSize];
+	int counter = 0;
+	while (fgets(str, maxStringSize, file)) {
+		counter += countDigits(str);
+	}
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	return counter;
+}
+
 int countCharsInFile(char* filepth) {
 	FILE* file;
 	if (fopen_s(&file, filepth, "r")) {
-		cout << "Unable to open file";
+		cout << "Error:\nUnable to open destFile file\nint countCharsInFile(char* filepth)";
 		return -1;
 	}
 	const int maxStringSize = 1024;
@@ -1672,7 +1760,7 @@ int countCharsInFile(char* filepth) {
 	return counter;
 }
 
-void writeStringsToFile(const char* filepath, const char* strings[], int rows)
+void writeStringsToFile(const char* filepath, char** strings, int rows, bool everyElOnNewStr)
 {
 	FILE* file;
 	if (fopen_s(&file, filepath, "w")) {
@@ -1682,13 +1770,72 @@ void writeStringsToFile(const char* filepath, const char* strings[], int rows)
 
 	for (int i = 0; i < rows; ++i) {
 		fputs(strings[i], file);
-		fputs("\n", file);
+		if (everyElOnNewStr) {
+			fputs("\n", file);
+		}
 	}
 
 	if (fclose(file)) {
 		cout << "Unable to close file";
 		return;
 	}
+}
+
+int writeInfoAboutFileToNewFile(const char* sourcefilepath, const char* destfilepath)
+{
+	FILE* sourceFile;
+	if (fopen_s(&sourceFile, sourcefilepath, "r")) {
+		cout << "Error:\nUnable to open sourceFile file\nint writeInfoAboutFileToNewFile(const char* sourcefilepath, const char* destfilepath)\n";
+		return -1;
+	}
+	int rows = 6;
+	int strLen = 256;
+	char** text;
+	reserveArr(rows, strLen, text);
+	for (int i = 0; i < rows; ++i) {
+		text[i][0] = '\0';
+	}
+	strcat_s(text[0], strLen, "Info about ");
+	strcat_s(text[0], strLen, sourcefilepath);
+	strcat_s(text[0], strLen, " file. There are:");
+
+	int counterChars = countCharsInFile((char*)sourcefilepath);
+	char* strCounterChars = convertIntToCharArr(counterChars);
+	strcat_s(text[1], strLen, strCounterChars);
+	strcat_s(text[1], strLen, " chars");
+	removeArr(strCounterChars);
+
+	int counterStr = countStringsInFile((char*)sourcefilepath);
+	char* strCounterStr = convertIntToCharArr(counterStr);
+	strcat_s(text[2], strLen, strCounterStr);
+	strcat_s(text[2], strLen, " strings");
+	removeArr(strCounterStr);
+
+	int counterVowelChars = countVowelLettersInFile(sourcefilepath);
+	char* strCounterVowelChars = convertIntToCharArr(counterVowelChars);
+	strcat_s(text[3], strLen, strCounterVowelChars);
+	strcat_s(text[3], strLen, " vowel chars");
+	removeArr(strCounterVowelChars);
+
+	int counterConsonantChars = countConsonantLettersInFile(sourcefilepath);
+	char* strCounterConsonantChars = convertIntToCharArr(counterConsonantChars);
+	strcat_s(text[4], strLen, strCounterConsonantChars);
+	strcat_s(text[4], strLen, " consonant chars");
+	removeArr(strCounterConsonantChars);
+
+	int counterDigitChars = countDigitsInFile(sourcefilepath);
+	char* strCounterDigitChars = convertIntToCharArr(counterDigitChars);
+	strcat_s(text[5], strLen, strCounterDigitChars);
+	strcat_s(text[5], strLen, " digits");
+	removeArr(strCounterDigitChars);
+
+	writeStringsToFile(destfilepath, text, rows);
+	removeArr(text, rows);
+	if (fclose(sourceFile)) {
+		cout << "Unable to close file";
+		return -2;
+	}
+	return 0;
 }
 
 void replaceCharInFile(const char* sourcefilepath, const char* destfilepath, char sCh, char dCh)
@@ -2064,4 +2211,20 @@ int replaceTextToFileExceptSpecialWords(const char* filepath, const char* destFi
 		return -2;
 	}
 	return 0;
+}
+
+void showMismatchedStringsFromFile(const char* filepath1, const char* filepath2)
+{
+	char** arr1, ** arr2;
+	int rows1, rows2;
+	copyStringsFromFileToArr(filepath1, arr1, rows1);
+	copyStringsFromFileToArr(filepath2, arr2, rows2);
+	cout << "________different lines:\n";
+	for (int i = 0; i < rows1 && rows2; ++i) {
+		if (strcmp(arr1[i], arr2[i])) {
+			cout << "____mismatched lines number " << i + 1 << ":" << endl << arr1[i] << arr2[i];
+		}
+	}
+	removeArr(arr1, rows1);
+	removeArr(arr2, rows2);
 }

@@ -128,8 +128,8 @@ double minValueDiagonal(double** squareMatrix, int length);
 int sumArrValues(int* curEl, int* endEl);
 double calcAverage(int* arr, int length);
 
-int compareValuesInArr(int* arr1, int length, int* arr2);
-int compareValuesInArr(char* arr1, char* arr2);
+int countPairsWithEqualValuesInArr(int* arr1, int length, int* arr2);
+int countPairsWithEqualValuesInArr(char* arr1, char* arr2);
 
 void createArr(int**& arr, int& rows, int& columns, int minVal, int maxVal, const char* arrShowingName);
 //
@@ -273,7 +273,10 @@ void processExamplePreprocessorsDefined();
 int countDigits(char* source);
 int countLetters(char* source);
 int countWords(char* sourceArr);
+int countVowelLettersInStr(char* str);
+int countConsonantLettersInStr(char* str);
 int countSymbolsInArr1isFromArr2(char* source, const char* symbolsToFind);
+
 int minStrLength(char** arr, int rows);
 
 void findName(char*** arr, int columns, char* strName, int setMinimumWidth = 16);
@@ -400,12 +403,16 @@ int countCharsInFile(char* filepth);
 int countWordsInFile(const char* filepath, char searchedChar);
 int countWordsInFile(const char* filepath);
 int countStringsInFile(char* filepth);
+int countVowelLettersInFile(const char* filepth);
+int countConsonantLettersInFile(const char* filepth);
+int countDigitsInFile(const char* filepth);
 
 bool isWordInArr(char** arr, int rows, char* word);
 
 int addStringToFile(const char* filepath);
 int addStringToFile(const char* filepath, char* strNew);
-void writeStringsToFile(const char* filepath, const char* strings[], int stringsSize);
+void writeStringsToFile(const char* filepath, char** strings, int stringsSize, bool everyElOnNewStr = true);
+int writeInfoAboutFileToNewFile(const char* sourcefilepath, const char* destfilepath);
 
 void replaceCharInFile(const char* sourcefilepath, const char* destfilepath, char sCh, char dCh);
 int replaceWordsToFile(const char* filepath, const char* destFilepath, int wordLength);
@@ -416,5 +423,7 @@ void copyStringsFromFileToFile(const char* sourceFilepath, const char* destFilep
 void copyStringsFromFileToFileReverse(const char* sourceFilepath, const char* destFilepath);
 void copyStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& rows);
 void copyStringsFromFileToArr(const char* sourceFilepath, char*& destArr, int& length, bool copyWithLineBreakCharacters = true);
+
+void showMismatchedStringsFromFile(const char* filepath1, const char* filepath2);
 
 #endif //funcs// !funcs
