@@ -298,6 +298,9 @@ void printChar(char** arr, int row, int column);
 void concatinateStr(char* source, char*& dest); // FIXME memory leak
 void concatinateStrInArr(char** source, int rows, char**& destArr, int& rowsDestArr);
 void concatinateStrInArr(char** source, int rows, char** source2, int rows2, char**& destArr, int& rowsDestArr);
+
+void encryptLettersInString(char* str, int encryptionKey);
+void encryptText(char** arr, int rows, int encryptionKey);
 //
 //
 //
@@ -411,19 +414,24 @@ bool isWordInArr(char** arr, int rows, char* word);
 
 int addStringToFile(const char* filepath);
 int addStringToFile(const char* filepath, char* strNew);
-void writeStringsToFile(const char* filepath, char** strings, int stringsSize, bool everyElOnNewStr = true);
+void writeStringsToFile(const char* filepath, char** strings, int rows, bool everyElOnNewStr = true);
 int writeInfoAboutFileToNewFile(const char* sourcefilepath, const char* destfilepath);
 
 void replaceCharInFile(const char* sourcefilepath, const char* destfilepath, char sCh, char dCh);
 int replaceWordsToFile(const char* filepath, const char* destFilepath, int wordLength);
 int replaceTextToFileExceptSpecialWords(const char* filepath, const char* destFilepath, const char* specialWordsFilePath); // here is some bag here. Rewrite it later
 
-void copyWordsFromFileToArr(const char* specialWordsFilePath, char**& destArr, int& length);
+void readWordsFromFileToArr(const char* specialWordsFilePath, char**& destArr, int& length);
+void readStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& rows);
+void readStringsFromFileToArr(const char* sourceFilepath, char*& destArr, int& length, bool copyWithLineBreakCharacters = true);
+
 void copyStringsFromFileToFile(const char* sourceFilepath, const char* destFilepath);
 void copyStringsFromFileToFileReverse(const char* sourceFilepath, const char* destFilepath);
-void copyStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& rows);
-void copyStringsFromFileToArr(const char* sourceFilepath, char*& destArr, int& length, bool copyWithLineBreakCharacters = true);
 
 void showMismatchedStringsFromFile(const char* filepath1, const char* filepath2);
+
+void encryptTextFromFileAnd_WriteToNewFile(const char* sourceFilepath, const char* destFilepath, int encryptionKey);
+
+void removeLastStrInFile(const char* filepath);
 
 #endif //funcs// !funcs

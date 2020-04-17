@@ -1611,6 +1611,35 @@ void concatinateStrInArr(char** source, int rows, char** source2, int rows2, cha
 	concatinateStrInArr(source2, rows2, destArr, rowsDestArr);
 }
 
+void encryptLettersInString(char* str, int encryptionKey)
+{
+	const char ALPHABET_LENGTH = 26;
+	const char INDEX_OF_FIRST_UPPERCASE_LETTER = 65;
+	const char INDEX_OF_LAST_UPPERCASE_LETTER = 90;
+	const char INDEX_OF_FIRST_LOWERCASE_LETTER = 97;
+	const char INDEX_OF_LAST_LOWERCASE_LETTER = 122;
+	if (encryptionKey < 0) {
+		encryptionKey = ALPHABET_LENGTH + encryptionKey % ALPHABET_LENGTH;
+	}
+	int i = 0;
+	while (str[i] != '\0') {
+		if (str[i] >= INDEX_OF_FIRST_UPPERCASE_LETTER && str[i] <= INDEX_OF_LAST_UPPERCASE_LETTER) {
+			str[i] = (str[i] - INDEX_OF_FIRST_UPPERCASE_LETTER + encryptionKey) % ALPHABET_LENGTH + INDEX_OF_FIRST_UPPERCASE_LETTER;
+		}
+		else if (str[i] >= INDEX_OF_FIRST_LOWERCASE_LETTER && str[i] <= INDEX_OF_LAST_LOWERCASE_LETTER) {
+			str[i] = (str[i] - INDEX_OF_FIRST_LOWERCASE_LETTER + encryptionKey) % ALPHABET_LENGTH + INDEX_OF_FIRST_LOWERCASE_LETTER;
+		}
+		i++;
+	}
+}
+
+void encryptText(char** arr, int rows, int encryptionKey)
+{
+	for (int i = 0; i < rows; ++i) {
+		encryptLettersInString(arr[i], encryptionKey);
+	}
+}
+
 
 void game_BullsAndCows()
 {
@@ -1985,7 +2014,7 @@ void copyStringsFromFileToFileReverse(const char* sourceFilepath, const char* de
 	}
 }
 
-void copyStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& rows)
+void readStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& rows)
 {
 	rows = countStringsInFile((char*)sourceFilepath);
 	FILE* sourceFile;
@@ -2004,7 +2033,7 @@ void copyStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& 
 	}
 }
 
-void copyStringsFromFileToArr(const char* sourceFilepath, char*& destArr, int& length, bool copyWithLineBreakCharacters)
+void readStringsFromFileToArr(const char* sourceFilepath, char*& destArr, int& length, bool copyWithLineBreakCharacters)
 {
 	length = countCharsInFile((char*)sourceFilepath) + 1;
 	reserveArr(length, destArr);
@@ -2136,7 +2165,7 @@ bool isWordInArr(char** arr, int rows, char* word)
 	return false;
 }
 
-void copyWordsFromFileToArr(const char* specialWordsFilePath, char**& destArr, int& length)
+void readWordsFromFileToArr(const char* specialWordsFilePath, char**& destArr, int& length)
 {
 	length = countWordsInFile(specialWordsFilePath);
 	FILE* sWFile;
@@ -2184,7 +2213,7 @@ int replaceTextToFileExceptSpecialWords(const char* filepath, const char* destFi
 	char str[maxStringSize];
 	char** arrBadWords;
 	int length;
-	copyWordsFromFileToArr(specialWordsFilePath, arrBadWords, length);
+	readWordsFromFileToArr(specialWordsFilePath, arrBadWords, length);
 	while (fgets(str, maxStringSize, file)) {
 		char* context;
 		char* word = strtok_s(str, " ", &context);
@@ -2217,8 +2246,8 @@ void showMismatchedStringsFromFile(const char* filepath1, const char* filepath2)
 {
 	char** arr1, ** arr2;
 	int rows1, rows2;
-	copyStringsFromFileToArr(filepath1, arr1, rows1);
-	copyStringsFromFileToArr(filepath2, arr2, rows2);
+	readStringsFromFileToArr(filepath1, arr1, rows1);
+	readStringsFromFileToArr(filepath2, arr2, rows2);
 	cout << "________different lines:\n";
 	for (int i = 0; i < rows1 && rows2; ++i) {
 		if (strcmp(arr1[i], arr2[i])) {
@@ -2227,4 +2256,22 @@ void showMismatchedStringsFromFile(const char* filepath1, const char* filepath2)
 	}
 	removeArr(arr1, rows1);
 	removeArr(arr2, rows2);
+}
+
+void encryptTextFromFileAnd_WriteToNewFile(const char* sourceFilepath, const char* destFilepath, int encryptionKey)
+{
+	char** str;
+	int rows;
+	readStringsFromFileToArr(sourceFilepath, str, rows);
+	encryptText(str, rows, encryptionKey);
+	writeStringsToFile(destFilepath, str, rows, false);
+	removeArr(str, rows);
+}
+
+void removeLastStrInFile(const char* filepath)
+{
+	char** text;
+	int rows;
+	readStringsFromFileToArr(filepath, text, rows);
+	writeStringsToFile(filepath, text, rows - 1, false);
 }
