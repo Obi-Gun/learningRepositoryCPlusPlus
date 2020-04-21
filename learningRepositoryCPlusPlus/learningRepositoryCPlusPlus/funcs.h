@@ -62,7 +62,7 @@ template <typename T> void printArr(T arr[], int LEN)
 void printArr(int** arr, int rows, int columns, int setMinimumWidth = 0, bool showIndexes = false);
 void printArr(double** arr, int rows, int columns, int setMinimumWidth = 0, bool showIndexes = false);
 void printArr(char** arr, int rows, int columns, int setMinimumWidth = 0, bool showIndexes = false);
-void printArr(char** arr, int rows);
+void printArr(char** arr, int rows, bool showOnNewLine = true);
 void printArr(char*** arr, int rows, int columns, int strLength, int setMinimumWidth = 2, bool showIndexes = false);
 
 void reserveArr(int length, int*& arr);
@@ -101,8 +101,8 @@ void shiftArrValues(int**& arr, int rows, int columns, bool shiftHigher, int ver
 
 void copyArray(int* arr, int lengthOfShortestArray, int* arrCopy);
 void copyArray(int** arr, int lengthOfShortestArray, int** arrCopy);
-void copyArray(char* arrSource, int length, char* arrDest);
-void copyArray2(char* arrSource, int length, char*& arrDest); //
+void copyArray(char* arrSource, int length, char* arrDest); // add arrLen parameter + check isOutOfArray
+//void copyArray2(char* arrSource, int length, char*& arrDest); //
 void copyArray(char** arrSource, int rows, char** arrDest);
 void copyArray(int* arrSource, int length, char* arrDest);
 
@@ -422,7 +422,7 @@ int replaceWordsToFile(const char* filepath, const char* destFilepath, int wordL
 int replaceTextToFileExceptSpecialWords(const char* filepath, const char* destFilepath, const char* specialWordsFilePath); // here is some bag here. Rewrite it later
 
 void readWordsFromFileToArr(const char* specialWordsFilePath, char**& destArr, int& length);
-void readStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& rows);
+void readStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& rows, bool makeAllLowerCase = false);
 void readStringsFromFileToArr(const char* sourceFilepath, char*& destArr, int& length, bool copyWithLineBreakCharacters = true);
 
 void copyStringsFromFileToFile(const char* sourceFilepath, const char* destFilepath);

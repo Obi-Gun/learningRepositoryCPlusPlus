@@ -207,10 +207,13 @@ void printArr(char** arr, int rows, int columns, int setMinimumWidth, bool showI
 	}
 }
 
-void printArr(char** arr, int rows)
+void printArr(char** arr, int rows, bool showOnNewLine)
 {
 	for (int i = 0; i < rows; ++i) {
-		cout << arr[i] << endl;
+		cout << arr[i];
+		if (showOnNewLine) {
+			cout << endl;
+		}
 	}
 }
 
@@ -840,12 +843,12 @@ void copyArray(char* arrSource, int length, char* arrDest)
 	}
 }
 
-void copyArray2(char* arrSource, int length, char*& arrDest)
+/*void copyArray2(char* arrSource, int length, char*& arrDest)
 {
 	for (int i = 0; i < length; ++i) {
 		*(arrDest + i) = *(arrSource + i);
 	}
-}
+}*/
 
 void copyArray(char** arrSource, int rows, char** arrDest)
 {
@@ -2014,7 +2017,7 @@ void copyStringsFromFileToFileReverse(const char* sourceFilepath, const char* de
 	}
 }
 
-void readStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& rows)
+void readStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& rows, bool makeAllCharsLowerCase)
 {
 	rows = countStringsInFile((char*)sourceFilepath);
 	FILE* sourceFile;
@@ -2025,7 +2028,12 @@ void readStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& 
 	const int maxStringSize = 1024;
 	reserveArr(rows, maxStringSize, destArr);
 	int i = 0;
-	while (fgets(destArr[i++], maxStringSize, sourceFile)) {
+	char tmp[maxStringSize];
+	while (fgets(destArr[i], maxStringSize, sourceFile)) {
+		if (makeAllCharsLowerCase) {
+			_strlwr_s(destArr[i], strlen(destArr[i]) + 1);
+		}
+		i++;
 	}
 	if (fclose(sourceFile)) {
 		cout << "Unable to close file";
