@@ -2,7 +2,7 @@
 #include "funcs.h"
 using namespace std;
 
-int maxStringLength(const char* filepath)
+int maxStringLengthInFile(const char* filepath)
 {
 	char** text;
 	int rows = 0;
@@ -39,6 +39,44 @@ int countSpecialWordInFile(const char* filepath, const char* word) // add ignore
 void changeSpecialWordsInArr(char* wordToBeRemoved, char* wordNew, char*& str, int lengthOfNewString = 1024)
 {
 	char* descriptorStr = str;
+	char* trash;
+	reserveArr(strlen(str) + 1, trash);
+	copyArray(str, strlen(str) + 1, trash);
+	char* context;
+	char* bufferLexemme = strtok_s(trash, " ", &context);
+	char* tmpStr;
+	reserveArr(lengthOfNewString, tmpStr);
+	char* descriptorTmp = tmpStr;
+	while (bufferLexemme) {
+		int counterCharsBeforeBuffer = (strstr(descriptorStr, bufferLexemme) - descriptorStr);
+		copyArray(descriptorStr, counterCharsBeforeBuffer, descriptorTmp);
+		descriptorTmp += counterCharsBeforeBuffer;
+		descriptorStr += counterCharsBeforeBuffer;
+		if (!strcmp(bufferLexemme, wordToBeRemoved)) {
+			copyArray(wordNew, strlen(wordNew), descriptorTmp);
+			descriptorTmp += strlen(wordNew);
+		}
+		else {
+			copyArray(bufferLexemme, strlen(bufferLexemme), descriptorTmp);
+			descriptorTmp += strlen(bufferLexemme);
+		}
+		descriptorStr += strlen(bufferLexemme);
+		bufferLexemme = strtok_s(NULL, " ", &context);
+	}
+	// end of the line
+	int counterlastSymbolsFromStr = strlen(str) - (descriptorStr - str);
+	copyArray(descriptorStr, counterlastSymbolsFromStr, descriptorTmp);
+	descriptorTmp += counterlastSymbolsFromStr;
+	descriptorStr += counterlastSymbolsFromStr;
+	*descriptorTmp = '\0';
+	removeArr(str);
+	removeArr(trash);
+	str = tmpStr;
+}
+
+void changeSpecialWordsInArr2(char* wordToBeRemoved, char* wordNew, char*& str, int lengthOfNewString = 1024)
+{
+	char* descriptorStr = str;
 	char* pFrst = strstr(descriptorStr, wordToBeRemoved);
 	if (pFrst) {
 		int lengthWordNew = strlen(wordNew);
@@ -52,6 +90,7 @@ void changeSpecialWordsInArr(char* wordToBeRemoved, char* wordNew, char*& str, i
 			if (charCounter > symbolsLeft) {
 				charCounter = symbolsLeft;
 			}
+			//charCounter = minValue(&charCounter, &symbolsLeft);
 			symbolsLeft -= charCounter;
 			copyArray(descriptorStr, charCounter, descriptorTmp);
 			descriptorTmp += charCounter;
@@ -64,6 +103,8 @@ void changeSpecialWordsInArr(char* wordToBeRemoved, char* wordNew, char*& str, i
 			descriptorStr = pFrst + lengthwordToBeRemoved;
 			pFrst = strstr(descriptorStr, wordToBeRemoved);
 		} while (pFrst && symbolsLeft > 0);
+
+		// add end of the string
 		int counterlastSymbolsFromStr = strlen(str) - (descriptorStr - str);
 		if (counterlastSymbolsFromStr > symbolsLeft) {
 			counterlastSymbolsFromStr = symbolsLeft;
@@ -83,9 +124,14 @@ void changeSpecialWordsInArr(char* wordToBeRemoved, char* wordNew, char** text, 
 	}
 }
 
-void changeSpecialWordsInFile()
+void changeSpecialWordsInFile(const char* filepath, char* wordToBeRemoved, char* wordNew)
 {
-
+	char** text;
+	int rows = 0;
+	readStringsFromFileToArr(filepath, text, rows);
+	changeSpecialWordsInArr(wordToBeRemoved, wordNew, text, rows);
+	writeStringsToFile(filepath, text, rows, false);
+	removeArr(text, rows);
 }
 
 int main() {
@@ -112,11 +158,6 @@ int main() {
 	//cout << countSpecialWordInFile("C:\\Users\\Alexandr\\Desktop\\test.txt", "test");
 
 // Homework 21.2.4 Course: "Basics of programming in C++".
-	char** text;
-	int rows = 0;
-	readStringsFromFileToArr("C:\\Users\\Alexandr\\Desktop\\test.txt", text, rows);
-	printArr(text, rows);
-	changeSpecialWordsInArr((char*)"_", (char*)"go", text, rows, 50);
-	printArr(text, rows);
-	
+	//changeSpecialWordsInFile("C:\\Users\\Alexandr\\Desktop\\test.txt", (char*)"_", (char*)"go");
+	changeSpecialWordsInFile("C:\\Users\\Alexandr\\Desktop\\test.txt", (char*)"go", (char*)"_");
 }
