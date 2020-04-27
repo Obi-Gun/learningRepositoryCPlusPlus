@@ -1643,6 +1643,84 @@ void encryptText(char** arr, int rows, int encryptionKey)
 	}
 }
 
+void changeSpecialWordsInArr(char* wordToBeRemoved, char* wordNew, char*& str, int lengthOfNewString)
+{
+	char* trash;
+	reserveArr(strlen(str) + 1, trash);
+	copyArray(str, strlen(str) + 1, trash);
+	char* context;
+	char* bufferLexemme = strtok_s(trash, " ", &context);
+
+	char* descriptorStr = str;
+	char* tmpStr;
+	reserveArr(lengthOfNewString, tmpStr);
+	char* descriptorTmp = tmpStr;
+	int symbolsLeft = lengthOfNewString - 1;
+	while (bufferLexemme && symbolsLeft > 0) {
+
+		int counterCharsBeforeBuffer = (strstr(descriptorStr, bufferLexemme) - descriptorStr);
+		if (counterCharsBeforeBuffer > symbolsLeft) {
+			counterCharsBeforeBuffer = symbolsLeft;
+		}
+
+		copyArray(descriptorStr, counterCharsBeforeBuffer, descriptorTmp);
+		descriptorTmp += counterCharsBeforeBuffer;
+		descriptorStr += counterCharsBeforeBuffer;
+		symbolsLeft -= counterCharsBeforeBuffer;
+
+		int lengthStrWordNew = strlen(wordNew);
+		if (lengthStrWordNew > symbolsLeft) {
+			lengthStrWordNew = symbolsLeft;
+		}
+		int lengthStrBufferLexemme = strlen(bufferLexemme);
+		if (lengthStrBufferLexemme > symbolsLeft) {
+			lengthStrBufferLexemme = symbolsLeft;
+		}
+
+		if (!strcmp(bufferLexemme, wordToBeRemoved)) {
+			copyArray(wordNew, lengthStrWordNew, descriptorTmp);
+			descriptorTmp += lengthStrWordNew;
+			symbolsLeft -= lengthStrWordNew;
+		}
+		else {
+			copyArray(bufferLexemme, lengthStrBufferLexemme, descriptorTmp);
+			descriptorTmp += lengthStrBufferLexemme;
+			symbolsLeft -= lengthStrBufferLexemme;
+		}
+		descriptorStr += lengthStrBufferLexemme;
+		bufferLexemme = strtok_s(NULL, " /?.,;:'\"\\|=+-_)(&^%$#@!~`{}[]", &context);
+	}
+
+	// end of the line
+	int counterlastSymbolsFromStr = strlen(str) - (descriptorStr - str);
+	if (counterlastSymbolsFromStr > symbolsLeft) {
+		counterlastSymbolsFromStr = symbolsLeft;
+	}
+	copyArray(descriptorStr, counterlastSymbolsFromStr, descriptorTmp);
+	descriptorTmp += counterlastSymbolsFromStr;
+	descriptorStr += counterlastSymbolsFromStr;
+	*descriptorTmp = '\0';
+	removeArr(str);
+	removeArr(trash);
+	str = tmpStr;
+}
+
+void changeSpecialWordsInArr(char* wordToBeRemoved, char* wordNew, char** text, int rows, int lengthOfNewString)
+{
+	for (int i = 0; i < rows; ++i) {
+		changeSpecialWordsInArr(wordToBeRemoved, wordNew, text[i], lengthOfNewString);
+	}
+}
+
+void changeSpecialWordsInFile(const char* filepath, char* wordToBeRemoved, char* wordNew)
+{
+	char** text;
+	int rows = 0;
+	readStringsFromFileToArr(filepath, text, rows);
+	changeSpecialWordsInArr(wordToBeRemoved, wordNew, text, rows);
+	writeStringsToFile(filepath, text, rows, false);
+	removeArr(text, rows);
+}
 
 void game_BullsAndCows()
 {
@@ -1771,6 +1849,40 @@ int countDigitsInFile(const char* filepth)
 		return -2;
 	}
 	return counter;
+}
+
+int maxStringLengthInFile(const char* filepath)
+{
+	char** text;
+	int rows = 0;
+	readStringsFromFileToArr(filepath, text, rows);
+	int maxLen = strlen(text[0]);
+	for (int i = 1; i < rows; ++i) {
+		if (strlen(text[i]) > maxLen) {
+			maxLen = strlen(text[i]);
+		}
+	}
+	removeArr(text, rows);
+	return maxLen;
+}
+
+int countSpecialWordInFile(const char* filepath, const char* word) // add ignore upper/lowercase
+{
+	char** text;
+	int rows = 0;
+	readStringsFromFileToArr(filepath, text, rows, true);
+	int wordCounter = 0;
+	for (int i = 0; i < rows; ++i) {
+		char* p = strstr(text[i], word);
+		if (p) {
+			do {
+				++wordCounter;
+				p += strlen(word);
+			} while (p = strstr(p, word));
+		}
+	}
+	removeArr(text, rows);
+	return wordCounter;
 }
 
 int countCharsInFile(char* filepth) {
@@ -2028,8 +2140,9 @@ void readStringsFromFileToArr(const char* sourceFilepath, char**& destArr, int& 
 	const int maxStringSize = 1024;
 	reserveArr(rows, maxStringSize, destArr);
 	int i = 0;
-	char tmp[maxStringSize];
-	while (fgets(destArr[i], maxStringSize, sourceFile)) {
+	
+	while (i < rows && fgets(destArr[i], maxStringSize - 1, sourceFile)) {
+		destArr[i][maxStringSize - 1] = '/0';
 		if (makeAllCharsLowerCase) {
 			_strlwr_s(destArr[i], strlen(destArr[i]) + 1);
 		}

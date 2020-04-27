@@ -301,6 +301,10 @@ void concatinateStrInArr(char** source, int rows, char** source2, int rows2, cha
 
 void encryptLettersInString(char* str, int encryptionKey);
 void encryptText(char** arr, int rows, int encryptionKey);
+
+void changeSpecialWordsInArr(char* wordToBeRemoved, char* wordNew, char*& str, int lengthOfNewString = 1024);
+void changeSpecialWordsInArr(char* wordToBeRemoved, char* wordNew, char** text, int rows, int lengthOfNewString = 1024);
+void changeSpecialWordsInFile(const char* filepath, char* wordToBeRemoved, char* wordNew);
 //
 //
 //
@@ -409,6 +413,9 @@ int countStringsInFile(char* filepth);
 int countVowelLettersInFile(const char* filepth);
 int countConsonantLettersInFile(const char* filepth);
 int countDigitsInFile(const char* filepth);
+int countSpecialWordInFile(const char* filepath, const char* word); // add ignore upper/lowercase
+
+int maxStringLengthInFile(const char* filepath);
 
 bool isWordInArr(char** arr, int rows, char* word);
 
