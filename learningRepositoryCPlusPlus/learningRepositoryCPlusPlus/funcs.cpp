@@ -361,6 +361,11 @@ int minValue(int* pa, int* pd)
 	return *pa > * pd ? *pd : *pa;
 }
 
+int minValue(int a, int b)
+{
+	return a >  b ? b : a;
+}
+
 int maxValueDiagonal(int** squareMatrix, int length)
 {
 	int tmp = squareMatrix[0][0];

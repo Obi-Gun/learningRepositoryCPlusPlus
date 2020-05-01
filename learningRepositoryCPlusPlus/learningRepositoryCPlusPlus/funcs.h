@@ -10,10 +10,14 @@
 #include <io.h>
 #include <direct.h>
 
+#include "Fraction.h"
+
 //   |            My own small libraries               |
 //   |    I`ve tryed to follow this codeStyle          |
 //   |      https://habr.com/ru/post/172091/           |
 
+	//srand(time(NULL));
+	//setlocale(LC_ALL, "Russian");
 using namespace std; //bad practice to use it out of funcs
 enum carColor { red, blue };
 enum carTransmissionType { mechanic, automatic };
@@ -203,6 +207,7 @@ void sortStr(char** arr, int rows, int iSL);
 //   ===================================================
 int maxValue(int* pa, int* pd);
 int minValue(int* pa, int* pd);
+int minValue(int a, int b);
 int maxCommonDivisor(int A, int B);
 int mathSumValFromRange(int a, int b);
 int* deletePrimeNumbers(int* arr, int length, int& lengthNewArr);
@@ -440,5 +445,168 @@ void showMismatchedStringsFromFile(const char* filepath1, const char* filepath2)
 void encryptTextFromFileAnd_WriteToNewFile(const char* sourceFilepath, const char* destFilepath, int encryptionKey);
 
 void removeLastStrInFile(const char* filepath);
+//
+//
+//
+//
+//
+//   ===================================================
+//   |            library "obi.classes.h"                |
+//   ===================================================
+class Counter {
+	int min;
+	int max;
+	int currentValue;
+
+public:
+	Counter() {
+		min = 0;
+		max = 100;
+		currentValue = min;
+	}
+	Counter(int minValue, int maxValue) {
+		min = minValue;
+		max = maxValue;
+		currentValue = min;
+	}
+	Counter(int minValue, int maxValue, int currentValue) {
+		min = minValue;
+		max = maxValue;
+		currentValue = currentValue;
+	}
+
+	void increment() {
+		if (currentValue < max) {
+			currentValue++;
+		}
+		else {
+			currentValue = min;
+		}
+	}
+
+	int getCurrentValue() {
+		return currentValue;
+	}
+
+	void setCurrentValue(int value) {
+		if (value < min) {
+			currentValue = min;
+		}
+		else if (value > max) {
+			currentValue = max;
+		}
+		else {
+			currentValue = value;
+		}
+	}
+
+	void print() {
+		cout << currentValue << endl;
+	}
+
+	~Counter() {
+		cout << "conter has been destructed\n";
+	}
+};
+
+class Student {
+	int height;
+	char name[16];
+
+public:
+	Student() {
+	}
+	Student(const char* name) {
+		name = name;
+	}
+
+	~Student() {
+		cout << "Student has been destructed\n";
+	}
+};
+
+class Group {
+	Student* group;
+
+public:
+	Group() {
+		group = new Student[0];
+	}
+	Group(int studentsInGroup) {
+		group = new Student[studentsInGroup];
+	}
+
+	~Group() {
+		cout << "Group has been destructed\n";
+		delete[] group;
+	}
+};
+
+enum gender { male, female };
+
+class Person {
+	char* _name;
+	int _age;
+	gender _gender;
+	char* _phoneNumber;
+
+public:
+	Person(char* name, int age, gender _gender, char* phoneNumber) {
+		reserveArr(strlen(name) + 1, this->_name);
+		copyArray(name, strlen(name) + 1, this->_name);
+		this->_age = age;
+		this->_gender = _gender;
+		reserveArr(strlen(phoneNumber) + 1, this->_phoneNumber);
+		copyArray(phoneNumber, strlen(phoneNumber) + 1, this->_phoneNumber);
+	}
+
+	Person(Person& person) {
+		reserveArr(strlen(person._name) + 1, this->_name);
+		copyArray(person._name, strlen(person._name) + 1, this->_name);
+		this->_age = person._age;
+		this->_gender = person._gender;
+		reserveArr(strlen(person._phoneNumber) + 1, this->_phoneNumber);
+		copyArray(person._phoneNumber, strlen(person._phoneNumber) + 1, this->_phoneNumber);
+	}
+
+	~Person() {
+		delete[] this->_name;
+		delete[] this->_phoneNumber;
+		cout << " <> Person has been distructed <>\n";
+	}
+
+	void print() {
+		cout << "\nInfo about person:\n";
+		cout << "name of person: " << this->_name << endl;
+		cout << "age of person: " << this->_age << endl;
+		if (this->_gender) {
+			cout << "gender of person: female" << endl;
+		}
+		else {
+			cout << "gender of person: male" << endl;
+		}
+		cout << "phoneNumber of person: " << this->_phoneNumber << endl;
+	}
+
+	void setName(char* newName) {
+		delete[] this->_name;
+		reserveArr(strlen(newName) + 1, this->_name);
+		copyArray(newName, strlen(newName) + 1, this->_name);
+	}
+
+	void setAge(int newAge) {
+		this->_age = newAge;
+	}
+
+	void setGender(gender newGender) {
+		this->_gender = newGender;
+	}
+
+	void setPhoneNumber(char* newPhoneNumber) {
+		delete[] this->_phoneNumber;
+		reserveArr(strlen(newPhoneNumber) + 1, this->_phoneNumber);
+		copyArray(newPhoneNumber, strlen(newPhoneNumber) + 1, this->_phoneNumber);
+	}
+};
 
 #endif //funcs// !funcs
