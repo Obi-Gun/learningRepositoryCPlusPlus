@@ -1,5 +1,5 @@
-#ifndef funcs
-#define funcs
+#ifndef funcsClass
+#define funcsClass
 
 #include <iostream>
 #include <cmath>
@@ -11,6 +11,8 @@
 #include <direct.h>
 
 #include "Fraction.h"
+#include "Contact.h"
+#include "PhoneBook.h"
 
 //   |            My own small libraries               |
 //   |    I`ve tryed to follow this codeStyle          |
