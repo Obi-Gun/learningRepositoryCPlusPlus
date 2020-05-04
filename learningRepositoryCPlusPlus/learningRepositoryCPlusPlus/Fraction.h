@@ -1,8 +1,6 @@
 #ifndef FractionClass
 #define FractionClass
 
-#include "funcs.h"
-
 class Fraction {
 	int numerator_;
 	int denominator_;

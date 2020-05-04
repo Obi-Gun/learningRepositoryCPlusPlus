@@ -1,4 +1,5 @@
 #include "Fraction.h"
+#include "funcs.h"
 
 void Fraction::print() {
 	cout << this->numerator_;

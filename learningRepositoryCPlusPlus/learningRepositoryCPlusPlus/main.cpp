@@ -3,6 +3,8 @@
 
 using namespace std;
 
+
+
 int main() {
 // Homework 1.1. Course: "OOP in C++".
 	/*Fraction A(1, 2);
@@ -56,7 +58,7 @@ int main() {
 	Contact* i8 = new Contact("Lili");
 	Contact* i9 = new Contact("Vova");
 	Contact* i10 = new Contact("Revu");
-	Contact* i11 = new Contact("Opel");
+	Contact* i11 = new Contact("Pepe");
 
 	phonebook.addContact(i0);
 	phonebook.addContact(i1);
@@ -73,5 +75,13 @@ int main() {
 
 	phonebook.menu();
 
+// Classwork 1.2. Course: "OOP in C++".
+	/*Date_obi date1(01, 01, 1910);
+	Date_obi date2(01, 03, 2005);
+	cout << date2 - date1;*/
+
+	/*String_obi string1("hello");
+	String_obi string2("hellga");
+	String_obi str = (string1 * string2);*/
 
 }

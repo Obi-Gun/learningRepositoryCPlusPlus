@@ -1,8 +1,6 @@
 #ifndef PhoneBookClass
 #define PhoneBookClass
 
-#include "funcs.h"
-
 class PhoneBook
 {
 private:
@@ -18,6 +16,8 @@ private:
 	void print();
 	void removeContact();
 	void removeContact(int indexOfContactToBeRemoved);
+	void searchByName();                                       // FIXME later (fix crutch)
+	void searchByName(const char* str);
 
 public:
 	PhoneBook();

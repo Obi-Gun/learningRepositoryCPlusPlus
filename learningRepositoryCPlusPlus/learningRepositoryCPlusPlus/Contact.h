@@ -1,7 +1,7 @@
 #ifndef ContactClass
 #define ContactClass
 
-#include "funcs.h"
+#include <iostream>
 
 class Contact
 {
@@ -29,6 +29,10 @@ public:
 	void setPhoneNumber_work(const char* newPhoneNumber_work);
 	void setPhoneNumber_mobile(const char* newPhoneNumber_mobile);
 	void setOtherInfo(const char* newOtherInfo);
+
+	const char* getName();
+	const char* getSurname();
+	const char* getMiddleName();
 
 	void cinAllFields(); // FIXME later (fix crutch)
 

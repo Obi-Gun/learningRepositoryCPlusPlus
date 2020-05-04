@@ -1,4 +1,5 @@
 #include "Contact.h"
+#include "funcs.h"
 
 Contact::Contact() {
 	this->makeDefaultString(this->name_);
@@ -66,6 +67,16 @@ void Contact::setPhoneNumber_mobile(const char* newPhoneNumber_mobile) {
 }
 void Contact::setOtherInfo(const char* newOtherInfo) {
 	this->setStringField(this->otherInfo_, newOtherInfo);
+}
+
+const char* Contact::getName() {
+	return this->name_;
+}
+const char* Contact::getSurname() {
+	return this->surname_;
+}
+const char* Contact::getMiddleName() {
+	return this->middleName_;
 }
 
 void Contact::cinAllFields() {

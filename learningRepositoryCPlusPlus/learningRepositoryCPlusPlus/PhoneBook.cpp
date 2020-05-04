@@ -1,4 +1,5 @@
 #include "PhoneBook.h"
+#include "funcs.h"
 
 PhoneBook::PhoneBook() {
 	this->addSlots();
@@ -45,7 +46,7 @@ void PhoneBook::menu() {
 			this->print();
 			break;
 		case '3': // for search contact
-
+			this->searchByName();
 			break;
 		case '4': // for remove contact
 			this->removeContact();
@@ -68,14 +69,16 @@ void PhoneBook::printMenu() {
 }
 
 void PhoneBook::print() {
+	std::cout << "_____Contact____list_______\n";
 	for (int i = 0; i < this->currentPosition_; ++i) {
 		std::cout << "\nID #" << i;
 		this->phoneBook_[i]->printCompact();
+		std::cout << "\n______________________\n";
 	}
 }
 
 void PhoneBook::removeContact() {
-	std::cout << "Enter ID ---> ";
+	std::cout << "Enter ID of contact you want to remove ---> ";
 	int input2;
 	cin >> input2;
 	this->removeContact(input2);
@@ -86,6 +89,24 @@ void PhoneBook::removeContact(int index) {
 	delete this->phoneBook_[index];
 	this->copyContactPointers(this->phoneBook_ + index, this->currentPosition_ - index - 1, this->phoneBook_ + index + 1);
 	--this->currentPosition_;
+}
+
+void PhoneBook::searchByName() {
+	std::cout << "Enter the name you want to find ----> ";
+	char* tmp = new char[100];
+	cin.getline(tmp, 99);                                       // FIXME later (fix crutch)
+	cin.getline(tmp, 99);
+	this->searchByName(tmp);
+}
+
+void PhoneBook::searchByName(const char* str) {
+	std::cout << "_____Search____results_______\n";
+	for (int i = 0; i < this->currentPosition_; ++i) {
+		if (!strcmp(this->phoneBook_[i]->getName(), str) || !strcmp(this->phoneBook_[i]->getSurname(), str) || !strcmp(this->phoneBook_[i]->getMiddleName(), str)) {
+			this->phoneBook_[i]->printCompact();
+			std::cout << "\n______________________\n";
+		}
+	}
 }
 
 void PhoneBook::addContact() {

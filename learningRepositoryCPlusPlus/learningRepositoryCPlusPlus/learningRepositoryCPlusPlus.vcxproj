@@ -124,16 +124,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="Date_obi.cpp" />
     <ClCompile Include="Fraction.cpp" />
     <ClCompile Include="funcs.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PhoneBook.cpp" />
+    <ClCompile Include="String_obi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Contact.h" />
+    <ClInclude Include="Date_obi.h" />
     <ClInclude Include="Fraction.h" />
     <ClInclude Include="funcs.h" />
     <ClInclude Include="PhoneBook.h" />
+    <ClInclude Include="String_obi.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

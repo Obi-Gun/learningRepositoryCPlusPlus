@@ -30,6 +30,12 @@
     <ClCompile Include="PhoneBook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Date_obi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="String_obi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="funcs.h">
@@ -42,6 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PhoneBook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Date_obi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="String_obi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
