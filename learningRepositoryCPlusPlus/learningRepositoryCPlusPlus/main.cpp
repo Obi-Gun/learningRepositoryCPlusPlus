@@ -6,82 +6,22 @@ using namespace std;
 
 
 int main() {
-// Homework 1.1. Course: "OOP in C++".
-	/*Fraction A(1, 2);
-	Fraction B(2, 3);
+// Homework 2.1. Course: "OOP in C++".
+// Homework 2.2. Course: "OOP in C++".
+// Homework 2.3. Course: "OOP in C++".
 
-	cout << "Sum (";
-	A.print();
-	cout << ") + (";
-	B.print();
-	cout << ") = ";
-	A.sum(B).print();
+	String_obi string1("Hello");
 
-	cout << "\nSubstr (";
-	A.print();
-	cout << ") - (";
-	B.print();
-	cout << ") = ";
-	A.substr(B).print();
+	String_obi string2 = "Helga";
 
-	cout << "\nMultiply (";
-	A.print();
-	cout << ") * (";
-	B.print();
-	cout << ") = ";
-	A.multiply(B).print();
+	String_obi string3;
 
-	cout << "\nDivide (";
-	A.print();
-	cout << ") / (";
-	A.print();
-	cout << ") = ";
-	A = A.divide(A);
-	A.print();
+	string3 = string1 *string2;
+	//string3 = string1 + " " + string2 + " " + string1;
+	string3.print();
+	//cout << endl;
 
-	cout << "\nReduced fraction = ";
-	A.reduceFraction();
-	A.print();*/
 
-// Homework 1.2. Course: "OOP in C++".
-	PhoneBook phonebook;
 
-	Contact* i0 = new Contact("Ivan");
-	Contact* i1 = new Contact(*i0);
-	i1->setName("Igor");
-	Contact* i2 = new Contact("Ivar");
-	Contact* i3 = new Contact("Lola");
-	Contact* i4 = new Contact("Kola");
-	Contact* i5 = new Contact("Juju");
-	Contact* i6 = new Contact("Goga");
-	Contact* i7 = new Contact("Pepe");
-	Contact* i8 = new Contact("Lili");
-	Contact* i9 = new Contact("Vova");
-	Contact* i10 = new Contact("Revu");
-	Contact* i11 = new Contact("Pepe");
-
-	phonebook.addContact(i0);
-	phonebook.addContact(i1);
-	phonebook.addContact(i2);
-	phonebook.addContact(i3);
-	phonebook.addContact(i4);
-	phonebook.addContact(i5);
-	phonebook.addContact(i6);
-	phonebook.addContact(i7);
-	phonebook.addContact(i8);
-	phonebook.addContact(i9);
-	phonebook.addContact(i10);
-	phonebook.addContact(i11);
-
-	phonebook.menu();
-
-// Classwork 1.2. Course: "OOP in C++".
-	/*Date_obi date1(01, 01, 1910);
-	Date_obi date2(01, 03, 2005);
-	cout << date2 - date1;*/
-
-	/*String_obi string1("hello");
-	String_obi string2("hellga");
-	String_obi str = (string1 * string2);*/
 
 }
