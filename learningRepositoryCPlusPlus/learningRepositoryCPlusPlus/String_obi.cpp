@@ -26,6 +26,12 @@ String_obi::String_obi(String_obi& string_obi) {
 	strcpy_s(this->string_, this->getCurrentMaxStrLen() + 1, string_obi.string_);
 	recalcStrLen();
 }
+String_obi::String_obi(const String_obi& string_obi) {
+	this->setCurrentMaxStrLen(string_obi.getStrLen());
+	this->string_ = new char[this->getCurrentMaxStrLen() + 1];
+	strcpy_s(this->string_, this->getCurrentMaxStrLen() + 1, string_obi.string_);
+	recalcStrLen();
+}
 String_obi::~String_obi() {
 	delete[] this->string_;
 	//std::cout << "\n~String_obi()";

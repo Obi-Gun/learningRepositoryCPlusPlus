@@ -15,6 +15,9 @@
 #include "PhoneBook.h"
 #include "Date_obi.h"
 #include "String_obi.h"
+#include "Human.h"
+#include "Flat.h"
+#include "House.h"
 
 //   |            My own small libraries               |
 //   |    I`ve tryed to follow this codeStyle          |

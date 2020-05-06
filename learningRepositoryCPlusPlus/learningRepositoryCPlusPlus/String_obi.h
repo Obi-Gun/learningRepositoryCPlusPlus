@@ -4,7 +4,7 @@
 class String_obi
 {
 private:
-	char* string_ = NULL;
+	char* string_;
 	int currentMaxStrLen_;
 	int strlen_;
 	static const int MIN_ARR_LEN_ = 1;				// min arrLen in chars
@@ -19,6 +19,7 @@ public:
 	String_obi(int length);
 	String_obi(const char* string);
 	String_obi(String_obi& string_obi);
+	String_obi(const String_obi& string_obi);
 	~String_obi();
 
 	int getCurrentMaxStrLen() const;
