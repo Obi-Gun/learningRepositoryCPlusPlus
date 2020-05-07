@@ -45,6 +45,9 @@
     <ClCompile Include="House.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Reservoir.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="funcs.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="House.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Reservoir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

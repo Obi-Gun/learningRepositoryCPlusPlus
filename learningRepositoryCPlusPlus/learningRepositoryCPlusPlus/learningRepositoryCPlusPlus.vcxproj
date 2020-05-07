@@ -132,6 +132,7 @@
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PhoneBook.cpp" />
+    <ClCompile Include="Reservoir.cpp" />
     <ClCompile Include="String_obi.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +144,7 @@
     <ClInclude Include="House.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="PhoneBook.h" />
+    <ClInclude Include="Reservoir.h" />
     <ClInclude Include="String_obi.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
