@@ -3,6 +3,7 @@
 
 using namespace std;
 
+
 int main() {
 // Homework 2.1. Course: "OOP in C++".
 	/*// Create new flat;
@@ -58,7 +59,19 @@ int main() {
 	house2.print();*/
 	
 // Homework 2.2. Course: "OOP in C++".
+	String_obi str("Black");
+	Reservoir reservoir(str, 1, 2, 3, sea);
+	reservoir.print();
 
+	Reservoir test = reservoir;
+	test.setName("Pacific");
+	test.setLength(10);
+	test.setWidth(10);
+	test.setDepth(10);
+	test.setReservoirType(ocean);
+	test.print();
+
+	// to do class Arr_Reservoir
 
 // Homework 2.3. Course: "OOP in C++".
 	/*String_obi string1("Hello");

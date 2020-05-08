@@ -2,32 +2,33 @@
 #define ReservoirClass
 
 #include "String_obi.h";
+#include "funcs.h" // added for use enum reservoirType type_;
 
 class Reservoir
 {
 private:
-	static enum reservoirType { ocean, sea, swimmingPool, pond };
 	String_obi name_;
 	int length_;
 	int width_;
 	int depth_;
-	reservoirType type_;
+	enum reservoirType type_;
 	
 public:
 	Reservoir();
 	Reservoir(String_obi name);
 	Reservoir(const char* name);
 	Reservoir(int length, int width, int depth);
-	Reservoir(const char* name, int length, int width, int depth, reservoirType type);
 	Reservoir(String_obi name, int length, int width, int depth, reservoirType type);
+	Reservoir(const char* name, int length, int width, int depth, reservoirType type);
 	Reservoir(Reservoir& reservoir);
 	~Reservoir();
 
-	void setName();
-	void setLength();
-	void setWidth();
-	void setDepth();
-	void setReservoirType();
+	void setName(String_obi name);
+	void setName(const char* name);
+	void setLength(int length);
+	void setWidth(int width);
+	void setDepth(int depth);
+	void setReservoirType(reservoirType type);
 
 	String_obi getName() const;
 	int getLength() const;
@@ -35,6 +36,7 @@ public:
 	int getDepth() const;
 	String_obi getReservoirType() const;
 
+	void print() const;
 	int calcVolume() const;
 	int calcAreaOfWaterSurface() const;
 	bool isEqualsReservoirTypes(const Reservoir& reservoir) const;

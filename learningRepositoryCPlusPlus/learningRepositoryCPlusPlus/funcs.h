@@ -30,7 +30,7 @@ using namespace std; //bad practice to use it out of funcs
 enum carColor { red, blue };
 enum carTransmissionType { mechanic, automatic };
 enum carField { carLength = 1, clearance = 2, engineVolume = 3, enginePower = 4, wheelsDiameter = 5, color = 6, transmissionType = 7 };
-
+enum reservoirType { nonselected = 0, ocean, sea, swimmingPool, pond };
 //
 //
 //
