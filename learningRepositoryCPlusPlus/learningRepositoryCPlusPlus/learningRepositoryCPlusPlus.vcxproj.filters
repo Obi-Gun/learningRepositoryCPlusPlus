@@ -48,6 +48,12 @@
     <ClCompile Include="Reservoir.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Arr_Reservoir.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Arr_int.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="funcs.h">
@@ -78,6 +84,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Reservoir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Arr_Reservoir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Arr_int.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

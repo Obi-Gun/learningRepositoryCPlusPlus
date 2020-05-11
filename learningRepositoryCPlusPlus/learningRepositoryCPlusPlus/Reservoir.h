@@ -41,5 +41,6 @@ public:
 	int calcAreaOfWaterSurface() const;
 	bool isEqualsReservoirTypes(const Reservoir& reservoir) const;
 	int compareReservoirAreaOfWaterSurface(const Reservoir& reservoir) const;
+	Reservoir operator= (const Reservoir& input);
 };
 #endif // !ReservoirClass

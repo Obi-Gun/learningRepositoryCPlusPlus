@@ -124,8 +124,25 @@ int Reservoir::calcAreaOfWaterSurface() const {
 	return length_ * width_;
 }
 bool Reservoir::isEqualsReservoirTypes(const Reservoir& reservoir) const {
+	if (this->type_ == reservoir.type_) {
+		return true;
+	}
+	return false;
+}
+int Reservoir::compareReservoirAreaOfWaterSurface(const Reservoir& input) const {
+	if (this->calcAreaOfWaterSurface() > input.calcAreaOfWaterSurface()) {
+		return 1;
+	}
+	if (this->calcAreaOfWaterSurface() < input.calcAreaOfWaterSurface()) {
+		return -1;
+	}
 	return 0;
 }
-int Reservoir::compareReservoirAreaOfWaterSurface(const Reservoir& reservoir) const {
-	return 0;
+Reservoir Reservoir::operator= (const Reservoir& input) {
+	this->name_ = input.name_;
+	this->setLength(input.getLength());
+	this->width_ = input.width_;
+	this->depth_ = input.depth_;
+	this->type_ = input.type_;
+	return *this;
 }

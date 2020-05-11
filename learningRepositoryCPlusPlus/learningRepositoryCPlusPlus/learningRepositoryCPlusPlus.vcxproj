@@ -123,6 +123,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Arr_int.cpp" />
+    <ClCompile Include="Arr_Reservoir.cpp" />
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="Date_obi.cpp" />
     <ClCompile Include="Flat.cpp" />
@@ -136,6 +138,8 @@
     <ClCompile Include="String_obi.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arr_int.h" />
+    <ClInclude Include="Arr_Reservoir.h" />
     <ClInclude Include="Contact.h" />
     <ClInclude Include="Date_obi.h" />
     <ClInclude Include="Flat.h" />

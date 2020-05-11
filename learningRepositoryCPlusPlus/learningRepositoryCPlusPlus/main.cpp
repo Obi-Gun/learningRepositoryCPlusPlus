@@ -1,5 +1,11 @@
 #include <iostream>
-#include "funcs.h"
+#include "Human.h"
+#include "Flat.h"
+#include "House.h"
+#include "Reservoir.h"
+#include "Arr_Reservoir.h"
+#include "String_obi.h"
+#include "Arr_int.h"
 
 using namespace std;
 
@@ -60,18 +66,39 @@ int main() {
 	
 // Homework 2.2. Course: "OOP in C++".
 	String_obi str("Black");
-	Reservoir reservoir(str, 1, 2, 3, sea);
-	reservoir.print();
+	Reservoir reservoir1(str, 1, 2, 3, sea);
+	//reservoir1.print();
 
-	Reservoir test = reservoir;
-	test.setName("Pacific");
-	test.setLength(10);
-	test.setWidth(10);
-	test.setDepth(10);
-	test.setReservoirType(ocean);
-	test.print();
+	Reservoir reservoir2 = reservoir1;
+	//cout << "is equals reservoirs " << reservoir2.isEqualsReservoirTypes(reservoir1) << endl;
+	//cout << "compare reservoirs " << reservoir2.compareReservoirAreaOfWaterSurface(reservoir1) << endl;
+	reservoir2.setName("Pacific");
+	reservoir2.setLength(10);
+	reservoir2.setWidth(10);
+	reservoir2.setDepth(10);
+	reservoir2.setReservoirType(ocean);
+	//reservoir2.print();
+	//cout << "is equals " << reservoir2.isEqualsReservoirTypes(reservoir1) << endl;
+	//cout << "compare reservoirs " << reservoir2.compareReservoirAreaOfWaterSurface(reservoir1) << endl;
 
-	// to do class Arr_Reservoir
+	Reservoir reservoir3;
+	//reservoir3.print();
+	reservoir3 = reservoir1;
+	//reservoir3.print();
+
+	// class Arr_Reservoir
+	int length = 2;
+	Reservoir** arr = new Reservoir*[length];
+	arr[0] = &reservoir1;
+	arr[1] = &reservoir2;
+
+	Arr_Reservoir testArr1(arr, length);
+	//testArr1.print();
+
+	Arr_Reservoir testArr2 = testArr1;
+	testArr2.print();
+
+	testArr2.menu();
 
 // Homework 2.3. Course: "OOP in C++".
 	/*String_obi string1("Hello");
@@ -79,5 +106,19 @@ int main() {
 	String_obi string3;
 	string3 = string1 * string2;
 	string3 = string3 + " " + string2 + " " + string1;
+	string3 = string3 + string3;
 	string3.print();*/
+
+// Classwork overrife operator [] 1. Course: "OOP in C++".
+	/*Arr_int arr(5);
+	arr[0] = 88;
+	arr[1] = 77;
+	arr[2] = 66;
+	arr[3] = 55;
+	arr[4] = 44;
+
+	Arr_int arr2;
+	arr2 = arr;
+	++arr2;
+	cout << arr2;*/
 }
