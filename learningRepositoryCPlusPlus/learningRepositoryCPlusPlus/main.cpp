@@ -6,110 +6,26 @@
 #include "Arr_Reservoir.h"
 #include "String_obi.h"
 #include "Arr_int.h"
+#include "Time_obi.h"
+#include "String_SmartPointer.h"
+#include "QueuePriority.h"
+#include "List.h"
+#include "ListBiDirectional.h"
 
 using namespace std;
 
+Time_obi* Time_obi::pointer_ = new Time_obi(666, 666, 666);
+
+void str(int first, ...) {
+	int* p = &first;
+	for (int i = 0; i < 6; ++i) {
+		cout << (char)*p++;
+
+	}
+}
 
 int main() {
-// Homework 2.1. Course: "OOP in C++".
-	/*// Create new flat;
-	int len = 3;
-	Human** arr = new Human * [len];
-	arr[0] = new Human("Boris");
-	arr[1] = new Human("Lilith");
-	arr[2] = new Human("Oleg");
-	String_obi str("Gagarins");
-	Flat flat(str, 10, 40, arr, len);
-	flat.print();
-
-
-	// Change all fields
-	Flat flat2 = flat;
-	int len2 = 2;
-	Human** arr2 = new Human * [len];
-	arr2[0] = new Human("Goga");
-	arr2[1] = new Human("Ellen");
-	flat2.setTenants(arr2, len2);
-	flat2.setFamilySurname("Polimer");
-	flat2.setFlatNumber(25);
-	flat2.setFloorNumber(7);
-	flat2.print();
-
-
-	// Create new house
-	int arrLen = 10;
-	Flat** flats = new Flat*[arrLen];
-	for (int i = 0; i < arrLen; ++i) {
-		flats[i] = new Flat(i + 1);
-	}
-	int floorsInHouse = 1;
-	String_obi adress = "Rostov, Lenina 1";
-	House house(flats, arrLen, floorsInHouse, adress);
-	house.print();
-
-
-	// Change all fields
-	House house2 = house;
-	int arrLen2 = 5;
-	Flat** flats2 = new Flat * [arrLen2];
-	flats2[0] = &flat;
-	flats2[1] = &flat2;
-	for (int i = 2; i < arrLen2; ++i) {
-		flats2[i] = new Flat(i + 1);
-	}
-	int floorsInHouse2 = 10;
-	String_obi adress2 = "Rostov, Lenina 2";
-	house2.setAdress(adress2);
-	house2.setFloorsInHouse(floorsInHouse2);
-	house2.setFlats(flats2, arrLen2);
-	house2.print();*/
-	
-// Homework 2.2. Course: "OOP in C++".
-	String_obi str("Black");
-	Reservoir reservoir1(str, 1, 2, 3, sea);
-	//reservoir1.print();
-
-	Reservoir reservoir2 = reservoir1;
-	//cout << "is equals reservoirs " << reservoir2.isEqualsReservoirTypes(reservoir1) << endl;
-	//cout << "compare reservoirs " << reservoir2.compareReservoirAreaOfWaterSurface(reservoir1) << endl;
-	reservoir2.setName("Pacific");
-	reservoir2.setLength(10);
-	reservoir2.setWidth(10);
-	reservoir2.setDepth(10);
-	reservoir2.setReservoirType(ocean);
-	//reservoir2.print();
-	//cout << "is equals " << reservoir2.isEqualsReservoirTypes(reservoir1) << endl;
-	//cout << "compare reservoirs " << reservoir2.compareReservoirAreaOfWaterSurface(reservoir1) << endl;
-
-	Reservoir reservoir3;
-	//reservoir3.print();
-	reservoir3 = reservoir1;
-	//reservoir3.print();
-
-	// class Arr_Reservoir
-	int length = 2;
-	Reservoir** arr = new Reservoir*[length];
-	arr[0] = &reservoir1;
-	arr[1] = &reservoir2;
-
-	Arr_Reservoir testArr1(arr, length);
-	//testArr1.print();
-
-	Arr_Reservoir testArr2 = testArr1;
-	testArr2.print();
-
-	testArr2.menu();
-
-// Homework 2.3. Course: "OOP in C++".
-	/*String_obi string1("Hello");
-	String_obi string2 = "Helga";
-	String_obi string3;
-	string3 = string1 * string2;
-	string3 = string3 + " " + string2 + " " + string1;
-	string3 = string3 + string3;
-	string3.print();*/
-
-// Classwork overrife operator [] 1. Course: "OOP in C++".
+// Classwork override operator [] 1. Course: "OOP in C++".
 	/*Arr_int arr(5);
 	arr[0] = 88;
 	arr[1] = 77;
@@ -121,4 +37,59 @@ int main() {
 	arr2 = arr;
 	++arr2;
 	cout << arr2;*/
+
+// Classwork singletone pattern and override operator(). Course: "OOP in C++".
+	/*Time_obi* time = Time_obi::getReference();
+	cout << time;*/
+
+// Classwork. Smartpointers. Course: "OOP in C++".
+	/*String_obi* str = new String_obi("Lola");
+
+	String_SmartPointer smartP(str);
+
+	String_obi* tmp = smartP;
+
+	String_SmartPointer tmpSP = smartP;
+
+	smartP->print();
+
+	++smartP;
+	smartP++;*/
+
+// Classwork. Functions with custom quantityand type arguments. Course: "OOP in C++".
+	//str('1', '2', '3', '4', '5', '6');
+
+// Classwork. New dataStructures. Queues. Course: "OOP in C++".
+	/*QueuePriority queue(10);
+
+	queue.add(666, 6);
+	queue.add(777, 7);
+	queue.add(666, 6);
+	queue.print();
+	queue.extract();
+	queue.print();*/
+
+// Homework 3.1. Course: "OOP in C++". Class Fraction
+// Homework 3.2. Course: "OOP in C++". Class ComplexNumber
+// Homework 3.3. Course: "OOP in C++". Class Overcoat
+// Homework 3.4. Course: "OOP in C++". Class Flat
+
+// Classwork. List. Queues. Course: "OOP in C++".
+	/*List* list = new List("Hello");
+	list->print();
+	list->add(", ");
+	list->add("Lola");
+	list->print();*/
+
+// Classwork. ListBiDirectional. Queues. Course: "OOP in C++".
+	ListBiDirectional<char>* list = new ListBiDirectional<char>((char*)"1");
+	list->addTail((char*)"2");
+	list->addTail((char*)"3");
+	list->addHead((char*)"0");
+	list->print();
+	list->insert((char*)"F", 1);
+	list->print();
+	list->~ListBiDirectional();
+	//cout << list->getEl(3)->str_;
+	//list->printReverse();
 }

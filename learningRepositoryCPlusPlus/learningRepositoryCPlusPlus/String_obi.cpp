@@ -1,6 +1,5 @@
 #include <iostream>
 #include "String_obi.h"
-//#include "funcs.h"
 
 String_obi::String_obi() {
 	this->setCurrentMaxStrLen();

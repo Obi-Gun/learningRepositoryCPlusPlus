@@ -132,10 +132,15 @@
     <ClCompile Include="funcs.cpp" />
     <ClCompile Include="House.cpp" />
     <ClCompile Include="Human.cpp" />
+    <ClCompile Include="List.cpp" />
+    <ClCompile Include="ListBiDirectional.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PhoneBook.cpp" />
+    <ClCompile Include="QueuePriority.cpp" />
     <ClCompile Include="Reservoir.cpp" />
     <ClCompile Include="String_obi.cpp" />
+    <ClCompile Include="String_SmartPointer.cpp" />
+    <ClCompile Include="Time_obi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arr_int.h" />
@@ -147,9 +152,14 @@
     <ClInclude Include="funcs.h" />
     <ClInclude Include="House.h" />
     <ClInclude Include="Human.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="ListBiDirectional.h" />
     <ClInclude Include="PhoneBook.h" />
+    <ClInclude Include="QueuePriority.h" />
     <ClInclude Include="Reservoir.h" />
     <ClInclude Include="String_obi.h" />
+    <ClInclude Include="String_SmartPointer.h" />
+    <ClInclude Include="Time_obi.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
