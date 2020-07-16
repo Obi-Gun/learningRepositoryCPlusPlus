@@ -1,11 +1,39 @@
 #include "Fraction.h"
 #include "funcs.h"
 
+Fraction::Fraction(int numerator, int denominator)
+{
+	this->_numerator = numerator;
+	this->_denominator = denominator;
+}
+
+Fraction::Fraction()
+{
+	this->_numerator = 0;
+	this->_denominator = 1;
+}
+
+Fraction::Fraction(Fraction& fraction)
+{
+	this->_numerator = fraction._numerator;
+	this->_denominator = fraction._denominator;
+}
+
+void Fraction::setNumerator(int numerator)
+{
+	this->_numerator = numerator;
+}
+
+void Fraction::setDenominator(int denominator)
+{
+	this->_denominator = denominator;
+}
+
 void Fraction::print() {
-	cout << this->numerator_;
-	if (this->denominator_ != 1) {
+	cout << this->_numerator;
+	if (this->_denominator != 1) {
 		cout << " / ";
-		cout << this->denominator_;
+		cout << this->_denominator;
 	}
 	//cout << endl;
 }
@@ -13,47 +41,85 @@ void Fraction::print() {
 Fraction Fraction::sum(Fraction fraction)
 {
 	Fraction result;
-	if (this->denominator_ != fraction.denominator_) {
-		result.setNumerator((this->numerator_ * fraction.denominator_) + (fraction.numerator_ * this->denominator_));
-		result.setDenominator(this->denominator_ * fraction.denominator_);
+	if (this->_denominator != fraction._denominator) {
+		result.setNumerator((this->_numerator * fraction._denominator) + (fraction._numerator * this->_denominator));
+		result.setDenominator(this->_denominator * fraction._denominator);
 		return result;
 	}
-	result.setNumerator(this->numerator_ + fraction.numerator_);
-	result.setDenominator(this->denominator_);
+	result.setNumerator(this->_numerator + fraction._numerator);
+	result.setDenominator(this->_denominator);
 	return result;
 }
 
 Fraction Fraction::substr(Fraction fraction)
 {
 	Fraction result;
-	if (this->denominator_ != fraction.denominator_) {
-		result.setNumerator((this->numerator_ * fraction.denominator_) - (fraction.numerator_ * this->denominator_));
-		result.setDenominator(this->denominator_ * fraction.denominator_);
+	if (this->_denominator != fraction._denominator) {
+		result.setNumerator((this->_numerator * fraction._denominator) - (fraction._numerator * this->_denominator));
+		result.setDenominator(this->_denominator * fraction._denominator);
 		return result;
 	}
-	result.setNumerator(this->numerator_ - fraction.numerator_);
-	result.setDenominator(this->denominator_);
+	result.setNumerator(this->_numerator - fraction._numerator);
+	result.setDenominator(this->_denominator);
 	return result;
 }
 
 Fraction Fraction::multiply(Fraction fraction)
 {
-	Fraction result(this->numerator_ * fraction.numerator_, this->denominator_ * fraction.denominator_);
+	Fraction result(this->_numerator * fraction._numerator, this->_denominator * fraction._denominator);
 	return result;
 }
 
 Fraction Fraction::divide(Fraction fraction)
 {
-	Fraction result(this->numerator_ * fraction.denominator_, this->denominator_ * fraction.numerator_);
+	Fraction result(this->_numerator * fraction._denominator, this->_denominator * fraction._numerator);
+	return result;
+}
+
+Fraction Fraction::operator+(const Fraction& fraction)
+{
+	Fraction result;
+	if (this->_denominator != fraction._denominator) {
+		result.setNumerator((this->_numerator * fraction._denominator) + (fraction._numerator * this->_denominator));
+		result.setDenominator(this->_denominator * fraction._denominator);
+		return result;
+	}
+	result.setNumerator(this->_numerator + fraction._numerator);
+	result.setDenominator(this->_denominator);
+	return result;
+}
+
+Fraction Fraction::operator-(const Fraction& fraction)
+{
+	Fraction result;
+	if (this->_denominator != fraction._denominator) {
+		result.setNumerator((this->_numerator * fraction._denominator) - (fraction._numerator * this->_denominator));
+		result.setDenominator(this->_denominator * fraction._denominator);
+		return result;
+	}
+	result.setNumerator(this->_numerator - fraction._numerator);
+	result.setDenominator(this->_denominator);
+	return result;
+}
+
+Fraction Fraction::operator*(const Fraction& fraction)
+{
+	Fraction result(this->_numerator * fraction._numerator, this->_denominator * fraction._denominator);
+	return result;
+}
+
+Fraction Fraction::operator/(const Fraction& fraction)
+{
+	Fraction result(this->_numerator * fraction._denominator, this->_denominator * fraction._numerator);
 	return result;
 }
 
 void Fraction::reduceFraction()
 {
-	for (int i = minValue(this->numerator_, this->denominator_); i > 0; --i) {
-		if (isDivisor(this->numerator_, i) && isDivisor(this->denominator_, i)) {
-			this->numerator_ /= i;
-			this->denominator_ /= i;
+	for (int i = minValue(this->_numerator, this->_denominator); i > 0; --i) {
+		if (isDivisor(this->_numerator, i) && isDivisor(this->_denominator, i)) {
+			this->_numerator /= i;
+			this->_denominator /= i;
 			break;
 		}
 	}

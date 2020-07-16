@@ -128,6 +128,7 @@
     <ClCompile Include="Aspirant.cpp" />
     <ClCompile Include="BinaryTree.cpp" />
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="ComplexNum.cpp" />
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="Date_obi.cpp" />
     <ClCompile Include="Employer.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="Aspirant.h" />
     <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="ComplexNum.h" />
     <ClInclude Include="Contact.h" />
     <ClInclude Include="Date_obi.h" />
     <ClInclude Include="Employer.h" />

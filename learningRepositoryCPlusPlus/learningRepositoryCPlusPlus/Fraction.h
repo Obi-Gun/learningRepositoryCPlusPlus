@@ -2,38 +2,29 @@
 #define FractionClass
 
 class Fraction {
-	int numerator_;
-	int denominator_;
+	int _numerator;
+	int _denominator;
 
 public:
-	Fraction(int numerator, int denominator) {
-		this->numerator_ = numerator;
-		this->denominator_ = denominator;
-	}
+	Fraction(int numerator, int denominator);
+	Fraction();
+	Fraction(Fraction& fraction);
 
-	Fraction() {
-		this->numerator_ = 0;
-		this->denominator_ = 1;
-	}
-
-	Fraction(Fraction& fraction) {
-		this->numerator_ = fraction.numerator_;
-		this->denominator_ = fraction.denominator_;
-	}
-
-	void setNumerator(int numerator) {
-		this->numerator_ = numerator;
-	}
-
-	void setDenominator(int denominator) {
-		this->denominator_ = denominator;
-	}
+	void setNumerator(int numerator);
+	void setDenominator(int denominator);
 
 	void print();
+
 	Fraction sum(Fraction fraction);
 	Fraction substr(Fraction fraction);
 	Fraction multiply(Fraction fraction);
 	Fraction divide(Fraction fraction);
+
+	Fraction operator+ (const Fraction& fraction);
+	Fraction operator- (const Fraction& fraction);
+	Fraction operator* (const Fraction& fraction);
+	Fraction operator/ (const Fraction& fraction);
+
 	void reduceFraction();
 
 	~Fraction() {
