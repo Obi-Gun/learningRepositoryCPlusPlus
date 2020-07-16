@@ -1,5 +1,6 @@
 #ifndef String_obiClass
 #define String_obiClass
+#include <iostream>
 
 class String_obi
 {
@@ -24,6 +25,7 @@ public:
 
 	int getCurrentMaxStrLen() const;
 	int getStrLen() const;
+	const char* getCharArr() const;
 
 	String_obi operator*(const String_obi& str);
 	String_obi operator=(const String_obi& str);
@@ -31,4 +33,8 @@ public:
 
 	void print() const;
 };
+
+std::ostream& operator << (std::ostream& out, String_obi& obj);
+std::istream& operator >> (std::istream& in, String_obi& obj);
+
 #endif

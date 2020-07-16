@@ -1,95 +1,153 @@
 #include <iostream>
-#include "Human.h"
-#include "Flat.h"
-#include "House.h"
-#include "Reservoir.h"
-#include "Arr_Reservoir.h"
-#include "String_obi.h"
-#include "Arr_int.h"
 #include "Time_obi.h"
-#include "String_SmartPointer.h"
-#include "QueuePriority.h"
-#include "List.h"
-#include "ListBiDirectional.h"
+#include "funcs.h"
+
 
 using namespace std;
-
 Time_obi* Time_obi::pointer_ = new Time_obi(666, 666, 666);
 
-void str(int first, ...) {
-	int* p = &first;
-	for (int i = 0; i < 6; ++i) {
-		cout << (char)*p++;
-
+union Task1Union {
+	int fieldInt;
+	char fieldChar[5];
+	
+	void showInBinary() {
+		int i, n;
+		if (this->fieldInt > 16777215) {
+			n = 31;
+		}
+		else if (this->fieldInt > 65535) {
+			n = 23;
+		}
+		else if (this->fieldInt > 255) {
+			n = 15;
+		}
+		else {
+			n = 7;
+		}
+		for (int i = n; i >= 0; --i) {
+			cout << ((this->fieldInt >> i) & 1);
+				if (i % 8 == 0) {
+					cout << " ";
+				}
+		}
 	}
-}
+
+	void showInHex() {
+		int i, n, tmp = 0, counter = 3;
+		this->fieldInt > 16777215 ? n = 31 : 
+			this->fieldInt > 65535 ? n = 23 :
+				this->fieldInt > 255 ? n = 15 : n = 7;
+
+		for (i = n; i >= 0; --i) {
+			tmp += ((this->fieldInt >> i) & 1) * mathPow(2, counter--);
+			if (counter < 0) {
+				counter = 3;
+				switch (tmp) {
+				case 15:
+					cout << 'F';
+					break;
+				case 14:
+					cout << 'E';
+					break;
+				case 13:
+					cout << 'D';
+					break;
+				case 12:
+					cout << 'C';
+					break;
+				case 11:
+					cout << 'B';
+					break;
+				case 10:
+					cout << 'A';
+					break;
+				default:
+					cout << tmp;
+					break;
+				}
+				tmp = 0;
+			}
+			if (i % 8 == 0) {
+				cout << " ";
+			}
+		}
+	}
+};
+
+union task2Union {
+	int varSigned;
+	unsigned int varUnsigned;
+};
+
+union task3Union {
+	int varInt;
+	bool varBool[5];
+
+	void setInt() {
+		cout << "Enter the number, please: ";
+		cin >> this->varInt;
+	}
+
+	bool isZeroByte(int numberOfByte) {
+		for (int i = 7 + 8 * numberOfByte; i >= 8 * numberOfByte; --i) {
+			if ((this->varInt >> i) & 1) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	int calcZeroBytes() {
+		const int BYTES = 4;
+		int nonZeroBytes = 0;
+		for (int i = 3; i >= 0; --i) {
+			if (!isZeroByte(i)) {
+				++nonZeroBytes;
+			}
+		}
+		return BYTES - nonZeroBytes;
+	}
+
+	void showInfoAboutBytes() {
+		for (int i = 3; i >= 0; --i) {
+			if (!isZeroByte(i)) {
+				cout << "Nonzero byte, ";
+			}
+			else {
+				cout << "Zero byte, ";
+			}
+		}
+	}
+};
 
 int main() {
-// Classwork override operator [] 1. Course: "OOP in C++".
-	/*Arr_int arr(5);
-	arr[0] = 88;
-	arr[1] = 77;
-	arr[2] = 66;
-	arr[3] = 55;
-	arr[4] = 44;
+// Hometask 17.1. Course: "C++ Basics".
+	Task1Union test1;
+	test1.fieldInt = 100000;
+	cout << "         int: " << test1.fieldInt << endl;
 
-	Arr_int arr2;
-	arr2 = arr;
-	++arr2;
-	cout << arr2;*/
+	cout << "showInBinary: ";
+	test1.showInBinary();
+	cout << endl;
 
-// Classwork singletone pattern and override operator(). Course: "OOP in C++".
-	/*Time_obi* time = Time_obi::getReference();
-	cout << time;*/
+	cout << "   showInHex: ";
+	test1.showInHex();
+	cout << endl;
 
-// Classwork. Smartpointers. Course: "OOP in C++".
-	/*String_obi* str = new String_obi("Lola");
+	test1.fieldChar[4] = '\0';
+	cout << "       chars: " << test1.fieldChar << endl;
 
-	String_SmartPointer smartP(str);
-
-	String_obi* tmp = smartP;
-
-	String_SmartPointer tmpSP = smartP;
-
-	smartP->print();
-
-	++smartP;
-	smartP++;*/
-
-// Classwork. Functions with custom quantityand type arguments. Course: "OOP in C++".
-	//str('1', '2', '3', '4', '5', '6');
-
-// Classwork. New dataStructures. Queues. Course: "OOP in C++".
-	/*QueuePriority queue(10);
-
-	queue.add(666, 6);
-	queue.add(777, 7);
-	queue.add(666, 6);
-	queue.print();
-	queue.extract();
-	queue.print();*/
-
-// Homework 3.1. Course: "OOP in C++". Class Fraction
-// Homework 3.2. Course: "OOP in C++". Class ComplexNumber
-// Homework 3.3. Course: "OOP in C++". Class Overcoat
-// Homework 3.4. Course: "OOP in C++". Class Flat
-
-// Classwork. List. Queues. Course: "OOP in C++".
-	/*List* list = new List("Hello");
-	list->print();
-	list->add(", ");
-	list->add("Lola");
-	list->print();*/
-
-// Classwork. ListBiDirectional. Queues. Course: "OOP in C++".
-	ListBiDirectional<char>* list = new ListBiDirectional<char>((char*)"1");
-	list->addTail((char*)"2");
-	list->addTail((char*)"3");
-	list->addHead((char*)"0");
-	list->print();
-	list->insert((char*)"F", 1);
-	list->print();
-	list->~ListBiDirectional();
-	//cout << list->getEl(3)->str_;
-	//list->printReverse();
+// Hometask 17.2. Course: "C++ Basics".
+	task2Union test2;
+	test2.varSigned = -1;
+	cout << test2.varSigned;
+	cout << endl;
+	cout << test2.varUnsigned;
+	
+// Hometask 17.3. Course: "C++ Basics".
+	task3Union test3;
+	test3.varInt = 65536;
+	cout << "There are " << test3.calcZeroBytes() << " zero bytes is the variable\n";
+	cout << "There is an information about bytes: ";
+	test3.showInfoAboutBytes();
 }

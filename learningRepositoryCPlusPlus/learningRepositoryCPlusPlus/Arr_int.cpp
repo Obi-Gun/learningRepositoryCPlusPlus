@@ -4,6 +4,7 @@ Arr_int::Arr_int() {
 	this->length_ = 0;
 	this->arr_ = new int[this->length_];
 }
+
 Arr_int::Arr_int(int length) {
 	this->length_ = length;
 	this->arr_ = new int[length];
@@ -11,6 +12,7 @@ Arr_int::Arr_int(int length) {
 		this->arr_[i] = 0;
 	}
 }
+
 Arr_int::Arr_int(Arr_int& obj) {
 	this->length_ = obj.length_;
 	this->arr_ = new int[this->length_];
@@ -88,6 +90,7 @@ std::ostream& operator << (std::ostream& out, Arr_int& obj) {
 	out << std::endl;
 	return out;
 }
+
 std::istream& operator >> (std::istream& in, Arr_int& obj) {
 	std::cout << "\n_________Enter the value:\n";
 	for (int i = 0; i < obj.getLength(); ++i) {

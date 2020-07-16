@@ -125,8 +125,13 @@
   <ItemGroup>
     <ClCompile Include="Arr_int.cpp" />
     <ClCompile Include="Arr_Reservoir.cpp" />
+    <ClCompile Include="Aspirant.cpp" />
+    <ClCompile Include="BinaryTree.cpp" />
+    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="Date_obi.cpp" />
+    <ClCompile Include="Employer.cpp" />
+    <ClCompile Include="Figure.cpp" />
     <ClCompile Include="Flat.cpp" />
     <ClCompile Include="Fraction.cpp" />
     <ClCompile Include="funcs.cpp" />
@@ -135,18 +140,32 @@
     <ClCompile Include="List.cpp" />
     <ClCompile Include="ListBiDirectional.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="Note.cpp" />
     <ClCompile Include="PhoneBook.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="President.cpp" />
     <ClCompile Include="QueuePriority.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Reservoir.cpp" />
+    <ClCompile Include="Square.cpp" />
     <ClCompile Include="String_obi.cpp" />
     <ClCompile Include="String_SmartPointer.cpp" />
+    <ClCompile Include="Student_obi.cpp" />
     <ClCompile Include="Time_obi.cpp" />
+    <ClCompile Include="Worker.cpp" />
+    <ClCompile Include="Сircle_inscribed_in_Square.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arr_int.h" />
     <ClInclude Include="Arr_Reservoir.h" />
+    <ClInclude Include="Aspirant.h" />
+    <ClInclude Include="BinaryTree.h" />
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="Contact.h" />
     <ClInclude Include="Date_obi.h" />
+    <ClInclude Include="Employer.h" />
+    <ClInclude Include="Figure.h" />
     <ClInclude Include="Flat.h" />
     <ClInclude Include="Fraction.h" />
     <ClInclude Include="funcs.h" />
@@ -154,12 +173,21 @@
     <ClInclude Include="Human.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="ListBiDirectional.h" />
+    <ClInclude Include="Manager.h" />
+    <ClInclude Include="Note.h" />
     <ClInclude Include="PhoneBook.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="President.h" />
     <ClInclude Include="QueuePriority.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Reservoir.h" />
+    <ClInclude Include="Square.h" />
     <ClInclude Include="String_obi.h" />
     <ClInclude Include="String_SmartPointer.h" />
+    <ClInclude Include="Student_obi.h" />
     <ClInclude Include="Time_obi.h" />
+    <ClInclude Include="Circle_inscribed_in_Square.h" />
+    <ClInclude Include="Worker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
