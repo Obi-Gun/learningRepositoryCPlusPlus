@@ -51,12 +51,10 @@ ComplexNum ComplexNum::operator/(const ComplexNum obj)
 	return num;
 }
 
-ComplexNum ComplexNum::operator=(ComplexNum obj)
+void ComplexNum::operator=(ComplexNum obj)
 {
-	ComplexNum trash;
 	_a = obj._a;
 	_b = obj._b;
-	return trash;
 }
 
 void ComplexNum::print()

@@ -18,7 +18,7 @@ public:
 	ComplexNum operator- (const ComplexNum obj);
 	ComplexNum operator* (const ComplexNum obj);
 	ComplexNum operator/ (const ComplexNum obj);
-	ComplexNum operator= (const ComplexNum obj);
+	void operator= (const ComplexNum obj);
 
 	void print();
 };

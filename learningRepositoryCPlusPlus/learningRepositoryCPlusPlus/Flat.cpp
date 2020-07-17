@@ -2,116 +2,168 @@
 #include "Flat.h"
 
 Flat::Flat() {
-	this->familySurname_ = " <empty> ";
-	this->floorNumber_ = 0;
-	this->flatNumber_ = 0;
-	this->tenants_ = new Human*[0];
-	this->arrLen_ = 0;
+	this->_familySurname = " <empty> ";
+	this->_floorNumber = 0;
+	this->_flatNumber = 0;
+	this->_tenants = new Human*[0];
+	this->_arrLen = 0;
+	this->_area = 0;
 }
 Flat::Flat(int flatNumber) {
-	this->familySurname_ = " <empty> ";
-	this->floorNumber_ = 0;
-	this->flatNumber_ = flatNumber;
-	this->tenants_ = new Human*[0];
-	this->arrLen_ = 0;
+	this->_familySurname = " <empty> ";
+	this->_floorNumber = 0;
+	this->_flatNumber = flatNumber;
+	this->_tenants = new Human*[0];
+	this->_arrLen = 0;
+	this->_area = 0;
 }
 Flat::Flat(const char* familySurname, int floorNumber, int flatNumber, Human** tenants, int arrLen) {
-	this->familySurname_ = familySurname;
-	this->floorNumber_ = floorNumber;
-	this->flatNumber_ = flatNumber;
-	this->tenants_ = tenants;
-	this->arrLen_ = arrLen;
+	this->_familySurname = familySurname;
+	this->_floorNumber = floorNumber;
+	this->_flatNumber = flatNumber;
+	this->_tenants = tenants;
+	this->_arrLen = arrLen;
+	this->_area = 0;
 }
 Flat::Flat(String_obi familySurname, int floorNumber, int flatNumber, Human** tenants, int arrLen) {
-	this->familySurname_ = familySurname;
-	this->floorNumber_ = floorNumber;
-	this->flatNumber_ = flatNumber;
-	this->tenants_ = tenants;
-	this->arrLen_ = arrLen;
+	this->_familySurname = familySurname;
+	this->_floorNumber = floorNumber;
+	this->_flatNumber = flatNumber;
+	this->_tenants = tenants;
+	this->_arrLen = arrLen;
+	this->_area = 0;
 }
 Flat::Flat(Flat& flat) {
-	this->familySurname_ = flat.familySurname_;
-	this->floorNumber_ = flat.floorNumber_;
-	this->flatNumber_ = flat.flatNumber_;
-	this->tenants_ = new Human*[flat.arrLen_];
-	for (int i = 0; i < flat.arrLen_; ++i) {
-		this->tenants_[i] = new Human(*(flat.tenants_[i]));
+	this->_familySurname = flat._familySurname;
+	this->_floorNumber = flat._floorNumber;
+	this->_flatNumber = flat._flatNumber;
+	this->_tenants = new Human*[flat._arrLen];
+	for (int i = 0; i < flat._arrLen; ++i) {
+		this->_tenants[i] = new Human(*(flat._tenants[i]));
 	}
-	this->arrLen_ = flat.arrLen_;
+	this->_arrLen = flat._arrLen;
+	this->_area = flat._area;
 }
 Flat::~Flat() {
-	delete[] this->tenants_;
+	delete[] this->_tenants;
 	//std::cout << "~Flat()";
 }
 
 void Flat::setFamilySurname(const char* familySurname) {
-	this->familySurname_ = familySurname;
+	this->_familySurname = familySurname;
 }
 void Flat::setFamilySurname(const String_obi familySurname) {
-	this->familySurname_ = familySurname;
+	this->_familySurname = familySurname;
 }
 void Flat::setFloorNumber(int floorNumber) {
-	this->floorNumber_ = floorNumber;
+	this->_floorNumber = floorNumber;
 }
 void Flat::setFlatNumber(int flatNumber) {
-	this->flatNumber_ = flatNumber;
+	this->_flatNumber = flatNumber;
 }
 void Flat::setTenants(Human** tenants, int length) {
 	Human** tmp = new Human * [length];
 	for (int i = 0; i < length; ++i) {
 		tmp[i] = new Human(*(tenants[i]));
 	}
-	this->arrLen_ = length;
-	delete[] this->tenants_;
-	this->tenants_ = tmp;
+	this->_arrLen = length;
+	delete[] this->_tenants;
+	this->_tenants = tmp;
+}
+
+void Flat::setArea(int area)
+{
+	this->_area = area;
 }
 
 String_obi Flat::getFamilySurname() const {
-	return this->familySurname_;
+	return this->_familySurname;
 }
 int Flat::getFloorNumber() const {
-	return this->flatNumber_;
+	return this->_flatNumber;
 }
 int Flat::getFlatNumber() const {
-	return this->flatNumber_;
+	return this->_flatNumber;
 }
 Human** Flat::getTenants() const {
-	return this->tenants_;
+	return this->_tenants;
 }
 int Flat::getArrLen() const {
-	return this->arrLen_;
+	return this->_arrLen;
+}
+
+int Flat::getArea() const
+{
+	return this->_area;
 }
 
 void Flat::addTenant(Human human) {
 	Human* tmp = new Human(human);
-	Human** tmp2 = new Human * [this->arrLen_ + 1];
-	for (int i = 0; i < this->arrLen_; ++i) {
-		tmp2[i] = this->tenants_[i];
+	Human** tmp2 = new Human * [this->_arrLen + 1];
+	for (int i = 0; i < this->_arrLen; ++i) {
+		tmp2[i] = this->_tenants[i];
 	}
-	tmp2[arrLen_] = tmp;
-	++this->arrLen_;
-	delete[] this->tenants_;
-	this->tenants_ = tmp2;
+	tmp2[_arrLen] = tmp;
+	++this->_arrLen;
+	delete[] this->_tenants;
+	this->_tenants = tmp2;
 }
 void Flat::print() const {
 	std::cout << "\nFamily surname: ";
-	this->familySurname_.print();
-	std::cout << "\nFloor   number: " << this->floorNumber_;
-	std::cout << "\nFlat    number: " << this->flatNumber_;
+	this->_familySurname.print();
+	std::cout << "\nFloor   number: " << this->_floorNumber;
+	std::cout << "\nFlat    number: " << this->_flatNumber;
 	std::cout << "\nTentnants list: ";
-	for (int i = 0; i < this->arrLen_; ++i) {
-		this->tenants_[i]->print();
+	for (int i = 0; i < this->_arrLen; ++i) {
+		this->_tenants[i]->print();
 		std::cout << "\n\t\t";
 	}
 }
 void Flat::printCompact() const {
-	std::cout << "\n - Floor " << this->floorNumber_;
-	std::cout << " Flat " << this->flatNumber_;
+	std::cout << "\n - Floor " << this->_floorNumber;
+	std::cout << " Flat " << this->_flatNumber;
 	std::cout << " Family ";
-	this->familySurname_.print();
+	this->_familySurname.print();
 	std::cout << "\n   Tentnants: ";
-	for (int i = 0; i < this->arrLen_; ++i) {
-		this->tenants_[i]->print();
+	for (int i = 0; i < this->_arrLen; ++i) {
+		this->_tenants[i]->print();
 		std::cout << "\n              ";
 	}
+}
+
+bool Flat::operator==(const Flat& obj)
+{
+	if (this->_area == obj._area) {
+		return true;
+	}
+	return false;
+}
+
+void Flat::operator=(const Flat& flat)
+{
+	this->_familySurname = flat._familySurname;
+	this->_floorNumber = flat._floorNumber;
+	this->_flatNumber = flat._flatNumber;
+	this->_tenants = new Human * [flat._arrLen];
+	for (int i = 0; i < flat._arrLen; ++i) {
+		this->_tenants[i] = new Human(*(flat._tenants[i]));
+	}
+	this->_arrLen = flat._arrLen;
+	this->_area = flat._area;
+}
+
+bool Flat::operator>(const Flat& obj)
+{
+	if (this->_area > obj._area) {
+		return true;
+	}
+	return false;
+}
+
+bool Flat::operator<(const Flat& obj)
+{
+	if (this->_area < obj._area) {
+		return true;
+	}
+	return false;
 }

@@ -7,11 +7,12 @@
 class Flat
 {
 private:
-	String_obi familySurname_;
-	int floorNumber_;
-	int flatNumber_;
-	Human** tenants_;
-	int arrLen_;
+	String_obi _familySurname;
+	int _floorNumber;
+	int _flatNumber;
+	Human** _tenants;
+	int _arrLen;
+	int _area;
 
 public:
 	Flat();
@@ -26,15 +27,22 @@ public:
 	void setFloorNumber(int floorNumber);
 	void setFlatNumber(int flatNumber);
 	void setTenants(Human** tenants, int length);
+	void setArea(int area);
 
 	String_obi getFamilySurname() const;
 	int getFloorNumber() const;
 	int getFlatNumber() const;
 	Human** getTenants() const;
 	int getArrLen() const;
+	int getArea() const;
 
 	void addTenant(Human human);
 	void print() const;
 	void printCompact() const;
+
+	bool operator== (const Flat& obj);
+	void operator= (const Flat& flat);
+	bool operator> (const Flat& obj);
+	bool operator< (const Flat& obj);
 };
 #endif

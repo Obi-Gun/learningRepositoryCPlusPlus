@@ -2,6 +2,8 @@
 #include "Time_obi.h"
 #include "Fraction.h"
 #include "ComplexNum.h"
+#include "Overcoat.h"
+#include "Flat.h"
 
 using namespace std;
 Time_obi* Time_obi::pointer_ = new Time_obi(666, 666, 666);
@@ -51,8 +53,49 @@ int main() {
 	num1.print();*/
 
 // Homework 3.3. Course: "OOP in C++". Class Overcoat
+	/*bool tmp;
+	Overcoat coat1, coat2(10, fur), coat3(15, fur);
 
+	tmp = coat2 == coat3;
+	cout << "\nTest operator==      Expected true      Result is: " << tmp;
+	tmp = coat1 == coat2;
+	cout << "\nTest operator==      Expected false     Result is: " << tmp;
+
+	coat1 = coat2;
+	tmp = coat1 == coat2;
+	cout << "\nTest operator=       Expected true      Result is: " << tmp;
+	
+	tmp = coat2 > coat3;
+	cout << "\nTest operator>       Expected false     Result is: " << tmp;
+	tmp = coat3 > coat2;
+	cout << "\nTest operator>       Expected true      Result is: " << tmp;
+	tmp = coat2 < coat3;
+	cout << "\nTest operator<       Expected true      Result is: " << tmp;
+	tmp = coat3 < coat2;
+	cout << "\nTest operator<       Expected false     Result is: " << tmp;*/
 
 // Homework 3.4. Course: "OOP in C++". Class Flat
+	bool tmp;
+	Flat flat1, flat2, flat3;
+	flat1.setArea(0);
+	flat2.setArea(0);
+	flat3.setArea(2);
 
+	tmp = flat1 == flat2;
+	cout << "\nTest operator==      Expected true      Result is: " << tmp;
+	tmp = flat2 == flat3;
+	cout << "\nTest operator==      Expected false     Result is: " << tmp;
+
+	flat2 = flat3;
+	tmp = flat2 == flat3;
+	cout << "\nTest operator=       Expected true      Result is: " << tmp;
+
+	tmp = flat1 > flat2;
+	cout << "\nTest operator>       Expected false     Result is: " << tmp;
+	tmp = flat2 > flat1;
+	cout << "\nTest operator>       Expected true      Result is: " << tmp;
+	tmp = flat1 < flat2;
+	cout << "\nTest operator<       Expected true      Result is: " << tmp;
+	tmp = flat2 < flat1;
+	cout << "\nTest operator<       Expected false     Result is: " << tmp;
 }
