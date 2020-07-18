@@ -1,101 +1,62 @@
 #include <iostream>
 #include "Time_obi.h"
-#include "Fraction.h"
-#include "ComplexNum.h"
-#include "Overcoat.h"
-#include "Flat.h"
+#include "String_obi.h"
 
 using namespace std;
 Time_obi* Time_obi::pointer_ = new Time_obi(666, 666, 666);
+int String_obi::_objCounter = 0;
+
 
 int main() {
-// Homework 3.1. Course: "OOP in C++". Class Fraction
-	/*Fraction fract1(5, 10), fract2(3, 5);
-	cout << "Sum:      ";
-	fract1.sum(fract2).print();
-	cout << "        ";
-	(fract1 + fract2).print();
+// Homework 4.1. Course: "OOP in C++".
 
-	cout << "\nSubstr:   ";
-	fract1.substr(fract2).print();
-	cout << "        ";
-	(fract1 - fract2).print();
+	String_obi str1("ho");
 
-	cout << "\nMultiply: ";
-	fract1.multiply(fract2).print();
-	cout << "        ";
-	(fract1 * fract2).print();
+	cout << "\ndefault value:                 \tExpected: \"hohoho   \"\tResult is: \"";
+	cout << str1 << str1 << str1 << "\"";
 
-	cout << "\nDivide:   ";
-	fract1.divide(fract2).print();
-	cout << "        ";
-	(fract1 / fract2).print();*/
+	cout << "\nTest operator++ (prefix)       \tExpected: \"ho ho ho \"\tResult is: \"";
+	cout << ++str1 << str1 << str1 << "\"";
 
-// Homework 3.2. Course: "OOP in C++". Class ComplexNumber
-	/*ComplexNum num1(5, 6), num2(8, 8);
-	cout << "Sum:      ";
-	(num1 + num2).print();
+	cout << "\nTest operator-- (prefix)       \tExpected: \"hohoho   \"\tResult is: \"";
+	cout << --str1 << str1 << str1 << "\"";
 
-	cout << "\nSubstr:   ";
-	(num1 - num2).print();
+	cout << "\nTest operator++ (postfix)      \tExpected: \"hoho ho  \"\tResult is: \"";
+	cout << str1++ << str1 << str1 << "\"";
 
-	cout << "\nMultiply: ";
-	(num1 * num2).print();
+	cout << "\nTest operator-- (postfix)      \tExpected: \"ho hoho  \"\tResult is: \"";
+	cout << str1-- << str1 << str1 << "\"";
 
-	cout << "\nDivide:   ";
-	(num1 / num2).print();
+	cout << "\nTest operator int              \tExpected: \"2        \"\tResult is: \"";
+	int len = str1;
+	cout << len << "\"";
 
-	cout << "\n = :      ";
-	num1.print();
-	num2.print();
-	num1 = num2;
-	cout << ",  ";
-	num1.print();*/
+	cout << "\nTest operator() (find \'e\')   \tExpected: \"-1       \"\tResult is: \"";
+	cout << str1('e') << "\"";
 
-// Homework 3.3. Course: "OOP in C++". Class Overcoat
-	/*bool tmp;
-	Overcoat coat1, coat2(10, fur), coat3(15, fur);
+	cout << "\nTest operator() (find \'o\')   \tExpected: \"1        \"\tResult is: \"";
+	cout << str1('o') << "\"";
 
-	tmp = coat2 == coat3;
-	cout << "\nTest operator==      Expected true      Result is: " << tmp;
-	tmp = coat1 == coat2;
-	cout << "\nTest operator==      Expected false     Result is: " << tmp;
+	cout << "\nTest operator[] (index -5)     \tExpected: \"         \"\tResult is: \"";
+	cout << str1[-5] << "\"";
 
-	coat1 = coat2;
-	tmp = coat1 == coat2;
-	cout << "\nTest operator=       Expected true      Result is: " << tmp;
-	
-	tmp = coat2 > coat3;
-	cout << "\nTest operator>       Expected false     Result is: " << tmp;
-	tmp = coat3 > coat2;
-	cout << "\nTest operator>       Expected true      Result is: " << tmp;
-	tmp = coat2 < coat3;
-	cout << "\nTest operator<       Expected true      Result is: " << tmp;
-	tmp = coat3 < coat2;
-	cout << "\nTest operator<       Expected false     Result is: " << tmp;*/
+	cout << "\nTest operator[] (index 100)    \tExpected: \"         \"\tResult is: \"";
+	cout << str1[100] << "\"";
 
-// Homework 3.4. Course: "OOP in C++". Class Flat
-	bool tmp;
-	Flat flat1, flat2, flat3;
-	flat1.setArea(0);
-	flat2.setArea(0);
-	flat3.setArea(2);
+	cout << "\nTest operator[] (index 0)      \tExpected: \"h        \"\tResult is: \"";
+	cout << str1[0] << "\"";
 
-	tmp = flat1 == flat2;
-	cout << "\nTest operator==      Expected true      Result is: " << tmp;
-	tmp = flat2 == flat3;
-	cout << "\nTest operator==      Expected false     Result is: " << tmp;
+	cout << "\nTest operator[] (index 1)      \tExpected: \"o        \"\tResult is: \"";
+	cout << str1[1] << "\"";
 
-	flat2 = flat3;
-	tmp = flat2 == flat3;
-	cout << "\nTest operator=       Expected true      Result is: " << tmp;
+	cout << "\nTest operator[] (index 2)      \tExpected: \"         \"\tResult is: \"";
+	cout << str1[2] << "\"";
 
-	tmp = flat1 > flat2;
-	cout << "\nTest operator>       Expected false     Result is: " << tmp;
-	tmp = flat2 > flat1;
-	cout << "\nTest operator>       Expected true      Result is: " << tmp;
-	tmp = flat1 < flat2;
-	cout << "\nTest operator<       Expected true      Result is: " << tmp;
-	tmp = flat2 < flat1;
-	cout << "\nTest operator<       Expected false     Result is: " << tmp;
+// Homework 4.2. Course: "OOP in C++".
+	cout << "\nThere are " << String_obi::getObjCounter() << " String_obi objects right now";
+
+// Homework 4.3. Course: "OOP in C++".
+	cout << endl;
+	String_obi* str2 = new String_obi;
+	delete str2;
 }
