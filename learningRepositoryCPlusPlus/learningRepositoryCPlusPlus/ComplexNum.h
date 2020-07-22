@@ -8,11 +8,13 @@ private:
 	double _b;
 	//char sigh = '+';
 	const char i = 'i';
+	static int _objCounter;
 
 public:
 	ComplexNum();
 	ComplexNum(double a, double b);
 	ComplexNum(ComplexNum& obj);
+	~ComplexNum();
 
 	ComplexNum operator+ (const ComplexNum obj);
 	ComplexNum operator- (const ComplexNum obj);
@@ -21,5 +23,9 @@ public:
 	void operator= (const ComplexNum obj);
 
 	void print();
+
+	static int getObjCounter();
+	void incrementObjCounter();
+	void decrementObjCounter();
 };
 #endif

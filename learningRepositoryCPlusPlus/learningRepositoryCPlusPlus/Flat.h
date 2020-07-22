@@ -1,5 +1,5 @@
-#ifndef FlatClass
-#define FlatClass
+#ifndef Flat_Guardian
+#define Flat_Guardian
 
 #include "String_obi.h"
 #include "Human.h"

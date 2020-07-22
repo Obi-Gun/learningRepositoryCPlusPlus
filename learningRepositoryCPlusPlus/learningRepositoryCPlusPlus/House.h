@@ -1,5 +1,5 @@
-#ifndef HouseClass
-#define HouseClass
+#ifndef House_Guardian
+#define House_Guardian
 
 #include <iostream>
 #include "String_obi.h"

@@ -1,62 +1,49 @@
 #include <iostream>
-#include "Time_obi.h"
-#include "String_obi.h"
+#include "ComplexNum.h"
+#include "String_SmartPointer.h"
 
 using namespace std;
-Time_obi* Time_obi::pointer_ = new Time_obi(666, 666, 666);
-int String_obi::_objCounter = 0;
 
+int ComplexNum::_objCounter = 0;
 
 int main() {
-// Homework 4.1. Course: "OOP in C++".
+// Homework 6.2. Course: "OOP in C++". Class ComplexNumber
+	/*cout << "\nThere are " << ComplexNum::getObjCounter() << " ComplexNum objects right now";
 
-	String_obi str1("ho");
+	ComplexNum num1(5, 6), num2(8, 8);
+	cout << "\nSum:      ";
+	(num1 + num2).print();
+	cout << "\nThere are " << ComplexNum::getObjCounter() << " ComplexNum objects right now";
 
-	cout << "\ndefault value:                 \tExpected: \"hohoho   \"\tResult is: \"";
-	cout << str1 << str1 << str1 << "\"";
+	cout << "\nSubstr:   ";
+	(num1 - num2).print();
+	cout << "\nThere are " << ComplexNum::getObjCounter() << " ComplexNum objects right now";
 
-	cout << "\nTest operator++ (prefix)       \tExpected: \"ho ho ho \"\tResult is: \"";
-	cout << ++str1 << str1 << str1 << "\"";
+	cout << "\nMultiply: ";
+	(num1 * num2).print();
+	cout << "\nThere are " << ComplexNum::getObjCounter() << " ComplexNum objects right now";
 
-	cout << "\nTest operator-- (prefix)       \tExpected: \"hohoho   \"\tResult is: \"";
-	cout << --str1 << str1 << str1 << "\"";
+	cout << "\nDivide:   ";
+	(num1 / num2).print();
+	cout << "\nThere are " << ComplexNum::getObjCounter() << " ComplexNum objects right now";
 
-	cout << "\nTest operator++ (postfix)      \tExpected: \"hoho ho  \"\tResult is: \"";
-	cout << str1++ << str1 << str1 << "\"";
+	cout << "\nnum1: ";
+	num1.print();
+	cout << "\nnum2: ";
+	num2.print();
+	num1 = num2;
+	cout << "\nnum1 after operation = : ";
+	num1.print();
+	cout << "\nThere are " << ComplexNum::getObjCounter() << " ComplexNum objects right now";*/
 
-	cout << "\nTest operator-- (postfix)      \tExpected: \"ho hoho  \"\tResult is: \"";
-	cout << str1-- << str1 << str1 << "\"";
+// Homework 6.3. Course: "OOP in C++". Class String_SmartPointer
+	String_obi* str = new String_obi("Hello there!");
 
-	cout << "\nTest operator int              \tExpected: \"2        \"\tResult is: \"";
-	int len = str1;
-	cout << len << "\"";
+	String_SmartPointer obj(str);
+	String_SmartPointer copy1;
+	copy1 = obj;
 
-	cout << "\nTest operator() (find \'e\')   \tExpected: \"-1       \"\tResult is: \"";
-	cout << str1('e') << "\"";
+	String_SmartPointer copy2 = obj;
+	String_SmartPointer copy3 = copy2;
 
-	cout << "\nTest operator() (find \'o\')   \tExpected: \"1        \"\tResult is: \"";
-	cout << str1('o') << "\"";
-
-	cout << "\nTest operator[] (index -5)     \tExpected: \"         \"\tResult is: \"";
-	cout << str1[-5] << "\"";
-
-	cout << "\nTest operator[] (index 100)    \tExpected: \"         \"\tResult is: \"";
-	cout << str1[100] << "\"";
-
-	cout << "\nTest operator[] (index 0)      \tExpected: \"h        \"\tResult is: \"";
-	cout << str1[0] << "\"";
-
-	cout << "\nTest operator[] (index 1)      \tExpected: \"o        \"\tResult is: \"";
-	cout << str1[1] << "\"";
-
-	cout << "\nTest operator[] (index 2)      \tExpected: \"         \"\tResult is: \"";
-	cout << str1[2] << "\"";
-
-// Homework 4.2. Course: "OOP in C++".
-	cout << "\nThere are " << String_obi::getObjCounter() << " String_obi objects right now";
-
-// Homework 4.3. Course: "OOP in C++".
-	cout << endl;
-	String_obi* str2 = new String_obi;
-	delete str2;
 }

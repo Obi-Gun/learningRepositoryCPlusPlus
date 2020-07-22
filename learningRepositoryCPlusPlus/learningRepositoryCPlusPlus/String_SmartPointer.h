@@ -6,8 +6,8 @@
 class String_SmartPointer
 {
 private:
-	String_obi* p_;
-	int counterCopies_;
+	String_obi* _ptr;
+	int _counterCopies;
 
 public:
 	String_SmartPointer(String_obi* pointer = nullptr);

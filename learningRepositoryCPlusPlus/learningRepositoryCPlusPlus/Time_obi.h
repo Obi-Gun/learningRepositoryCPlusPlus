@@ -5,7 +5,7 @@
 class Time_obi
 {
 private:
-	static Time_obi* pointer_;
+	//static Time_obi* pointer_;
 	int hour_;
 	int minute_;
 	int second_;
@@ -15,7 +15,7 @@ private:
 public:
 	
 	~Time_obi();
-	static Time_obi* getReference();
+	//static Time_obi* getReference();
 
 	void setHour(int hour);
 	void setMinute(int minute);

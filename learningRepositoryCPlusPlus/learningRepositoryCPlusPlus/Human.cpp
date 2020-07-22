@@ -2,13 +2,13 @@
 #include "Human.h"
 
 Human::Human() {
-	this->name_ = "Name";
+	this->_name = "Name";
 }
 Human::Human(const char* name) {
-	this->name_ = name;
+	this->_name = name;
 }
 Human::Human(Human& human) {
-	this->name_ = human.name_;
+	this->_name = human._name;
 }
 Human::~Human() {
 	//this->name_.~String_obi();
@@ -16,12 +16,12 @@ Human::~Human() {
 }
 
 void Human::setName(const char* name) {
-	this->name_ = name;
+	this->_name = name;
 }
 String_obi Human::getName() const {
-	return this->name_;
+	return this->_name;
 }
 
 void Human::print() {
-	this->name_.print();
+	this->_name.print();
 }

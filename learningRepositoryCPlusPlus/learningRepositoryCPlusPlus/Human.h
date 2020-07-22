@@ -1,12 +1,12 @@
-#ifndef HumanClass
-#define HumanClass
+#ifndef Human_Guardian
+#define Human_Guardian
 
 #include "String_obi.h"
 
 class Human
 {
 private:
-	String_obi name_;
+	String_obi _name;
 
 public:
 	Human();

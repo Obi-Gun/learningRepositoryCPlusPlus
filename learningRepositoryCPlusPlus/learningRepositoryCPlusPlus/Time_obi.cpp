@@ -9,9 +9,9 @@ Time_obi::~Time_obi() {
 	std::cout << "\n~Time_obi()";
 }
 
-Time_obi* Time_obi::getReference() {
+/*Time_obi* Time_obi::getReference() {
 	return pointer_;
-}
+}*/
 void Time_obi::setHour(int hour) {
 	this->hour_ = hour % 24;
 }
