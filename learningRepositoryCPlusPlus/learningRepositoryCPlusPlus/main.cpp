@@ -1,10 +1,12 @@
 #include <iostream>
 #include "ComplexNum.h"
 #include "String_SmartPointer.h"
+#include "String_obi.h"
 
 using namespace std;
 
 int ComplexNum::_objCounter = 0;
+int String_obi::_objCounter = 0;
 
 int main() {
 // Homework 6.2. Course: "OOP in C++". Class ComplexNumber
@@ -37,13 +39,34 @@ int main() {
 	cout << "\nThere are " << ComplexNum::getObjCounter() << " ComplexNum objects right now";*/
 
 // Homework 6.3. Course: "OOP in C++". Class String_SmartPointer
+	/*cout << "\nThere are " << String_obi::getObjCounter() << " String_obi objects right now";
+
 	String_obi* str = new String_obi("Hello there!");
+	cout << "\nThere are " << String_obi::getObjCounter() << " String_obi objects right now";
 
 	String_SmartPointer obj(str);
-	String_SmartPointer copy1;
-	copy1 = obj;
+	cout << "\nThere are " << String_obi::getObjCounter() << " String_obi objects right now";
 
-	String_SmartPointer copy2 = obj;
-	String_SmartPointer copy3 = copy2;
+	String_SmartPointer copy1;
+	cout << "\nThere are " << String_obi::getObjCounter() << " String_obi objects right now";
+	copy1 = obj;
+	cout << "\nThere are " << String_obi::getObjCounter() << " String_obi objects right now";
+
+	String_SmartPointer* copy2 = new String_SmartPointer(obj);
+	cout << "\nThere are " << String_obi::getObjCounter() << " String_obi objects right now";
+
+	delete copy2;
+	cout << "\nThere are " << String_obi::getObjCounter() << " String_obi objects right now";
+
+	copy2 = new String_SmartPointer(obj);
+	cout << "\nThere are " << String_obi::getObjCounter() << " String_obi objects right now";
+
+	copy2->~String_SmartPointer() ;
+	cout << "\nThere are " << String_obi::getObjCounter() << " String_obi objects right now";
+
+	String_SmartPointer copy3 = copy1;
+	cout << "\nThere are " << String_obi::getObjCounter() << " String_obi objects right now";
+	*/
+	// Here we can see that there is only one example of class String_obi has been created. Thats why we used a smartpointer.
 
 }

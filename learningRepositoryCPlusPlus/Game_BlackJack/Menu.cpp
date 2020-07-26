@@ -1,24 +1,6 @@
 #include "Menu.h"
 using namespace std;
 
-int Menu::getNumbOfDecks() const
-{
-	return _numberOfDecks;
-}
-
-bool Menu::setNumberOfDecks(int num)
-{
-	if (num < 1) {
-		_numberOfDecks = _MIN_NUMB_OF_DECKS;
-		return false;
-	}
-	if (num > 8) {
-		_numberOfDecks = _MAX_NUMB_OF_DECKS;
-		return false;
-	}
-	_numberOfDecks = num;
-}
-
 void Menu::showRules() const
 {
 	cout << "\nWould you like to read rules? (Y / N) ";
@@ -29,7 +11,7 @@ void Menu::showRules() const
 	}
 	cout << "\n\n =========================================== ";
 	cout << "\n ================== RULES ================== ";
-	cout << "\n ================== RULES ================== ";
+	cout << "\n ===============https://youtu.be/j7IcPS4YQBI ";
 	cout << "\n ================== RULES ================== ";
 	cout << "\n ================== RULES ================== ";
 }
@@ -53,19 +35,20 @@ void Menu::showDeck() const
 	cout << "\n ================== DESK =================== ";
 }
 
-void Menu::initialize()
+void Menu::match()
 {
-	_length = _CARDS_IN_DECK * _numberOfDecks;
-	_deckOfCards = new int[_length];
-	for (int i = 0; i < _length; ++i) {
-		_deckOfCards[i] = 0;
+	makeABet();
+	int cardNum = randVal();
+	while (!isCardInDeck(cardNum)) {
+		cardNum = randVal();
 	}
+
 }
 
 Menu::Menu()
 {
 	_deckOfCards = nullptr;
-	_numberOfDecks = _MIN_NUMB_OF_DECKS;
+	_numberOfDecks = _DEFAULT_NUMB_OF_DECKS;
 	_length = 0;
 }
 
@@ -82,5 +65,10 @@ void Menu::start()
 	showRules();
 	showMenu();
 	initialize();
+	match();
+}
 
+Menu* Menu::getReferance()
+{
+	return _ptr;
 }

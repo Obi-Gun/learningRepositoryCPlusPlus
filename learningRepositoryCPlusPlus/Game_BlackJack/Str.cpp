@@ -1,53 +1,53 @@
 #include <iostream>
-#include "String_obi.h"
+#include "Str.h"
 
-String_obi::String_obi() {
+Str::Str() {
 	this->setCurrentMaxStrLen();
 	this->_string = new char[this->getCurrentMaxStrLen() + 1];
 	this->_string[0] = '\0';
 	recalcStrLen();
-	++_objCounter;
+	//++_objCounter;
 }
 
-String_obi::String_obi(int maxStringLength) {
+Str::Str(int maxStringLength) {
 	this->setCurrentMaxStrLen(maxStringLength);
 	this->_string = new char[this->getCurrentMaxStrLen() + 1];
 	this->_string[0] = '\0';
 	recalcStrLen();
-	++_objCounter;
+	//++_objCounter;
 }
 
-String_obi::String_obi(const char* string) {
+Str::Str(const char* string) {
 	this->setCurrentMaxStrLen(strlen(string));
 	this->_string = new char[this->getCurrentMaxStrLen() + 1];
 	strcpy_s(this->_string, this->getCurrentMaxStrLen() + 1, string);
 	recalcStrLen();
-	++_objCounter;
+	//++_objCounter;
 }
 
-String_obi::String_obi(String_obi& string_obi) {
+Str::Str(Str& string_obi) {
 	this->setCurrentMaxStrLen(string_obi.getStrLen());
 	this->_string = new char[this->getCurrentMaxStrLen() + 1];
 	strcpy_s(this->_string, this->getCurrentMaxStrLen() + 1, string_obi._string);
 	recalcStrLen();
-	++_objCounter;
+	//++_objCounter;
 }
 
-String_obi::String_obi(const String_obi& string_obi) {
+Str::Str(const Str& string_obi) {
 	this->setCurrentMaxStrLen(string_obi.getStrLen());
 	this->_string = new char[this->getCurrentMaxStrLen() + 1];
 	strcpy_s(this->_string, this->getCurrentMaxStrLen() + 1, string_obi._string);
 	recalcStrLen();
-	++_objCounter;
+	//++_objCounter;
 }
 
-String_obi::~String_obi() {
+Str::~Str() {
 	delete[] this->_string;
-	std::cout << "\n~String_obi()";
-	--_objCounter;
+	//std::cout << "\n~String_obi()";
+	//--_objCounter;
 }
 
-void String_obi::setCurrentMaxStrLen(int maxStringLength) {
+void Str::setCurrentMaxStrLen(int maxStringLength) {
 	if (maxStringLength < this->_MIN_ARR_LEN) {
 		this->_currentMaxStrLen = this->_MIN_ARR_LEN - 1;
 	}
@@ -59,26 +59,26 @@ void String_obi::setCurrentMaxStrLen(int maxStringLength) {
 	}
 }
 
-int String_obi::getCurrentMaxStrLen() const {
+int Str::getCurrentMaxStrLen() const {
 	return this->_currentMaxStrLen;
 }
 
-int String_obi::getStrLen() const {
+int Str::getStrLen() const {
 	return this->_strLen;
 }
 
-const char* String_obi::getCharArr() const
+const char* Str::getCharArr() const
 {
 	return this->_string;
 }
 
-int String_obi::getObjCounter()
+/*int Str::getObjCounter()
 {
-	return String_obi::_objCounter;
-}
+	return Str::_objCounter;
+}*/
 
-String_obi String_obi::operator*(const String_obi& string) {
-	String_obi result(strlen(this->_string) + strlen(string._string));
+Str Str::operator*(const Str& string) {
+	Str result(strlen(this->_string) + strlen(string._string));
 	int i = 0;
 	char* str = this->_string;
 	while (str = strpbrk(str, string._string)) {
@@ -93,7 +93,7 @@ String_obi String_obi::operator*(const String_obi& string) {
 	return result;
 }
 
-String_obi String_obi::operator=(const String_obi& str) {
+Str Str::operator=(const Str& str) {
 	if (this->getCurrentMaxStrLen() < str.getStrLen()) {
 		delete[] this->_string;
 		this->setCurrentMaxStrLen(str.getStrLen());
@@ -104,15 +104,15 @@ String_obi String_obi::operator=(const String_obi& str) {
 	return *this;
 }
 
-String_obi String_obi::operator+(const String_obi& str) {
-	String_obi tmp(this->getStrLen() + str.getStrLen());
+Str Str::operator+(const Str& str) {
+	Str tmp(this->getStrLen() + str.getStrLen());
 	strcpy_s(tmp._string, tmp.getCurrentMaxStrLen() + 1, this->_string);
 	strcat_s(tmp._string, tmp.getCurrentMaxStrLen() + 1, str._string);
 	tmp.recalcStrLen();
 	return tmp;
 }
 
-char String_obi::operator[](int index)
+char Str::operator[](int index)
 {
 	if (index < 0 || index > _strLen) {
 		return '\0';
@@ -120,7 +120,7 @@ char String_obi::operator[](int index)
 	return _string[index];
 }
 
-int String_obi::operator()(char el)
+int Str::operator()(char el)
 {
 	int index = -1;
 	char* tmp;
@@ -130,12 +130,12 @@ int String_obi::operator()(char el)
 	return index;
 }
 
-String_obi::operator int()
+Str::operator int()
 {
 	return _strLen;
 }
 
-String_obi& String_obi::operator++()
+Str& Str::operator++()
 {
 	if (this->_strLen < this->_currentMaxStrLen) {
 		_string[_strLen] = ' ';
@@ -143,7 +143,7 @@ String_obi& String_obi::operator++()
 		recalcStrLen();
 		return *this;
 	}
-	String_obi* tmp = new String_obi(this->getStrLen() + _NEW_EMPTY_SPACE);
+	Str* tmp = new Str(this->getStrLen() + _NEW_EMPTY_SPACE);
 	strcpy_s(tmp->_string, tmp->getCurrentMaxStrLen() + 1, this->_string);
 	strcat_s(tmp->_string, tmp->getCurrentMaxStrLen() + 1, " ");
 	tmp->recalcStrLen();
@@ -151,9 +151,9 @@ String_obi& String_obi::operator++()
 	return *this;
 }
 
-String_obi& String_obi::operator++(int)
+Str& Str::operator++(int)
 {
-	String_obi* tmp2 = new String_obi;
+	Str* tmp2 = new Str;
 	*tmp2 = *this;
 	if (this->_strLen < this->_currentMaxStrLen) {
 
@@ -162,7 +162,7 @@ String_obi& String_obi::operator++(int)
 		recalcStrLen();
 		return *tmp2;
 	}
-	String_obi* tmp = new String_obi(this->getStrLen() + _NEW_EMPTY_SPACE);
+	Str* tmp = new Str(this->getStrLen() + _NEW_EMPTY_SPACE);
 	strcpy_s(tmp->_string, tmp->getCurrentMaxStrLen() + 1, this->_string);
 	strcat_s(tmp->_string, tmp->getCurrentMaxStrLen() + 1, " ");
 	tmp->recalcStrLen();
@@ -170,7 +170,7 @@ String_obi& String_obi::operator++(int)
 	return *tmp2;
 }
 
-String_obi& String_obi::operator--()
+Str& Str::operator--()
 {
 	if (this->_strLen <= this->_MIN_ARR_LEN) {
 		return *this;
@@ -180,19 +180,19 @@ String_obi& String_obi::operator--()
 	return *this;
 }
 
-String_obi& String_obi::operator--(int)
+Str& Str::operator--(int)
 {
 	if (this->_strLen <= this->_MIN_ARR_LEN) {
 		return *this;
 	}
-	String_obi* tmp = new String_obi;
+	Str* tmp = new Str;
 	*tmp = *this;
 	_string[_strLen - 1] = '\0';
 	recalcStrLen();
 	return *tmp;
 }
 
-void* String_obi::operator new(size_t size)
+void* Str::operator new(size_t size)
 {
 	void* ptr = malloc(size);
 	/*if (ptr) {
@@ -204,45 +204,45 @@ void* String_obi::operator new(size_t size)
 	return ptr;
 }
 
-void* String_obi::operator new[](size_t size)
+void* Str::operator new[](size_t size)
 {
 	void* ptr = malloc(size);
 	return ptr;
 }
 
-void String_obi::operator delete(void* ptr)
+void Str::operator delete(void* ptr)
 {
-	~String_obi();
+	~Str();
 	//free(ptr);
 	//std::cout << " <" << sizeof(String_obi) << "_bytes_were_released_> ";
 }
 
-void String_obi::operator delete[](void* ptr)
+void Str::operator delete[](void* ptr)
 {
-	~String_obi();
+	~Str();
 	//free(ptr);
 }
 
-void String_obi::print() const {
+void Str::print() const {
 	std::cout << this->_string;
 }
 
-void String_obi::recalcStrLen() {
+void Str::recalcStrLen() {
 	this->_strLen = strlen(this->_string);
 }
 
-std::ostream& operator << (std::ostream& out, String_obi& obj) {
+std::ostream& operator << (std::ostream& out, Str& obj) {
 	for (int i = 0; i < obj.getStrLen(); ++i) {
 		out << obj.getCharArr()[i];
 	}
 	return out;
 }
 
-std::istream& operator >> (std::istream& in, String_obi& obj) {
+std::istream& operator >> (std::istream& in, Str& obj) {
 	const int lenTmp = 256;
 	char tmp[lenTmp];
 	in >> tmp;
-	String_obi* newStr = new String_obi(tmp);
+	Str* newStr = new Str(tmp);
 	obj = *newStr;
 	return in;
 }

@@ -1,10 +1,16 @@
 #include "Menu.h"
+#include "Deck.h"
+
+Menu* Menu::_ptr = new Menu;
+Deck* Deck::_ptr = new Deck;
+Diller* Diller::_ptr = new Diller;
 
 int main()
 {
-    Menu* menu = new Menu();
+    Menu* menu = Menu::getReferance();
+    Deck* deck = Deck::getReferance();
+    Diller* diller = Diller::getReferance();
     menu->start();
-
     menu->~Menu();
 }
 

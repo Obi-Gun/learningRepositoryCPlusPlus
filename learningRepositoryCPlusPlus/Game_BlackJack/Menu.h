@@ -2,30 +2,31 @@
 #define Menu_Guardian
 #include <iostream>
 #include "Card.h"
+#include "Diller.h"
+#include "Player.h"
 
 class Menu
 {
 private:
-	int* _deckOfCards;
-	int _numberOfDecks;
-	int _length;
-	const int _CARDS_IN_DECK = 52; 
-	const int _MIN_NUMB_OF_DECKS = 1;
-	const int _MAX_NUMB_OF_DECKS = 8;
+	static Menu* _ptr;
+	Person** _persons;
 
-	int getNumbOfDecks() const;
-	bool setNumberOfDecks(int);
+	Menu();
 
 	void showRules() const;
 	void showMenu();
 	void showDeck() const;
-
-	void initialize();
+	void initPersons();
+	void initPlayers();
+	void initDiller();
+	void initDecks();
+	void match();
 
 public:
-	Menu();
 	~Menu();
 
 	void start();
+
+	static Menu* getReferance();
 };
 #endif // !Menu_Guardian
