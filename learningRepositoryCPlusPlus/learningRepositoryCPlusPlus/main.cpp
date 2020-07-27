@@ -2,6 +2,7 @@
 #include "ComplexNum.h"
 #include "String_SmartPointer.h"
 #include "String_obi.h"
+#include "CalcStr.h"
 
 using namespace std;
 
@@ -66,7 +67,13 @@ int main() {
 
 	String_SmartPointer copy3 = copy1;
 	cout << "\nThere are " << String_obi::getObjCounter() << " String_obi objects right now";
-	*/
-	// Here we can see that there is only one example of class String_obi has been created. Thats why we used a smartpointer.
 
+	// Here we can see that there is only one example of class String_obi has been created. Thats why we used a smartpointer.
+	*/
+
+// Homework . Course: "OOP in C++".
+	CalcStr* calc = new CalcStr;
+	string t = "(((5 + 5 * 2)))";
+	t = calc->unbracked(t);
+	cout << t;
 }

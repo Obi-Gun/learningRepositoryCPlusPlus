@@ -127,6 +127,7 @@
     <ClCompile Include="Arr_Reservoir.cpp" />
     <ClCompile Include="Aspirant.cpp" />
     <ClCompile Include="BinaryTree.cpp" />
+    <ClCompile Include="CalcStr.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="ComplexNum.cpp" />
     <ClCompile Include="Contact.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Arr_Reservoir.h" />
     <ClInclude Include="Aspirant.h" />
     <ClInclude Include="BinaryTree.h" />
+    <ClInclude Include="CalcStr.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="ComplexNum.h" />
     <ClInclude Include="Contact.h" />

@@ -9,17 +9,13 @@ namespace FileParserCsharp
     {
         static void Main(string[] args)
         {
-
-            Console.WriteLine("Hello World!");
-            WriteFile("C:\\Users\\Alexandr\\Desktop\\Result.log");
-            string x = ReadFile("C:\\Users\\Alexandr\\Desktop\\Result.log");
-            Console.WriteLine(x);
-
+            /*Parser parser = new Parser();
+            parser.ReadFile("C:\\Users\\Alexandr\\Desktop\\Test.log");
+            parser.filterStrWith("Request for");
+            parser.separateSubStr(" _|");
+            parser.printSubStrings();
+            parser.filterNeededColumns("10,9,8,7,1,0");
+            parser.WriteFilteredSubStringsToFile("C:\\Users\\Alexandr\\Desktop\\FilteredSubStrings.log");*/
         }
-
-       
-
-
-        
     }
 }
