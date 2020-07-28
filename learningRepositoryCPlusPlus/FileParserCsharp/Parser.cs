@@ -20,14 +20,59 @@ namespace FileParserCsharp
         private string _filteredStrings;
         private string[,] _SubStrings;
         private string _filteredSubStrings;
-        private int _length;
-        private int _columns;
         private int[] _neededColumns;
-        
-        public void ReadFile(string sourseFilepath)
+        private int _length { get; set; }
+        private int _columns { get; set; }
+
+        public Parser() { }
+        public Parser(string sourceFilepath, string destFilepath, string subStrSeparators, string strFilter = "all strings", string neededSubStrColumnsSeparatedByComma = "all columns")
+        {
+            Parse(sourceFilepath, destFilepath, subStrSeparators, strFilter, neededSubStrColumnsSeparatedByComma);
+        }
+
+        /// <summary>
+        /// The main logic method. Like in test task.
+        /// </summary>
+        /// <param name="sourceFilepath"></param>
+        /// <param name="destFilepath"></param>
+        /// <param name="subStrSeparators"></param>
+        /// <param name="strFilter"></param>
+        /// <param name="neededSubStrColumnsSeparatedByComma"></param>
+        /// <example>
+        ///    Parser parser2 = new Parser();
+        ///    try
+        ///    {
+        ///        parser2.ReadFile("C:\\Users\\Alexandr\\Desktop\\Test.log");
+        ///        parser2.filterStrWith("Request for");
+        ///        parser2.separateSubStr(" _|");
+        ///        parser2.printSubStrings();
+        ///        parser2.filterNeededColumns("10,9,8,7,0,1");
+        ///        parser2.WriteFilteredSubStringsToFile("C:\\Users\\Alexandr\\Desktop\\FilteredSubStrings.log");
+        ///    }
+        ///    catch (ParserException e)
+        ///    {
+        ///        Console.WriteLine("ParserException: " + e.Message);
+        ///    }</example>
+        private void Parse(string sourceFilepath, string destFilepath, string subStrSeparators, string strFilter, string neededSubStrColumnsSeparatedByComma)
+        {
+            try
+            {
+                this.ReadFile(sourceFilepath);
+                this.filterStrWith(strFilter);
+                this.separateSubStr(subStrSeparators);
+                this.filterNeededColumns(neededSubStrColumnsSeparatedByComma);
+                this.WriteFilteredSubStringsToFile(destFilepath);
+            }
+            catch (ParserException e)
+            {
+                Console.WriteLine("ParserException: " + e.Message);
+            }
+        }
+
+        public void ReadFile(string sourceFilepath)
         {
             using (
-                FileStream fs = new FileStream(sourseFilepath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                FileStream fs = new FileStream(sourceFilepath, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 byte[] readBytes = new byte[(int)fs.Length];
                 fs.Read(readBytes, 0, readBytes.Length);
@@ -64,7 +109,7 @@ namespace FileParserCsharp
         {
             if (_text == null)
             {
-                throw (new ParserException("public string getText() ==> _text == null"));
+                throw new ParserException("public string getText() ==> _text == null");
             }
             else
             {
@@ -84,11 +129,20 @@ namespace FileParserCsharp
             }
         }
 
-        public string getFilteredStrings()
+        private string[] getFilteredStringsArr()
         {
             if (_filteredStringsArr == null)
             {
-                throw (new ParserException("public string getFilteredStrings() ==> _filteredStringsArr == null"));
+                throw new ParserException("public void separateSubStr(string separators) ==> _filteredStringsArr == null");
+            }
+            return _filteredStringsArr;
+        }
+
+        private string getFilteredStrings()
+        {
+            if (_filteredStringsArr == null)
+            {
+                throw new ParserException("public string getFilteredStrings() ==> _filteredStringsArr == null");
             }
             else
             {
@@ -96,11 +150,20 @@ namespace FileParserCsharp
             }
         }
 
+        private string[,] getSubStrings()
+        {
+            if (_SubStrings == null)
+            {
+                throw new ParserException("private string[,] getSubStrings() ==> _SubStrings == null");
+            }
+            return _SubStrings;
+        }
+
         public string getFilteredSubStrings()
         {
             if (_filteredSubStrings == null)
             {
-                throw (new ParserException(" public string getFilteredSubStrings() ==> _filteredSubStrings == null"));
+                throw new ParserException(" public string getFilteredSubStrings() ==> _filteredSubStrings == null");
             }
             else
             {
@@ -145,14 +208,14 @@ namespace FileParserCsharp
 
         public void filterStrWith(string key = "all strings") {
             bool allStrings = key.Equals("all strings");
-            string[] tmp = _text.Split("\n");
+            string[] tmp = getText().Split("\n");
             _filteredStringsArr = new string[tmp.Length];
             _length = 0;
-            for (int i = 0; i < tmp.Length; ++i)
+            foreach (string i in tmp)
             {
-                if (allStrings || tmp[i].Contains(key))
+                if (allStrings || i.Contains(key))
                 {
-                    _filteredStringsArr[_length++] = tmp[i];
+                    _filteredStringsArr[_length++] = i;
                 }
             }
             concatFilteredStrings();
@@ -179,16 +242,20 @@ namespace FileParserCsharp
         /// </summary>
         public void separateSubStr(string separators)
         {
+            if (separators.Equals("") || separators.Equals("\n"))
+            {
+                throw new ParserException("public void separateSubStr(string separators) ==> separators.Equals(\"\") || separators.Equals(\"\\n\") == true");
+            }
             char[] separatorsArr = splitSeparators(separators);
-            string[] tmp = _filteredStringsArr[0].Split(separatorsArr);
+            string[] tmp = getFilteredStringsArr()[0].Split(separatorsArr);
             _columns = tmp.Length;
             _SubStrings = new string[_length, _columns];
             for (int i = 0; i < _length; ++i)
             {
-                tmp = _filteredStringsArr[i].Split(separatorsArr);
+                tmp = getFilteredStringsArr()[i].Split(separatorsArr);
                 for (int j = 0; j < _columns; ++j)
                 {
-                    _SubStrings[i,j] = tmp[j];
+                    _SubStrings[i, j] = tmp[j];
                 }
             }
         }
@@ -215,9 +282,9 @@ namespace FileParserCsharp
         /// </returns>
         private bool isInNeededColumns(int num)
         {
-            for (int i = 0; i < _neededColumns.Length; ++i)
+            foreach (int i in _neededColumns)
             {
-                if (num == _neededColumns[i])
+                if (num == i)
                 {
                     return true;
                 }
@@ -236,20 +303,18 @@ namespace FileParserCsharp
             {
                 splitNeededColumns(neededColumnsSeparatedByComma);
             }
-            if (_SubStrings != null)
+            _filteredSubStrings = "";
+            getSubStrings(); //check exception
+            for (int i = 0; i < _length; ++i)
             {
-                _filteredSubStrings = "";
-                for (int i = 0; i < _length; ++i)
+                for (int j = 0; j < _columns; ++j)
                 {
-                    for (int j = 0; j < _columns; ++j)
+                    if (allColumns || isInNeededColumns(j))
                     {
-                        if (allColumns || isInNeededColumns(j))
-                        {
-                            _filteredSubStrings += " " + _SubStrings[i, j];
-                        }
+                        _filteredSubStrings += " " + getSubStrings()[i, j];
                     }
-                    _filteredSubStrings += "\n";
                 }
+                _filteredSubStrings += "\n";
             }
         }
     }
