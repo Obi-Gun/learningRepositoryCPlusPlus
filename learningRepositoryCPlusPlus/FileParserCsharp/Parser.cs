@@ -6,6 +6,13 @@ using System.Linq;
 
 namespace FileParserCsharp
 {
+    /// <summary>
+    /// The main Parser class.
+    /// Contains methods for read, filter and write substrings to file.
+    /// </summary>
+    /// <remarks>
+    /// This class can read, filter by key, split by separators and write substrings to file.
+    /// </remarks>
     public class Parser
     {
         private string _text;
@@ -55,13 +62,19 @@ namespace FileParserCsharp
 
         public string getText()
         {
-            if (_text != null)
+            if (_text == null)
+            {
+                throw (new ParserException("public string getText() ==> _text == null"));
+            }
+            else
             {
                 return _text;
             }
-            return "";
         }
 
+        /// <summary>
+        /// Method concatinate substrings from string array.
+        /// </summary>
         private void concatFilteredStrings()
         {
             _filteredStrings = "";
@@ -73,44 +86,45 @@ namespace FileParserCsharp
 
         public string getFilteredStrings()
         {
-            if (_filteredStringsArr != null)
+            if (_filteredStringsArr == null)
+            {
+                throw (new ParserException("public string getFilteredStrings() ==> _filteredStringsArr == null"));
+            }
+            else
             {
                 return _filteredStrings;
             }
-            return "";
         }
 
         public string getFilteredSubStrings()
         {
-            if (_filteredSubStrings != null)
+            if (_filteredSubStrings == null)
+            {
+                throw (new ParserException(" public string getFilteredSubStrings() ==> _filteredSubStrings == null"));
+            }
+            else
             {
                 return _filteredSubStrings;
             }
-            return "";
         }
 
         public void print()
         {
-            if (_text != null)
-            {
                 Console.WriteLine(this.getText());
-            }
         }
 
         public void printFilteredStrings()
         {
-            if (_filteredStringsArr != null)
-            {
-                for (int i = 0; i < _length; ++i)
-                {
-                    Console.WriteLine(this.getFilteredStrings());
-                }
-            }
+                Console.WriteLine(this.getFilteredStrings());
         }
 
         public void printSubStrings()
         {
-            if (_SubStrings != null)
+            if (_SubStrings == null)
+            {
+                throw (new ParserException("public void printSubStrings() ==> _SubStrings == null"));
+            }
+            else
             {
                 for (int i = 0; i < _length; ++i)
                 {
@@ -125,19 +139,18 @@ namespace FileParserCsharp
 
         public void printFilteredSubStrings()
         {
-            if (_filteredSubStrings != null)
-            {
-                Console.WriteLine(_filteredSubStrings);
-            }
+            Console.WriteLine(this.getFilteredSubStrings());
         }
 
-        public void filterStrWith(string key) {
+
+        public void filterStrWith(string key = "all strings") {
+            bool allStrings = key.Equals("all strings");
             string[] tmp = _text.Split("\n");
             _filteredStringsArr = new string[tmp.Length];
             _length = 0;
             for (int i = 0; i < tmp.Length; ++i)
             {
-                if (tmp[i].Contains(key))
+                if (allStrings || tmp[i].Contains(key))
                 {
                     _filteredStringsArr[_length++] = tmp[i];
                 }
@@ -145,6 +158,12 @@ namespace FileParserCsharp
             concatFilteredStrings();
         }
 
+        /// <summary>
+        /// Method split separators string to char array.
+        /// </summary>
+        /// <returns>
+        /// char array of separated symbols.
+        /// </returns>
         private char[] splitSeparators(string separators)
         {
             char[] separatorsArr = new char[separators.Length];
@@ -155,6 +174,9 @@ namespace FileParserCsharp
             return separatorsArr;
         }
 
+        /// <summary>
+        /// Method split string to substrings by separators string to string array.
+        /// </summary>
         public void separateSubStr(string separators)
         {
             char[] separatorsArr = splitSeparators(separators);
@@ -171,6 +193,9 @@ namespace FileParserCsharp
             }
         }
 
+        /// <summary>
+        /// Method split neededColumns string to int array.
+        /// </summary>
         private void splitNeededColumns(string neededColumns)
         {
             string[] tmp = neededColumns.Split(',');
@@ -181,6 +206,13 @@ namespace FileParserCsharp
             }
         }
 
+        /// <summary>
+        /// Method check _neededColumns contains the number.
+        /// </summary>
+        /// <returns>
+        /// true if _neededColumns contains the number.
+        /// false if _neededColumns does not contain the number.
+        /// </returns>
         private bool isInNeededColumns(int num)
         {
             for (int i = 0; i < _neededColumns.Length; ++i)
@@ -193,9 +225,17 @@ namespace FileParserCsharp
             return false;
         }
 
-        public void filterNeededColumns(string neededColumnsSeparatedByComma)
+        /// <summary>
+        /// Method filter columns what you have writed in 'neededColumnsSeparatedByComma' 
+        /// and concatinate all filtered substrings to string this._filteredSubStrings
+        /// </summary>
+        public void filterNeededColumns(string neededColumnsSeparatedByComma = "all columns")
         {
-            splitNeededColumns(neededColumnsSeparatedByComma);
+            bool allColumns = neededColumnsSeparatedByComma.Equals("all columns");
+            if (!allColumns)
+            {
+                splitNeededColumns(neededColumnsSeparatedByComma);
+            }
             if (_SubStrings != null)
             {
                 _filteredSubStrings = "";
@@ -203,7 +243,7 @@ namespace FileParserCsharp
                 {
                     for (int j = 0; j < _columns; ++j)
                     {
-                        if (isInNeededColumns(j))
+                        if (allColumns || isInNeededColumns(j))
                         {
                             _filteredSubStrings += " " + _SubStrings[i, j];
                         }
