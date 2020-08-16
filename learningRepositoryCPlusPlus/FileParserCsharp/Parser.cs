@@ -138,7 +138,7 @@ namespace FileParserCsharp
             return _filteredStringsArr;
         }
 
-        private string getFilteredStrings()
+        public string getFilteredStrings()
         {
             if (_filteredStringsArr == null)
             {

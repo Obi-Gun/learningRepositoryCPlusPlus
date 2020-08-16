@@ -4,29 +4,27 @@
 #include "Card.h"
 #include "Diller.h"
 #include "Player.h"
+#include "Deck.h"
 
 class Menu
 {
 private:
-	static Menu* _ptr;
-	Person** _persons;
+	Player** _players;
+	Deck* _deck;
+	Diller* _diller;
 
-	Menu();
+
 
 	void showRules() const;
 	void showMenu();
 	void showDeck() const;
-	void initPersons();
 	void initPlayers();
-	void initDiller();
-	void initDecks();
 	void match();
 
 public:
+	Menu();
 	~Menu();
 
 	void start();
-
-	static Menu* getReferance();
 };
 #endif // !Menu_Guardian

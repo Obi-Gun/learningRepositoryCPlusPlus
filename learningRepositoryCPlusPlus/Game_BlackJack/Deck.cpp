@@ -14,6 +14,14 @@ void Deck::initializeDeck()
 	}
 }
 
+Deck::Deck()
+{
+}
+
+Deck::~Deck()
+{
+}
+
 bool Deck::setNumberOfDecks(int num)
 {
 	if (num < 1) {

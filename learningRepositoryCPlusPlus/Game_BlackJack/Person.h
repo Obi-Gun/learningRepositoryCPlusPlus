@@ -5,14 +5,15 @@
 
 class Person
 {
-private:
+protected:
 	Card** _hand;
 	int _cardsCounter;
-	Str _name;
+	//Str _name;
 
 	Person();
 
 public:
+
 	virtual ~Person() = 0;
 	
 	virtual void bringCard(Card*);

@@ -1,6 +1,10 @@
 #include "Diller.h"
 
-/*Diller* Diller::getReferance()
+Diller::Diller()
 {
-    return _ptr;
-}*/
+
+}
+
+Diller::~Diller()
+{
+}

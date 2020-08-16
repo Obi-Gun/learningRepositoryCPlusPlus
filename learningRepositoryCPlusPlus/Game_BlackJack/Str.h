@@ -30,7 +30,6 @@ public:
 	const char* getCharArr() const;
 	//static int getObjCounter();
 
-
 	Str operator*(const Str& str);
 	Str operator=(const Str& str);
 	Str operator+(const Str& str);

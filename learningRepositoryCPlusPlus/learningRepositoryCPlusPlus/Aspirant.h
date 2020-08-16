@@ -1,9 +1,9 @@
 #ifndef AspirantClass
 #define AspirantClass
 #include "String_obi.h"
-#include "Student_obi.h"
+#include "Student.h"
 
-class Aspirant : public Student_obi
+class Aspirant : public Student
 {
 private:
 	String_obi _graduationWork;

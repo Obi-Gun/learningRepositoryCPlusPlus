@@ -5,7 +5,6 @@
 class Deck
 {
 private:
-	static Deck* _ptr;
 	int* _deckOfCards;
 	int _numberOfDecks;
 	int _length;
@@ -14,9 +13,7 @@ private:
 	const int _DEFAULT_NUMB_OF_DECKS = 6;
 	const int _MAX_NUMB_OF_DECKS = 8;
 
-	Deck();
 
-	int getNumbOfDecks() const;
 
 	void initializeDeck();
 	
@@ -30,8 +27,9 @@ private:
 
 
 public:
+	Deck();
 	~Deck();
-	static Deck* getReferance();
 	bool setNumberOfDecks(int);
+	int getNumbOfDecks() const;
 };
 #endif // !Menu_Guardian

@@ -132,6 +132,7 @@
     <ClCompile Include="ComplexNum.cpp" />
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="Date_obi.cpp" />
+    <ClCompile Include="DictionaryOfFrequency.cpp" />
     <ClCompile Include="Employer.cpp" />
     <ClCompile Include="Figure.cpp" />
     <ClCompile Include="Flat.cpp" />
@@ -154,7 +155,8 @@
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="String_obi.cpp" />
     <ClCompile Include="String_SmartPointer.cpp" />
-    <ClCompile Include="Student_obi.cpp" />
+    <ClCompile Include="Student.cpp" />
+    <ClCompile Include="Student_Vector.cpp" />
     <ClCompile Include="Time_obi.cpp" />
     <ClCompile Include="Worker.cpp" />
     <ClCompile Include="Circle_inscribed_in_Square.cpp" />
@@ -169,6 +171,7 @@
     <ClInclude Include="ComplexNum.h" />
     <ClInclude Include="Contact.h" />
     <ClInclude Include="Date_obi.h" />
+    <ClInclude Include="DictionaryOfFrequency.h" />
     <ClInclude Include="Employer.h" />
     <ClInclude Include="Figure.h" />
     <ClInclude Include="Flat.h" />
@@ -190,7 +193,8 @@
     <ClInclude Include="Square.h" />
     <ClInclude Include="String_obi.h" />
     <ClInclude Include="String_SmartPointer.h" />
-    <ClInclude Include="Student_obi.h" />
+    <ClInclude Include="Student.h" />
+    <ClInclude Include="Student_Vector.h" />
     <ClInclude Include="Time_obi.h" />
     <ClInclude Include="Circle_inscribed_in_Square.h" />
     <ClInclude Include="Worker.h" />
