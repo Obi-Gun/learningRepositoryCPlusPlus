@@ -161,7 +161,7 @@ int main() {
 
 // Homework 14.2. Course: "OOP in C++".
 	DictionaryOfFrequency dict;
-	//dict.readFile("C:\\Users\\Alexandr\\Desktop\\New Text Document.txt");
-	dict.readFile("C:\\Users\\Alexandr\\Desktop\\War and Peace.txt");
+	//dict.readFileAndFillDictionary("C:\\Users\\Alexandr\\Desktop\\New Text Document.txt");
+	dict.readFileAndFillDictionary("C:\\Users\\Alexandr\\Desktop\\War and Peace.txt");
 	cout << dict;
 }
