@@ -19,6 +19,7 @@ int main() {
 // Homework 6.1. Course: "OOP in C++". 
 
 
+
 // Homework 6.2. Course: "OOP in C++". Class ComplexNumber
 	/*cout << "\nThere are " << ComplexNum::getObjCounter() << " ComplexNum objects right now";
 
