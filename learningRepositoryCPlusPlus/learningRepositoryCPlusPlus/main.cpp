@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include "ComplexNum.h"//
 //#include "String_SmartPointer.h"
 #include "String_obi.h"//
@@ -9,6 +9,8 @@
 #include <list>
 #include "Student_Vector.h"
 #include "DictionaryOfFrequency.h"
+#include <fcntl.h>
+#include <io.h>
 
 using namespace std;
 
@@ -161,8 +163,16 @@ int main() {
 	cout << "_______SortByFirst 1-3 and 4-20" << endl << arr << endl;*/
 
 // Homework 14.2. Course: "OOP in C++".
+	/*_setmode(_fileno(stdout), _O_U16TEXT);
+	_setmode(_fileno(stdin), _O_U16TEXT);
+	_setmode(_fileno(stderr), _O_U16TEXT);
+
+	wcout << L"Unicode -- English -- Русский -- Ελληνικά -- Español." << endl;
+	wchar_t d = 'ж';
+	wcout << sizeof(d);*/
+
 	DictionaryOfFrequency dict;
 	//dict.readFileAndFillDictionary("C:\\Users\\Alexandr\\Desktop\\New Text Document.txt");
-	dict.readFileAndFillDictionary("C:\\Users\\Alexandr\\Desktop\\War and Peace.txt");
+	dict.readFileAndFillDictionary("G:\\_Downloads\\War and Peace.txt");
 	cout << dict;
 }

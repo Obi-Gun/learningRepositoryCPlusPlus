@@ -4,6 +4,8 @@
 #include <map>
 #include <algorithm>
 #include <cctype>
+#include <fcntl.h>
+#include <io.h>
 
 using namespace std;
 
