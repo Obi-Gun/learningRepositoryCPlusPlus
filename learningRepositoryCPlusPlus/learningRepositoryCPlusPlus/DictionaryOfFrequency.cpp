@@ -83,6 +83,12 @@ void DictionaryOfFrequency::readFileAndFillDictionary(const char* specialWordsFi
 	}
 }
 
+void DictionaryOfFrequency::showWordFrequency()
+{
+	printf("\n________________________________________________________________________________");
+	printf("\n_________________There are %10i words in the text_______________________\n", getWordsCounter());
+}
+
 std::ostream& operator<<(std::ostream& out, DictionaryOfFrequency& obj)
 {
 	int i = 0;
@@ -92,7 +98,6 @@ std::ostream& operator<<(std::ostream& out, DictionaryOfFrequency& obj)
 			out << endl;
 		}
 	}
-	printf("\n________________________________________________________________________________");
-	printf("\n_________________There are %10i words in the text_______________________\n", obj.getWordsCounter());
+	obj.showWordFrequency();
 	return out;
 }

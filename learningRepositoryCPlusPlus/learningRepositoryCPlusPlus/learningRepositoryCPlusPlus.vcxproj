@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddNumberFrom.cpp" />
     <ClCompile Include="Arr_int.cpp" />
     <ClCompile Include="Arr_Reservoir.cpp" />
     <ClCompile Include="Aspirant.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="Circle_inscribed_in_Square.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddNumberFrom.h" />
     <ClInclude Include="Arr_int.h" />
     <ClInclude Include="Arr_Reservoir.h" />
     <ClInclude Include="Aspirant.h" />
