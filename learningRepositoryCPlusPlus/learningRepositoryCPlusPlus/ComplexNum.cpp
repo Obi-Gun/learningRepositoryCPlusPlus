@@ -5,26 +5,26 @@ ComplexNum::ComplexNum()
 {
 	_a = 0;
 	_b = 0;
-	incrementObjCounter();
+	//incrementObjCounter();
 }
 
 ComplexNum::ComplexNum(double a, double b)
 {
 	_a = a;
 	_b = b;
-	incrementObjCounter();
+	//incrementObjCounter();
 }
 
 ComplexNum::ComplexNum(ComplexNum& obj)
 {
 	_a = obj._a;
 	_b = obj._b;
-	incrementObjCounter();
+	//incrementObjCounter();
 }
 
 ComplexNum::~ComplexNum()
 {
-	decrementObjCounter();
+	//decrementObjCounter();
 }
 
 ComplexNum ComplexNum::operator+(const ComplexNum obj)
@@ -70,17 +70,17 @@ void ComplexNum::print()
 	std::cout << this->_a << " + " << this->_b << i << std::endl;
 }
 
-int ComplexNum::getObjCounter()
-{
-	return _objCounter;
-}
-
-void ComplexNum::incrementObjCounter()
-{
-	++_objCounter;
-}
-
-void ComplexNum::decrementObjCounter()
-{
-	--_objCounter;
-}
+//int ComplexNum::getObjCounter()
+//{
+//	return _objCounter;
+//}
+//
+//void ComplexNum::incrementObjCounter()
+//{
+//	++_objCounter;
+//}
+//
+//void ComplexNum::decrementObjCounter()
+//{
+//	--_objCounter;
+//}

@@ -8,7 +8,7 @@ private:
 	double _b;
 	//char sigh = '+';
 	const char i = 'i';
-	static int _objCounter;
+	//static int _objCounter;
 
 public:
 	ComplexNum();
@@ -24,8 +24,8 @@ public:
 
 	void print();
 
-	static int getObjCounter();
-	void incrementObjCounter();
-	void decrementObjCounter();
+	//static int getObjCounter();
+	//void incrementObjCounter();
+	//void decrementObjCounter();
 };
 #endif

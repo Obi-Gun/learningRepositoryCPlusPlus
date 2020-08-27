@@ -12,7 +12,7 @@ private:
 	static const int _MAX_ARR_LEN = 1000;			// max arrLen in chars
 	static const int _DEFAULT_ARR_LEN = 81;			// default arrLen in chars = 81 (task requirement)
 	static const int _NEW_EMPTY_SPACE = 20;         // minimum space will be added if there is no space for cancatinate new string
-	static int _objCounter;
+	//static int _objCounter;
 
 	void setCurrentMaxStrLen(int maxStringLength = _DEFAULT_ARR_LEN - 1);
 	void recalcStrLen();
@@ -28,7 +28,7 @@ public:
 	int getCurrentMaxStrLen() const;
 	int getStrLen() const;
 	const char* getCharArr() const;
-	static int getObjCounter();
+	//static int getObjCounter();
 
 
 	String_obi operator*(const String_obi& str);

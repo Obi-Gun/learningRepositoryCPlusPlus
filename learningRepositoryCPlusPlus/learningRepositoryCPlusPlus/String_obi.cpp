@@ -6,7 +6,7 @@ String_obi::String_obi() {
 	this->_string = new char[this->getCurrentMaxStrLen() + 1];
 	this->_string[0] = '\0';
 	recalcStrLen();
-	++_objCounter;
+	//++_objCounter;
 }
 
 String_obi::String_obi(int maxStringLength) {
@@ -14,7 +14,7 @@ String_obi::String_obi(int maxStringLength) {
 	this->_string = new char[this->getCurrentMaxStrLen() + 1];
 	this->_string[0] = '\0';
 	recalcStrLen();
-	++_objCounter;
+	//++_objCounter;
 }
 
 String_obi::String_obi(const char* string) {
@@ -22,7 +22,7 @@ String_obi::String_obi(const char* string) {
 	this->_string = new char[this->getCurrentMaxStrLen() + 1];
 	strcpy_s(this->_string, this->getCurrentMaxStrLen() + 1, string);
 	recalcStrLen();
-	++_objCounter;
+	//++_objCounter;
 }
 
 String_obi::String_obi(String_obi& string_obi) {
@@ -30,7 +30,7 @@ String_obi::String_obi(String_obi& string_obi) {
 	this->_string = new char[this->getCurrentMaxStrLen() + 1];
 	strcpy_s(this->_string, this->getCurrentMaxStrLen() + 1, string_obi._string);
 	recalcStrLen();
-	++_objCounter;
+	//++_objCounter;
 }
 
 String_obi::String_obi(const String_obi& string_obi) {
@@ -38,13 +38,13 @@ String_obi::String_obi(const String_obi& string_obi) {
 	this->_string = new char[this->getCurrentMaxStrLen() + 1];
 	strcpy_s(this->_string, this->getCurrentMaxStrLen() + 1, string_obi._string);
 	recalcStrLen();
-	++_objCounter;
+	//++_objCounter;
 }
 
 String_obi::~String_obi() {
 	delete[] this->_string;
 	std::cout << "\n~String_obi()";
-	--_objCounter;
+	//--_objCounter;
 }
 
 void String_obi::setCurrentMaxStrLen(int maxStringLength) {
@@ -72,10 +72,10 @@ const char* String_obi::getCharArr() const
 	return this->_string;
 }
 
-int String_obi::getObjCounter()
-{
-	return String_obi::_objCounter;
-}
+//int String_obi::getObjCounter()
+//{
+//	return String_obi::_objCounter;
+//}
 
 String_obi String_obi::operator*(const String_obi& string) {
 	String_obi result(strlen(this->_string) + strlen(string._string));
