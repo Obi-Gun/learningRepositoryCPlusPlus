@@ -22,8 +22,10 @@ void DictionaryOfFrequency::strToLowerCase(string& str)
 
 void DictionaryOfFrequency::addToDictionary(string str)
 {
-	// add check \n
+	if (str == "\n") 
+		return;
 	incrementWordsCounter();
+	strToLowerCase(str);
 	pair<string, int> tmp3(str, 1);
 	auto tmp2 = _dictionary.insert(tmp3);
 	if (!tmp2.second) {
@@ -46,18 +48,24 @@ void DictionaryOfFrequency::splitStrToWordsAndFillDictionary(char* str)
 	char* context;
 	char* wordArr = strtok_s(str, _DELIMETERS, &context);
 	string wordString = wordArr;
-	strToLowerCase(wordString);
-	for (auto letter = wordString.begin(); letter != wordString.end(); ++letter) {
-		//if (*letter == )
-		//wordString.
-	}
 	addToDictionary(wordString);
 	while (wordArr = strtok_s(NULL, _DELIMETERS, &context)) {
 		wordString = wordArr;
-		strToLowerCase(wordString);
-		//if (wordString.) //add split by ôöæùÆ
 		addToDictionary(wordString);
 	}
+}
+
+void DictionaryOfFrequency::findTheMostCommonWord()
+{
+	auto max = _dictionary.begin();
+	for (auto word = _dictionary.begin(); word != _dictionary.end(); ++word)
+	{
+		if (word->second > max->second) {
+			max = word;
+		}
+	}
+	_mostCommonWord = max->first;
+	_mostCommonWordCounter = max->second;
 }
 
 DictionaryOfFrequency::DictionaryOfFrequency()
@@ -69,10 +77,10 @@ DictionaryOfFrequency::~DictionaryOfFrequency()
 {
 }
 
-void DictionaryOfFrequency::readFileAndFillDictionary(const char* specialWordsFilePath)
+void DictionaryOfFrequency::readFileAndFillDictionary(const char* filePath)
 {
 	FILE* sWFile;
-	if (fopen_s(&sWFile, specialWordsFilePath, "r")) {
+	if (fopen_s(&sWFile, filePath, "r")) {
 		cout << "Unable to open file";
 		return;
 	}
@@ -81,6 +89,42 @@ void DictionaryOfFrequency::readFileAndFillDictionary(const char* specialWordsFi
 		cout << "Unable to close file";
 		return;
 	}
+	findTheMostCommonWord();
+}
+
+void DictionaryOfFrequency::writeFile(const char* filePath)
+{
+	FILE* file;
+	if (fopen_s(&file, filePath, "w")) {
+		cout << "Unable to open file";
+		return;
+	}
+	int newStrCounter = 0;
+	_strDictionary << "\n_________________________________________________________________________";
+	_strDictionary << "\n_________________There are " << getWordsCounter() << "words in the text_______________________";
+	_strDictionary << "\n_________The word \"" << getMostCommonWord() << "\" was met in the text " << getMostCommonWordCounter() << " times_________________";
+	_strDictionary << "\n_________________________________________________________________________\n";
+	for (auto i = _dictionary.begin(); i != _dictionary.end(); ++i, ++newStrCounter) {
+		_strDictionary << i->first << " " << i->second << "    ";
+		if (newStrCounter % 7 == 0) {
+			_strDictionary << "\n";
+		}
+	}
+	fputs(_strDictionary.str().c_str(), file);
+	if (fclose(file)) {
+		cout << "Unable to close file";
+		return;
+	}
+}
+
+string DictionaryOfFrequency::getMostCommonWord() const
+{
+	return _mostCommonWord;
+}
+
+int DictionaryOfFrequency::getMostCommonWordCounter() const
+{
+	return _mostCommonWordCounter;
 }
 
 std::ostream& operator<<(std::ostream& out, DictionaryOfFrequency& obj)
@@ -94,5 +138,7 @@ std::ostream& operator<<(std::ostream& out, DictionaryOfFrequency& obj)
 	}
 	printf("\n________________________________________________________________________________");
 	printf("\n_________________There are %10i words in the text_______________________\n", obj.getWordsCounter());
+	printf("\n_________________The word %s was met in the text %i times_______________________\n", obj.getMostCommonWord().c_str(), obj.getMostCommonWordCounter());
+	printf("\n________________________________________________________________________________");
 	return out;
 }

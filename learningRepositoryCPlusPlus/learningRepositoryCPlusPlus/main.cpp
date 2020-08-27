@@ -1,18 +1,16 @@
 #include <list>
-#include <list>
 #include <io.h>
 #include <vector>
-#include "ComplexNum.h"
-#include "String_obi.h"
 #include "Student_Vector.h"
 #include "DictionaryOfFrequency.h"
 #include "Student.h"
+#include <sstream>
 
 using namespace std;
 
 int main() {
 // Homework 16.1. Course: "OOP in C++".
-	/*Student_Vector arr;
+	Student_Vector arr;
 	arr.add("Ivan2", "Ivanov", 1);
 	arr.add("Egor2", "Gagarin", 2);
 	arr.add("Oleg2", "Ivanov", 3);
@@ -46,11 +44,10 @@ int main() {
 
 	arr.sortByName(0, 3);
 	arr.sortByName(3);
-	cout << "_______SortByFirst 1-3 and 4-20" << endl << arr << endl;*/
+	cout << "_______SortByFirst 1-3 and 4-20" << endl << arr << endl;
 
 // Homework 16.2. Course: "OOP in C++".
-	DictionaryOfFrequency dict;
+	/*DictionaryOfFrequency dict;
 	dict.readFileAndFillDictionary("G:\\_Downloads\\War and Peace.txt");
-	cout << dict;
-
+	dict.writeFile("G:\\_Downloads\\Parsed War and Peace.txt");*/
 }

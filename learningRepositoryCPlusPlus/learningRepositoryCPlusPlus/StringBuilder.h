@@ -2,7 +2,7 @@
 #define String_obiClass
 #include <iostream>
 
-class String_obi
+class StringBuilder
 {
 private:
 	char* _string;
@@ -18,12 +18,12 @@ private:
 	void recalcStrLen();
 
 public:
-	String_obi();
-	String_obi(int length);
-	String_obi(const char* string);
-	String_obi(String_obi& string_obi);
-	String_obi(const String_obi& string_obi);
-	~String_obi();
+	StringBuilder();
+	StringBuilder(int length);
+	StringBuilder(const char* string);
+	StringBuilder(StringBuilder& string_obi);
+	StringBuilder(const StringBuilder& string_obi);
+	~StringBuilder();
 
 	int getCurrentMaxStrLen() const;
 	int getStrLen() const;
@@ -31,16 +31,16 @@ public:
 	//static int getObjCounter();
 
 
-	String_obi operator*(const String_obi& str);
-	String_obi operator=(const String_obi& str);
-	String_obi operator+(const String_obi& str);
+	StringBuilder operator*(const StringBuilder& str);
+	StringBuilder operator=(const StringBuilder& str);
+	StringBuilder operator+(const StringBuilder& str);
 	char operator[] (int);
 	int operator() (char);
 	operator int();
-	String_obi& operator++();
-	String_obi& operator--();
-	String_obi& operator++(int);
-	String_obi& operator--(int);
+	StringBuilder& operator++();
+	StringBuilder& operator--();
+	StringBuilder& operator++(int);
+	StringBuilder& operator--(int);
 	void* operator new (size_t);
 	void* operator new[] (size_t);
 	void operator delete (void*);
@@ -49,7 +49,7 @@ public:
 	void print() const;
 };
 
-std::ostream& operator << (std::ostream& out, String_obi& obj);
-std::istream& operator >> (std::istream& in, String_obi& obj);
+std::ostream& operator << (std::ostream& out, StringBuilder& obj);
+std::istream& operator >> (std::istream& in, StringBuilder& obj);
 
 #endif
