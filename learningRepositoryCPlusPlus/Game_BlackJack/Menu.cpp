@@ -37,8 +37,7 @@ void Menu::showDeck() const
 
 void Menu::initPlayers()
 {
-	_players = new Player * [1];
-	_players[0] = new Player;
+	_players = new Player;
 }
 
 void Menu::match()

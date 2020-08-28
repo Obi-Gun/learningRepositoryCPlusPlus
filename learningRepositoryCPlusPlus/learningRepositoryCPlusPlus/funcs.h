@@ -1,4 +1,3 @@
-#include "..\Game_BlackJack\Person.h"
 #ifndef funcsClass
 #define funcsClass
 
@@ -10,11 +9,7 @@
 #include <stdio.h>
 #include <io.h>
 #include <direct.h>
-
 #include "Fraction.h"
-#include "Contact.h"
-#include "PhoneBook.h"
-#include "Date_obi.h"
 
 //   |            My own small libraries               |
 //   |    I`ve tryed to follow this codeStyle          |
@@ -627,31 +622,31 @@ public:
 	}
 };
 
-class Student_first_class {
+class Student {
 	int height;
 	char name[16];
 
 public:
-	Student_first_class() {
+	Student() {
 	}
-	Student_first_class(const char* name) {
+	Student(const char* name) {
 		name = name;
 	}
 
-	~Student_first_class() {
+	~Student() {
 		cout << "Student has been destructed\n";
 	}
 };
 
 class Group {
-	Student_first_class* group;
+	Student* group;
 
 public:
 	Group() {
-		group = new Student_first_class[0];
+		group = new Student[0];
 	}
 	Group(int studentsInGroup) {
-		group = new Student_first_class[studentsInGroup];
+		group = new Student[studentsInGroup];
 	}
 
 	~Group() {
@@ -662,5 +657,69 @@ public:
 
 enum gender { male, female };
 
+class Person {
+	char* _name;
+	int _age;
+	gender _gender;
+	char* _phoneNumber;
+
+public:
+	Person(char* name, int age, gender _gender, char* phoneNumber) {
+		reserveArr(strlen(name) + 1, this->_name);
+		copyArray(name, strlen(name) + 1, this->_name);
+		this->_age = age;
+		this->_gender = _gender;
+		reserveArr(strlen(phoneNumber) + 1, this->_phoneNumber);
+		copyArray(phoneNumber, strlen(phoneNumber) + 1, this->_phoneNumber);
+	}
+
+	Person(Person& person) {
+		reserveArr(strlen(person._name) + 1, this->_name);
+		copyArray(person._name, strlen(person._name) + 1, this->_name);
+		this->_age = person._age;
+		this->_gender = person._gender;
+		reserveArr(strlen(person._phoneNumber) + 1, this->_phoneNumber);
+		copyArray(person._phoneNumber, strlen(person._phoneNumber) + 1, this->_phoneNumber);
+	}
+
+	~Person() {
+		delete[] this->_name;
+		delete[] this->_phoneNumber;
+		cout << " <> Person has been distructed <>\n";
+	}
+
+	void print() {
+		cout << "\nInfo about person:\n";
+		cout << "name of person: " << this->_name << endl;
+		cout << "age of person: " << this->_age << endl;
+		if (this->_gender) {
+			cout << "gender of person: female" << endl;
+		}
+		else {
+			cout << "gender of person: male" << endl;
+		}
+		cout << "phoneNumber of person: " << this->_phoneNumber << endl;
+	}
+
+	void setName(char* newName) {
+		delete[] this->_name;
+		reserveArr(strlen(newName) + 1, this->_name);
+		copyArray(newName, strlen(newName) + 1, this->_name);
+	}
+
+	void setAge(int newAge) {
+		this->_age = newAge;
+	}
+
+	void setGender(gender newGender) {
+		this->_gender = newGender;
+	}
+
+	void setPhoneNumber(char* newPhoneNumber) {
+		delete[] this->_phoneNumber;
+		reserveArr(strlen(newPhoneNumber) + 1, this->_phoneNumber);
+		copyArray(newPhoneNumber, strlen(newPhoneNumber) + 1, this->_phoneNumber);
+	}
+};
 
 #endif //funcs// !funcs

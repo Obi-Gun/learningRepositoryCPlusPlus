@@ -1,13 +1,13 @@
 #ifndef Deck_Guardian
 #define Deck_Guardian
+#include <vector>
 #include "Card.h"
-
+using namespace std;
 class Deck
 {
 private:
-	int* _deckOfCards;
+	(vector<bool>)* _deckOfCards;
 	int _numberOfDecks;
-	int _length;
 	const int _CARDS_IN_DECK = 52;
 	const int _MIN_NUMB_OF_DECKS = 1;
 	const int _DEFAULT_NUMB_OF_DECKS = 6;
@@ -19,7 +19,7 @@ private:
 	
 	int randVal() const;
 
-	Card* giveACard() const;
+	Card* giveACard();
 
 	Card* createCard(int);
 	bool isCardInDeck(int) const; //check card haven`t already been played in this match.

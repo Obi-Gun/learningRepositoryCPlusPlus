@@ -9,11 +9,9 @@
 class Menu
 {
 private:
-	Player** _players;
+	Player* _players;
 	Deck* _deck;
 	Diller* _diller;
-
-
 
 	void showRules() const;
 	void showMenu();

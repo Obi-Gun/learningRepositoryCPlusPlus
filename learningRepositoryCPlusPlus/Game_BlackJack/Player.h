@@ -5,9 +5,7 @@
 class Player : public Person
 {
 private:
-	Card** _secondHand;
-	int _secondCardsCounter;
-	int _bet;
+	vector<Card*> _secondHand;
 	int _secondHandBet;
 
 public:
