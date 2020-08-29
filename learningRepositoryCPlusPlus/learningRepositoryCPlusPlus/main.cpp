@@ -1,19 +1,27 @@
 #include <iostream>
-#include "ComplexNum.h"//
-//#include "String_SmartPointer.h"
-#include "String_obi.h"//
-//#include "CalcStr.h"
 #include <vector>
-//#include "funcs.h"
-#include "Student.h"
 #include <list>
-#include "Student_Vector.h"
-#include "DictionaryOfFrequency.h"
+#include <algorithm>
 
 using namespace std;
 
-int ComplexNum::_objCounter = 0;
-int String_obi::_objCounter = 0;
+class minValue {
+private:
+	vector<int>::iterator _start;
+	vector<int>::iterator _end;
+
+	vector<int>::iterator findMinVal() {
+
+	}
+
+public:
+	minValue(vector<int>::iterator start, vector<int>::iterator end) : _start(start), _end(end) 
+	{ 
+		findMinVal(); 
+	};
+
+
+};
 
 int main() {
 // Classwork 23.08.2020. Course: "OOP in C++". Functor
@@ -48,7 +56,7 @@ int main() {
 		cout << endl << endl;
 	}*/
 
-// Classwork2 23.08.2020. Course: "OOP in C++"
+// Hometask 2 Course: "OOP in C++"
 	vector<int> test{ 4, 2, 6, 4, 7, 1, 8, 9 };
 	copy(test.begin(), test.end(), ostream_iterator<int>(cout, " "));
 
