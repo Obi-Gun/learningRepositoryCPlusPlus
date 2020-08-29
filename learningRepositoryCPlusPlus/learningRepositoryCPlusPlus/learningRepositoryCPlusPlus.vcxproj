@@ -123,47 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CalcStr.cpp" />
-    <ClCompile Include="Contact.cpp" />
-    <ClCompile Include="Date_obi.cpp" />
-    <ClCompile Include="Employer.cpp" />
-    <ClCompile Include="Fraction.cpp" />
     <ClCompile Include="funcs.cpp" />
-    <ClCompile Include="List.cpp" />
+    <ClCompile Include="Functors.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Manager.cpp" />
-    <ClCompile Include="Note.cpp" />
-    <ClCompile Include="Overcoat.cpp" />
-    <ClCompile Include="PhoneBook.cpp" />
-    <ClCompile Include="Point.cpp" />
-    <ClCompile Include="President.cpp" />
-    <ClCompile Include="QueuePriority.cpp" />
-    <ClCompile Include="Square.cpp" />
-    <ClCompile Include="Student.cpp" />
-    <ClCompile Include="Student_Vector.cpp" />
-    <ClCompile Include="Time_obi.cpp" />
-    <ClCompile Include="Worker.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CalcStr.h" />
-    <ClInclude Include="Contact.h" />
-    <ClInclude Include="Date_obi.h" />
-    <ClInclude Include="Employer.h" />
-    <ClInclude Include="Fraction.h" />
     <ClInclude Include="funcs.h" />
-    <ClInclude Include="List.h" />
-    <ClInclude Include="Manager.h" />
-    <ClInclude Include="Note.h" />
-    <ClInclude Include="Overcoat.h" />
-    <ClInclude Include="PhoneBook.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="President.h" />
-    <ClInclude Include="QueuePriority.h" />
-    <ClInclude Include="Square.h" />
-    <ClInclude Include="Student.h" />
-    <ClInclude Include="Student_Vector.h" />
-    <ClInclude Include="Time_obi.h" />
-    <ClInclude Include="Worker.h" />
+    <ClInclude Include="Functors.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,26 +2,9 @@
 #include <vector>
 #include <list>
 #include <algorithm>
+#include "Functors.h"
 
 using namespace std;
-
-class minValue {
-private:
-	vector<int>::iterator _start;
-	vector<int>::iterator _end;
-
-	vector<int>::iterator findMinVal() {
-
-	}
-
-public:
-	minValue(vector<int>::iterator start, vector<int>::iterator end) : _start(start), _end(end) 
-	{ 
-		findMinVal(); 
-	};
-
-
-};
 
 int main() {
 // Classwork 23.08.2020. Course: "OOP in C++". Functor
@@ -57,26 +40,26 @@ int main() {
 	}*/
 
 // Hometask 2 Course: "OOP in C++"
-	vector<int> test{ 4, 2, 6, 4, 7, 1, 8, 9 };
+	/*vector<int> test{ 4, 2, 6, 4, 7, 1, 8, 9 };
 	copy(test.begin(), test.end(), ostream_iterator<int>(cout, " "));
 
-	cout << endl << *(min_element(test.begin(), test.end()));
+	cout << endl << "min value: " << (for_each(test.begin(), test.end(), minValueObi()))();
 
-	cout << endl << *(max_element(test.begin(), test.end())) << endl;
+	cout << endl << "min value: " << (for_each(test.begin(), test.end(), maxValueObi()))();
 
+	cout << endl;
 	sort(test.begin(), test.end(), greater<int>());
 	copy(test.begin(), test.end(), ostream_iterator<int>(cout, " "));
 	cout << endl;
 
 	sort(test.begin(), test.end(), less<int>());
 	copy(test.begin(), test.end(), ostream_iterator<int>(cout, " "));
-	cout << endl;
+
 
 	//generate_n(test.begin(), test.size(), AddNumber(10));
 	//transform(a.begin(), a.end(), b.begin(), res.begin(), plus<int>());
-	//for_each(test.begin(), test.size())
-	for_each(test.begin(), test.end(), [](int& num) { num += 5; });
-
-	copy(test.begin(), test.end(), ostream_iterator<int>(cout, " "));
 	cout << endl;
+	for_each(test.begin(), test.end(), [](int& num) { num += 5; });
+	copy(test.begin(), test.end(), ostream_iterator<int>(cout, " "));*/
+
 }

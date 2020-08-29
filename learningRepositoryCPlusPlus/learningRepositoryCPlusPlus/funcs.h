@@ -11,11 +11,6 @@
 #include <io.h>
 #include <direct.h>
 
-#include "Fraction.h"
-#include "Contact.h"
-#include "PhoneBook.h"
-#include "Date_obi.h"
-
 //   |            My own small libraries               |
 //   |    I`ve tryed to follow this codeStyle          |
 //   |      https://habr.com/ru/post/172091/           |
